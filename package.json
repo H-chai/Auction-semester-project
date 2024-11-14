@@ -1,0 +1,30 @@
+{
+  "name": "auction-2",
+  "version": "1.0.0",
+  "description": "An auction website where users can add items to be bid on and bid on items other users have put up for auction. (Semester project 2 assignment at Noroff))",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite && npx tailwindcss -i ./src/css/style.css -o ./style.css --watch",
+    "build": "vite build && npx tailwindcss -i ./src/css/style.css -o ./style.css",
+    "tailwind-build": "npx tailwindcss -i ./src/css/style.css -o ./style.css",
+    "preview": "vite preview",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.14.0",
+    "eslint": "^9.14.0",
+    "globals": "^15.12.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.15",
+    "vite": "^5.4.11"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,html,scss,css,md}": "prettier --write"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript"],
+  "css.validate": false,
+  "scss.validate": false,
+  "eslint.options": {
+    "ignorePatterns": ["postcss.config.js", "tailwind.config.js"]
+  },
+  "files.associations": {
+    "postcss.config.js": "javascript",
+    "tailwind.config.js": "javascript"
+  },
+  "cSpell.languageSettings": [
+    {
+      "languageId": ["javascript", "json"],
+      "words": ["tailwindcss"]
+    }
+  ]
+}
