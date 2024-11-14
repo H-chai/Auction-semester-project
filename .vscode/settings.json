@@ -17,7 +17,8 @@
   "cSpell.languageSettings": [
     {
       "languageId": ["javascript", "json"],
-      "words": ["tailwindcss", "Credi"]
+      "words": ["tailwindcss"]
     }
-  ]
+  ],
+  "cSpell.userWords": ["Credi"]
 }
