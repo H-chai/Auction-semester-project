@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <title>CrediBid</title>
+    <script
+      src="https://kit.fontawesome.com/98d292e689.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header-authenticated">
+      <a href="/">
+        <img src="../images/Logo.svg" alt="CrediBid logo" />
+      </a>
+      <nav>
+        <a href="create/">Create Listing</a>
+        <img src="" alt="my avatar image" class="user-avatar" />
+        <div class="avatar-hover-nav">
+          <ul>
+            <li>
+              <a class="my-page"><i class="fa-regular fa-user"></i>Profile</a>
+            </li>
+            <li>
+              <button>
+                <i class="fa-solid fa-right-from-bracket"></i>Log out
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="profile">
+        <div class="user-info">
+          <img src="" alt="user's avatar" />
+          <div class="user-profile">
+            <h1 class="username"></h1>
+            <p class="bio"></p>
+            <p>Credits: <span class="credits"></span></p>
+            <p>Items: <span class="item-count"></span></p>
+          </div>
+        </div>
+        <div class="profile-update"></div>
+      </section>
+      <section class="user-listings-feed">
+        <div class="sort-order">
+          <button id="newest">Newest</button>
+          <button id="oldest">Oldest</button>
+        </div>
+        <div class="user-listings-container"></div>
+        <div class="profile-pagination"></div>
+      </section>
+    </main>
+    <footer>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
