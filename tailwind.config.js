@@ -8,6 +8,7 @@ export default {
     },
     colors: {
       black: '#212121',
+      white: '#FFFFFF',
       blue: '#034C8C',
       orange: '#FFA726',
       gray: '#727272',
@@ -18,7 +19,15 @@ export default {
       outline: '#B0BEC5',
       'outline-light': '#E0E0E0',
     },
-    extend: {},
+
+    extend: {
+      fontSize: {
+        '3xl': ['1.75rem', '2.275rem'],
+      },
+      borderRadius: {
+        md: '0.25rem',
+      },
+    },
   },
   plugins: [],
 };
