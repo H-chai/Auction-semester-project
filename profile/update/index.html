@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <title>CrediBid Update Profile</title>
+    <script
+      src="https://kit.fontawesome.com/98d292e689.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header-authenticated">
+      <a href="/">
+        <img src="../../images/Logo.svg" alt="CrediBid logo" />
+      </a>
+      <nav>
+        <a href="../../listing/create/">Create Listing</a>
+        <img src="" alt="my avatar image" class="user-avatar" />
+        <div class="avatar-hover-nav">
+          <ul>
+            <li>
+              <a class="my-page"><i class="fa-regular fa-user"></i>Profile</a>
+            </li>
+            <li>
+              <button>
+                <i class="fa-solid fa-right-from-bracket"></i>Log out
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <h1>Update profile</h1>
+      <form name="updateProfile">
+        <label for="bio">Bio<input type="text" name="bio" id="bio" /></label>
+        <label for="banner"
+          >Banner URL<input type="url" name="banner[url]" id="banner"
+        /></label>
+        <label for="banner-alt"
+          >Banner alr<input type="text" name="banner[alt]" id="banner-alt"
+        /></label>
+        <label for="avatar"
+          >Avatar URL<input type="url" name="avatar[url]" id="avatar"
+        /></label>
+        <label for="avatar-alt"
+          >Avatar alt<input type="text" name="avatar[alt]" id="avatar-alt"
+        /></label>
+        <button type="submit">Update Profile</button>
+      </form>
+    </main>
+    <footer>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
