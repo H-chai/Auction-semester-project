@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Update your auction listing with new details, images, or pricing. Keep your item fresh and increase your chances of making a sale!"
+    />
+    <title>CrediBid Update Listing</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=gambetta@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/98d292e689.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header-authenticated">
+      <a href="/">
+        <img src="../../images/Logo.svg" alt="CrediBid logo" />
+      </a>
+      <nav>
+        <a href="../create/">Create Listing</a>
+        <img src="" alt="my avatar image" class="user-avatar" />
+        <div class="avatar-hover-nav">
+          <ul>
+            <li>
+              <a class="my-page"><i class="fa-regular fa-user"></i>Profile</a>
+            </li>
+            <li>
+              <button>
+                <i class="fa-solid fa-right-from-bracket"></i>Log out
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <h1>Update Listing</h1>
+      <form name="updateListing">
+        <label for="title"
+          >Title<input type="text" name="title" id="title" required
+        /></label>
+        <label for="description"
+          >Description<input
+            type="text"
+            name="description"
+            id="description"
+            required
+        /></label>
+        <label for="ending-date"
+          >Ending-date<input
+            type="date"
+            name="ending-date"
+            id="ending-date"
+            required
+        /></label>
+        <label for="ending-time"
+          >Ending-time<input
+            type="time"
+            name="ending-time"
+            id="ending-time"
+            required
+        /></label>
+        <label for="img-url"
+          >Image URL<input type="url" name="media[url]" id="img-url" required
+        /></label>
+        <label for="img-alt"
+          >Image alt<input type="text" name="media[alt]" id="img-alt" required
+        /></label>
+        <button type="submit">Update Listing</button>
+        <button type="submit">Delete Listing</button>
+      </form>
+    </main>
+    <footer>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
