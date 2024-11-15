@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CrediBid Sign up</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/">
+        <img src="../../images/Logo.svg" alt="CrediBid logo" />
+      </a>
+    </header>
+    <main>
+      <h1>Sign up</h1>
+      <form name="signup">
+        <div>
+          <label for="username">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              id="username"
+              maxlength="20"
+              pattern="^[\w]+$"
+              title="Please enter a username using only letters, numbers, and underscores."
+              required
+            />
+          </label>
+        </div>
+        <div>
+          <label for="email">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              id="email"
+              pattern="^[\w\-.]+@stud\.noroff\.no$"
+              title="Please enter a valid stud.noroff.no address"
+              required
+            />
+          </label>
+        </div>
+        <div>
+          <label for="password">
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              id="password"
+              minlength="8"
+              required
+            />
+          </label>
+        </div>
+        <button type="submit">Sign up</button>
+        <p>Do you have an account already?<a href="../login/">Log in</a></p>
+      </form>
+    </main>
+    <footer>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+    </footer>
+  </body>
+</html>

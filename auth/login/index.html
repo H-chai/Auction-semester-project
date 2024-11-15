@@ -6,5 +6,44 @@
     <title>CrediBid Login</title>
     <link rel="stylesheet" href="../../style.css" />
   </head>
-  <body></body>
+  <body>
+    <header>
+      <a href="/">
+        <img src="../../images/Logo.svg" alt="CrediBid logo" />
+      </a>
+    </header>
+    <main>
+      <h1>Login</h1>
+      <form name="login">
+        <div>
+          <label for="email">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              id="email"
+              required
+            />
+          </label>
+        </div>
+        <div>
+          <label for="password">
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              id="password"
+              required
+            />
+          </label>
+        </div>
+        <button type="submit">Log in</button>
+        <p>Don't have an account?<a href="../register/">Sign up</a></p>
+      </form>
+    </main>
+    <footer>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+    </footer>
+  </body>
 </html>
