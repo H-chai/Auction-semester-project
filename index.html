@@ -19,34 +19,92 @@
     ></script>
   </head>
   <body>
-    <header class="header-unauthenticated">
-      <a href="/">
+    <!-- <header
+      class="header-unauthenticated flex justify-between items-center p-4 lg:px-16 lg:py-10"
+    >
+      <a href="/" class="block w-1/3 lg:w-1/6">
         <img src="images/Logo.svg" alt="CrediBid logo" />
       </a>
-      <nav>
+      <nav class="hidden lg:block">
         <a href="auth/login/">Log in</a>
         <a href="auth/register/">Sign up</a>
       </nav>
-    </header>
-    <header class="header-authenticated">
-      <a href="/">
+      <nav class="lg:hidden">
+        <input type="checkbox" class="menu-btn hidden" id="menu-btn" />
+        <label
+          for="menu-btn"
+          class="menu-icon inline-block relative cursor-pointer py-6 px-3"
+          ><span class="navicon bg-blue block relative h-[2px] w-[28px]"></span
+        ></label>
+        <ul
+          class="menu-box bg-off-white block fixed top-0 -right-full invisible m-0 py-20 list-none h-full w-4/5 font-body"
+        >
+          <li class="text-center">
+            <a
+              class="menu-item text-blue inline-block py-3 px-6 font-semibold text-xl mb-7"
+              href="auth/login/"
+              >Log in</a
+            >
+          </li>
+          <li class="text-center">
+            <a
+              class="menu-item text-white bg-blue rounded-md inline-block py-3 px-6 font-semibold text-xl"
+              href="auth/register/"
+              >Sign up</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header> -->
+    <header
+      class="header-authenticated flex justify-between items-center p-4 lg:px-16 lg:py-10"
+    >
+      <a href="/" class="block w-1/3 lg:w-1/6">
         <img src="images/Logo.svg" alt="CrediBid logo" />
       </a>
-      <nav>
+      <nav class="hidden lg:block">
         <a href="listing/create/">Create Listing</a>
         <img src="" alt="my avatar image" class="user-avatar" />
         <div class="avatar-hover-nav">
           <ul>
             <li>
-              <a class="my-page"><i class="fa-regular fa-user"></i>Profile</a>
+              <a class="my-page"
+                ><i class="fa-regular fa-user mr-2"></i><span>Profile</span></a
+              >
             </li>
             <li>
               <button>
-                <i class="fa-solid fa-right-from-bracket"></i>Log out
+                <i class="fa-solid fa-right-from-bracket mr-2"></i
+                ><span>Log out</span>
               </button>
             </li>
           </ul>
         </div>
+      </nav>
+      <nav class="lg:hidden">
+        <input type="checkbox" class="menu-btn hidden" id="menu-btn" />
+        <label
+          for="menu-btn"
+          class="menu-icon inline-block relative cursor-pointer py-6 px-3"
+          ><span class="navicon bg-blue block relative h-[2px] w-[28px]"></span
+        ></label>
+        <ul
+          class="menu-box bg-off-white block fixed top-0 -right-full invisible m-0 py-20 list-none h-full w-4/5 font-body"
+        >
+          <li>
+            <a
+              class="my-page flex justify-center items-center menu-item text-blue py-3 px-6 font-semibold text-xl w-fit mx-auto mb-3"
+              ><i class="fa-regular fa-user mr-2"></i><span>Profile</span></a
+            >
+          </li>
+          <li>
+            <a
+              class="my-page flex justify-center items-center menu-item text-blue py-3 px-6 font-semibold text-xl w-fit mx-auto"
+              ><i class="fa-solid fa-right-from-bracket mr-2"></i
+              ><span>Log out</span></a
+            >
+          </li>
+        </ul>
       </nav>
     </header>
     <main>
