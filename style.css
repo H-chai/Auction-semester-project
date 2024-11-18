@@ -1396,6 +1396,10 @@ video {
     width: 100%;
   }
 
+  .lg\:w-3\/5 {
+    width: 60%;
+  }
+
   .lg\:translate-y-0 {
     --tw-translate-y: 0px;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y))
@@ -1473,6 +1477,10 @@ video {
 
   .lg\:pb-6 {
     padding-bottom: 1.5rem;
+  }
+
+  .lg\:pb-32 {
+    padding-bottom: 8rem;
   }
 
   .lg\:font-display {
