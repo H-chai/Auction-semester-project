@@ -3,13 +3,14 @@ export default {
   content: ['./**/*.{html,js}', '!./node_modules/**/*'],
   theme: {
     fontFamily: {
-      display: ['General Sans', 'sans-serif'],
-      body: ['Gambetta', 'serif'],
+      display: ['Gambetta', 'serif'],
+      body: ['General Sans', 'sans-serif'],
     },
     colors: {
       black: '#212121',
       white: '#FFFFFF',
       blue: '#034C8C',
+      'light-blue': '#B3D1F2',
       orange: '#FFA726',
       gray: '#727272',
       'light-gray': '#9E9E9E',
