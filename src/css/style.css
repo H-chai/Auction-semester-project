@@ -1,3 +1,178 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.menu-btn:checked ~ .menu-box {
+  visibility: visible;
+  right: 0;
+}
+
+.menu-box {
+  box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+  transition-duration: 0.375s;
+}
+
+.menu-item {
+  transition-duration: 0.25s;
+}
+
+.navicon {
+  transition: 0.395s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+    background: #034c8c;
+    transition: 0.395s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+  }
+
+  &::before {
+    top: 8px;
+  }
+
+  &::after {
+    bottom: 8px;
+  }
+}
+
+.menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-135deg);
+}
+
+.menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(135deg);
+}
+
+.menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before {
+  top: 0;
+}
+.menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  bottom: 0;
+}
+
+.menu-btn:checked ~ .menu-icon .navicon {
+  background: rgba(0, 0, 0, 0);
+  transition: 0.2192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+}
+
+.blue-btn {
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 2px solid #034c8c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    z-index: -1;
+    transform: scale(0.8);
+    opacity: 0;
+    transition:
+      transform ease 0.5s,
+      opacity 0.5s;
+  }
+
+  &:hover {
+    background-color: transparent;
+
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.creating-btn {
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 2px solid #ffa726;
+    border-radius: 4px;
+    box-sizing: border-box;
+    z-index: -1;
+    transform: scale(0.8);
+    opacity: 0;
+    transition:
+      transform ease 0.5s,
+      opacity 0.5s;
+  }
+
+  &:hover {
+    background-color: transparent;
+
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+}
+
+.profile-update-btn {
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 2px solid #8bc34a;
+    border-radius: 4px;
+    box-sizing: border-box;
+    z-index: -1;
+    transform: scale(0.8);
+    opacity: 0;
+    transition:
+      transform ease 0.5s,
+      opacity 0.5s;
+  }
+
+  &:hover {
+    background-color: transparent;
+
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.delete-btn {
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 2px solid #d32f2f;
+    border-radius: 4px;
+    box-sizing: border-box;
+    z-index: -1;
+    transform: scale(0.8);
+    opacity: 0;
+    transition:
+      transform ease 0.5s,
+      opacity 0.5s;
+  }
+
+  &:hover {
+    background-color: transparent;
+
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
