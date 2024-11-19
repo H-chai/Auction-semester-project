@@ -60,7 +60,7 @@
   transition: 0.2192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
 }
 
-.signup-btn {
+.blue-btn {
   &::before {
     content: '';
     position: absolute;

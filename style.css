@@ -1167,7 +1167,7 @@ video {
   transition: 0.2192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
 }
 
-.signup-btn {
+.blue-btn {
   &::before {
     content: '';
     position: absolute;
@@ -1356,16 +1356,16 @@ video {
     margin-bottom: 5rem;
   }
 
+  .lg\:mb-4 {
+    margin-bottom: 1rem;
+  }
+
   .lg\:mb-6 {
     margin-bottom: 1.5rem;
   }
 
   .lg\:mt-2 {
     margin-top: 0.5rem;
-  }
-
-  .lg\:mb-4 {
-    margin-bottom: 1rem;
   }
 
   .lg\:block {
@@ -1388,16 +1388,20 @@ video {
     width: 75%;
   }
 
-  .lg\:w-4\/5 {
-    width: 80%;
+  .lg\:w-3\/5 {
+    width: 60%;
+  }
+
+  .lg\:w-48 {
+    width: 12rem;
+  }
+
+  .lg\:w-48\% {
+    width: 48%;
   }
 
   .lg\:w-full {
     width: 100%;
-  }
-
-  .lg\:w-3\/5 {
-    width: 60%;
   }
 
   .lg\:translate-y-0 {
@@ -1411,8 +1415,16 @@ video {
     align-items: flex-start;
   }
 
+  .lg\:items-center {
+    align-items: center;
+  }
+
   .lg\:justify-center {
     justify-content: center;
+  }
+
+  .lg\:justify-between {
+    justify-content: space-between;
   }
 
   .lg\:gap-6 {
@@ -1463,6 +1475,14 @@ video {
     padding-bottom: 4rem;
   }
 
+  .lg\:pb-32 {
+    padding-bottom: 8rem;
+  }
+
+  .lg\:pb-6 {
+    padding-bottom: 1.5rem;
+  }
+
   .lg\:pt-10 {
     padding-top: 2.5rem;
   }
@@ -1473,14 +1493,6 @@ video {
 
   .lg\:pt-28 {
     padding-top: 7rem;
-  }
-
-  .lg\:pb-6 {
-    padding-bottom: 1.5rem;
-  }
-
-  .lg\:pb-32 {
-    padding-bottom: 8rem;
   }
 
   .lg\:font-display {
