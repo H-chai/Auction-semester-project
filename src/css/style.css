@@ -147,3 +147,32 @@
     }
   }
 }
+
+.delete-btn {
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 2px solid #d32f2f;
+    border-radius: 4px;
+    box-sizing: border-box;
+    z-index: -1;
+    transform: scale(0.8);
+    opacity: 0;
+    transition:
+      transform ease 0.5s,
+      opacity 0.5s;
+  }
+
+  &:hover {
+    background-color: transparent;
+
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
