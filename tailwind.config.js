@@ -28,6 +28,9 @@ export default {
       borderRadius: {
         md: '0.25rem',
       },
+      width: {
+        '48%': '48%',
+      },
     },
   },
   plugins: [],
