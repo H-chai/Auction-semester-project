@@ -52,7 +52,10 @@ export default class AuctionApp extends AuctionAPI {
       form.addEventListener('submit', this.events.register);
     },
 
-    login: async () => {},
+    login: async () => {
+      const form = document.forms['login'];
+      form.addEventListener('submit', this.events.login);
+    },
 
     listing: async () => {},
 
@@ -78,6 +81,19 @@ export default class AuctionApp extends AuctionAPI {
       } catch (error) {
         alert(
           `Could not register this account.\n${error.message}.\nPlease try again.`,
+        );
+      }
+    },
+
+    login: async (event) => {
+      const data = AuctionApp.form.formSubmit(event);
+      try {
+        await this.auth.login(data);
+        alert('You have successfully logged in!');
+        window.location.href = '/';
+      } catch (error) {
+        alert(
+          `Could not log in with this account.\n${error.message}.\nPlease try again.`,
         );
       }
     },

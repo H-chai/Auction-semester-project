@@ -27,8 +27,17 @@ export default class AuctionAPI {
     },
   };
 
+  // Delete?
   static set isNewUser(value) {
     localStorage.setItem('isNewUser', JSON.stringify(value));
+  }
+
+  static set token(accessToken) {
+    localStorage.setItem('token', accessToken);
+  }
+
+  static set username(user) {
+    localStorage.setItem('username', user);
   }
 
   auth = {
@@ -41,14 +50,39 @@ export default class AuctionAPI {
       });
 
       const data = await AuctionAPI.responseHandler.handleResponse(response);
+
+      //Delete?
       AuctionAPI.isNewUser = true;
+
       return data;
     },
 
-    login: async () => {},
+    login: async ({ email, password }) => {
+      const body = JSON.stringify({ email, password });
+      const response = await fetch(AuctionAPI.paths.login, {
+        headers: headers(true),
+        method: 'POST',
+        body,
+      });
+
+      const { data } =
+        await AuctionAPI.responseHandler.handleResponse(response);
+      const { accessToken: token, name: name } = data;
+      AuctionAPI.token = token;
+      AuctionAPI.username = name;
+      return data;
+    },
   };
 
   profile = {
+    getUserName: () => {
+      try {
+        return JSON.parse(localStorage.getItem('username'));
+      } catch (error) {
+        return error;
+      }
+    },
+
     getProfile: async function getProfile(name) {
       const response = await fetch(`${AuctionAPI.paths.profiles}/${name}`, {
         headers: headers(true),
