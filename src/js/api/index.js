@@ -36,10 +36,7 @@ export default class AuctionAPI {
         body,
       });
 
-      const data = await AuctionAPI.responseHandler.handleResponse(
-        response,
-        'Could not register this account. Please try again.',
-      );
+      const data = await AuctionAPI.responseHandler.handleResponse(response);
       return data;
     },
 
