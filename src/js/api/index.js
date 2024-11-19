@@ -27,6 +27,10 @@ export default class AuctionAPI {
     },
   };
 
+  static set isNewUser(value) {
+    localStorage.setItem('isNewUser', JSON.stringify(value));
+  }
+
   auth = {
     register: async ({ name, email, password }) => {
       const body = JSON.stringify({ name, email, password });
@@ -37,9 +41,21 @@ export default class AuctionAPI {
       });
 
       const data = await AuctionAPI.responseHandler.handleResponse(response);
+      AuctionAPI.isNewUser = true;
       return data;
     },
 
     login: async () => {},
+  };
+
+  profile = {
+    getProfile: async function getProfile(name) {
+      const response = await fetch(`${AuctionAPI.paths.profiles}/${name}`, {
+        headers: headers(true),
+        method: 'GET',
+      });
+      const data = await AuctionAPI.responseHandler.handleResponse(response);
+      return data;
+    },
   };
 }

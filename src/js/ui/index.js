@@ -71,7 +71,9 @@ export default class AuctionApp extends AuctionAPI {
       const { name, email } = data;
       try {
         await this.auth.register(data);
-        alert(`Thank you for registering!\nUsername: ${name}\nEmail: ${email}`);
+        alert(
+          `Thank you for registering!\nUsername: ${name}\nEmail: ${email}\nYou've received 1000 credits to get started.`,
+        );
         window.location.href = '/auth/login/';
       } catch (error) {
         alert(
