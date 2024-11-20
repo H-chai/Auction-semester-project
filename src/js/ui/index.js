@@ -1,4 +1,6 @@
 import AuctionAPI from '../api';
+import { generateAuthenticatedHeader } from './components/authenticatedHeader';
+import { generateUnAuthenticatedHeader } from './components/unAuthenticatedHeader';
 
 export default class AuctionApp extends AuctionAPI {
   constructor() {
@@ -45,7 +47,9 @@ export default class AuctionApp extends AuctionAPI {
   };
 
   views = {
-    listingFeed: async () => {},
+    listingFeed: async () => {
+      this.events.headerToggle();
+    },
 
     register: async () => {
       const form = document.forms['signup'];
@@ -95,6 +99,19 @@ export default class AuctionApp extends AuctionAPI {
         alert(
           `Could not log in with this account.\n${error.message}.\nPlease try again.`,
         );
+      }
+    },
+
+    headerToggle: () => {
+      const isLoggedIn = localStorage.getItem('token');
+      const header = document.querySelector('header');
+
+      if (isLoggedIn) {
+        const authenticatedHeader = generateAuthenticatedHeader();
+        header.appendChild(authenticatedHeader);
+      } else {
+        const unAuthenticatedHeader = generateUnAuthenticatedHeader();
+        header.appendChild(unAuthenticatedHeader);
       }
     },
   };
