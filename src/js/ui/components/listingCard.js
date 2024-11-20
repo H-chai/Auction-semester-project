@@ -75,23 +75,8 @@ export function generateListingCard(listing) {
   credits.textContent = 'credits';
   credits.classList.add('text-xs', 'font-semibold', 'ml-1');
 
-  // const ending = document.createElement('li');
-  // const endingTitle = document.createElement('p');
-  // endingTitle.classList.add('text-xs', 'text-gray', 'font-medium', 'mb-1');
-  // endingTitle.textContent = 'Ending in';
-  // const endingIn = document.createElement('p');
-  // endingIn.classList.add('text-xl', 'font-semibold', 'lg:text-2xl');
-  // // Get ending in
-  // const timeLeft = calcTimeDiff(listing);
-  // endingIn.textContent = timeLeft;
-  // const daysLeft = document.createElement('span');
-  // daysLeft.textContent = 'days left';
-  // daysLeft.classList.add('text-xs', 'font-semibold', 'ml-1');
-
   currentBidNumber.appendChild(credits);
   bidding.append(currentBid, currentBidNumber);
-  // endingIn.appendChild(daysLeft);
-  // ending.append(endingTitle, endingIn);
   const ending = generateTimeLeftHTML(listing);
   listingInfo.append(bidding, ending);
 
