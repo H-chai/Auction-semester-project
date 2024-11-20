@@ -1,3 +1,5 @@
+import { generateTimeLeftHTML } from './generateTimeLeftHTML';
+
 export function generateListingCard(listing) {
   const cardContainer = document.createElement('a');
   cardContainer.classList.add(
@@ -54,7 +56,12 @@ export function generateListingCard(listing) {
   );
 
   const listingInfo = document.createElement('ul');
-  listingInfo.classList.add('flex', 'justify-between', 'items-center');
+  listingInfo.classList.add(
+    'flex',
+    'justify-between',
+    'items-center',
+    'lg:px-2',
+  );
 
   const bidding = document.createElement('li');
   const currentBid = document.createElement('p');
@@ -68,18 +75,24 @@ export function generateListingCard(listing) {
   credits.textContent = 'credits';
   credits.classList.add('text-xs', 'font-semibold', 'ml-1');
 
-  const ending = document.createElement('li');
-  const endingIn = document.createElement('p');
-  endingIn.classList.add('text-xs', 'text-gray', 'font-medium', 'mb-1');
-  endingIn.textContent = 'Ending in';
-  const endingInNumber = document.createElement('p');
-  endingInNumber.classList.add('text-xl', 'font-semibold', 'lg:text-2xl');
-  // Get ending in
-  endingInNumber.textContent = 'In 10h 30m';
+  // const ending = document.createElement('li');
+  // const endingTitle = document.createElement('p');
+  // endingTitle.classList.add('text-xs', 'text-gray', 'font-medium', 'mb-1');
+  // endingTitle.textContent = 'Ending in';
+  // const endingIn = document.createElement('p');
+  // endingIn.classList.add('text-xl', 'font-semibold', 'lg:text-2xl');
+  // // Get ending in
+  // const timeLeft = calcTimeDiff(listing);
+  // endingIn.textContent = timeLeft;
+  // const daysLeft = document.createElement('span');
+  // daysLeft.textContent = 'days left';
+  // daysLeft.classList.add('text-xs', 'font-semibold', 'ml-1');
 
   currentBidNumber.appendChild(credits);
   bidding.append(currentBid, currentBidNumber);
-  ending.append(endingIn, endingInNumber);
+  // endingIn.appendChild(daysLeft);
+  // ending.append(endingTitle, endingIn);
+  const ending = generateTimeLeftHTML(listing);
   listingInfo.append(bidding, ending);
 
   cardContainer.append(figure, listingTitle, listingInfo);

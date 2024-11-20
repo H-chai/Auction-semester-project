@@ -123,11 +123,11 @@ export default class AuctionApp extends AuctionAPI {
       try {
         const listings = await this.listing.getListings(12, page);
         const { data } = listings;
+        console.log(data);
         const listingsContainer = document.querySelector('.listings-container');
         listingsContainer.innerHTML = '';
         data.forEach((listing) => {
           const listingCard = generateListingCard(listing);
-          console.log(listingCard);
           listingsContainer.appendChild(listingCard);
         });
       } catch (error) {
