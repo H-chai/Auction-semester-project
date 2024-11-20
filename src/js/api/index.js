@@ -27,11 +27,6 @@ export default class AuctionAPI {
     },
   };
 
-  // Delete?
-  static set isNewUser(value) {
-    localStorage.setItem('isNewUser', JSON.stringify(value));
-  }
-
   static set token(accessToken) {
     localStorage.setItem('token', accessToken);
   }
@@ -48,11 +43,7 @@ export default class AuctionAPI {
         method: 'POST',
         body,
       });
-
       const data = await AuctionAPI.responseHandler.handleResponse(response);
-
-      //Delete?
-      AuctionAPI.isNewUser = true;
 
       return data;
     },
@@ -64,12 +55,12 @@ export default class AuctionAPI {
         method: 'POST',
         body,
       });
-
       const { data } =
         await AuctionAPI.responseHandler.handleResponse(response);
       const { accessToken: token, name: name } = data;
       AuctionAPI.token = token;
       AuctionAPI.username = name;
+
       return data;
     },
   };
@@ -89,6 +80,24 @@ export default class AuctionAPI {
         method: 'GET',
       });
       const data = await AuctionAPI.responseHandler.handleResponse(response);
+      return data;
+    },
+  };
+
+  listing = {
+    getListings: async (limit = 12, page = 1) => {
+      const url = new URL(AuctionAPI.paths.listings);
+      url.searchParams.append('limit', limit);
+      url.searchParams.append('page', page);
+      url.searchParams.append('_seller', true);
+      url.searchParams.append('_bids', true);
+
+      const response = await fetch(url.toString(), {
+        headers: headers(),
+        method: 'GET',
+      });
+      const data = await AuctionAPI.responseHandler.handleResponse(response);
+
       return data;
     },
   };

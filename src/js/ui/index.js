@@ -1,5 +1,6 @@
 import AuctionAPI from '../api';
 import { generateAuthenticatedHeader } from './components/authenticatedHeader';
+import { generateListingCard } from './components/listingCard';
 import { generateUnAuthenticatedHeader } from './components/unAuthenticatedHeader';
 
 export default class AuctionApp extends AuctionAPI {
@@ -49,6 +50,7 @@ export default class AuctionApp extends AuctionAPI {
   views = {
     listingFeed: async () => {
       this.events.headerToggle();
+      this.events.displayListings();
     },
 
     register: async () => {
@@ -114,6 +116,22 @@ export default class AuctionApp extends AuctionAPI {
       } else {
         const unAuthenticatedHeader = generateUnAuthenticatedHeader();
         header.appendChild(unAuthenticatedHeader);
+      }
+    },
+
+    displayListings: async (page = 1) => {
+      try {
+        const listings = await this.listing.getListings(12, page);
+        const { data } = listings;
+        const listingsContainer = document.querySelector('.listings-container');
+        listingsContainer.innerHTML = '';
+        data.forEach((listing) => {
+          const listingCard = generateListingCard(listing);
+          console.log(listingCard);
+          listingsContainer.appendChild(listingCard);
+        });
+      } catch (error) {
+        alert(error.message);
       }
     },
   };

@@ -19,7 +19,7 @@
     ></script>
     <script type="module" src="src/main.js" defer></script>
   </head>
-  <body>
+  <body class="font-body text-black">
     <header class="header p-4 lg:px-16 lg:pt-10 lg:pb-6"></header>
     <main>
       <section class="main-wrapper md:flex md:flex-row-reverse md:h-[50vh]">
@@ -31,7 +31,7 @@
           <h1 class="text-3xl font-semibold font-display xl:text-4xl">
             Explore Unique Auctions
           </h1>
-          <p class="font-body">Bid on exclusive listings or sell your own</p>
+          <p>Bid on exclusive listings or sell your own</p>
         </div>
       </section>
       <section
@@ -67,7 +67,9 @@
             Oldest
           </button>
         </div>
-        <div class="listings-container"></div>
+        <div
+          class="listings-container grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
+        ></div>
         <div class="pagination"></div>
       </section>
     </main>
