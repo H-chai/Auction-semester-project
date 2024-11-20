@@ -61,7 +61,9 @@ export default class AuctionApp extends AuctionAPI {
       form.addEventListener('submit', this.events.login);
     },
 
-    listing: async () => {},
+    listing: async () => {
+      this.events.headerToggle();
+    },
 
     listingCreate: async () => {},
 
