@@ -1,4 +1,4 @@
-import { calcTimeDiff } from './calcTimeDiff';
+import { calcTimeDiff } from '../utils/calcTimeDiff';
 
 export function generateTimeLeftHTML(listing) {
   const timeDiff = calcTimeDiff(listing);

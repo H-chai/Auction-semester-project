@@ -1,7 +1,7 @@
 import AuctionAPI from '../api';
-import { generateAuthenticatedHeader } from './components/authenticatedHeader';
-import { generateListingCard } from './components/listingCard';
-import { generateUnAuthenticatedHeader } from './components/unAuthenticatedHeader';
+import { generateAuthenticatedHeader } from './components/headers/authenticatedHeader';
+import { generateListingCard } from './components/listing/listingCard';
+import { generateUnAuthenticatedHeader } from './components/headers/unAuthenticatedHeader';
 
 export default class AuctionApp extends AuctionAPI {
   constructor() {
