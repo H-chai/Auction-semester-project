@@ -85,7 +85,7 @@ export default class AuctionAPI {
   };
 
   listing = {
-    getListings: async (limit = 12, page = 1) => {
+    getListings: async (limit = 24, page = 1) => {
       const url = new URL(AuctionAPI.paths.listings);
       url.searchParams.append('limit', limit);
       url.searchParams.append('page', page);

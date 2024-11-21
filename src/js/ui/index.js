@@ -121,7 +121,7 @@ export default class AuctionApp extends AuctionAPI {
 
     displayListings: async (page = 1) => {
       try {
-        const listings = await this.listing.getListings(12, page);
+        const listings = await this.listing.getListings(24, page);
         const { data } = listings;
         console.log(data);
         const listingsContainer = document.querySelector('.listings-container');
