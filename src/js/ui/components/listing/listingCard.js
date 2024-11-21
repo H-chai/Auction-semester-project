@@ -1,3 +1,4 @@
+import { generateCurrentBidHTML } from './generateCurrentBidHTML';
 import { generateTimeLeftHTML } from './generateTimeLeftHTML';
 
 export function generateListingCard(listing) {
@@ -63,20 +64,7 @@ export function generateListingCard(listing) {
     'lg:px-2',
   );
 
-  const bidding = document.createElement('li');
-  const currentBid = document.createElement('p');
-  currentBid.classList.add('text-xs', 'text-gray', 'font-medium', 'mb-1');
-  currentBid.textContent = 'Current bid';
-  const currentBidNumber = document.createElement('p');
-  currentBidNumber.classList.add('text-xl', 'font-semibold', 'lg:text-2xl');
-  // Get currentBid amount
-  currentBidNumber.textContent = '100';
-  const credits = document.createElement('span');
-  credits.textContent = 'credits';
-  credits.classList.add('text-xs', 'font-semibold', 'ml-1');
-
-  currentBidNumber.appendChild(credits);
-  bidding.append(currentBid, currentBidNumber);
+  const bidding = generateCurrentBidHTML(listing);
   const ending = generateTimeLeftHTML(listing);
   listingInfo.append(bidding, ending);
 
