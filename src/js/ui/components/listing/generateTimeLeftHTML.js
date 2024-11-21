@@ -58,9 +58,14 @@ export function generateTimeLeftHTML(listing) {
   } else {
     endingTitle.textContent = 'Bid closed';
     const lineContainer = document.createElement('div');
-    lineContainer.classList.add('h-[32px]', 'flex', 'items-center');
+    lineContainer.classList.add(
+      'h-[32px]',
+      'flex',
+      'items-center',
+      'justify-center',
+    );
     const daysNumber = document.createElement('span');
-    daysNumber.classList.add('h-[2px]', 'w-[28px]', 'block', 'bg-gray');
+    daysNumber.classList.add('h-[2px]', 'w-[20px]', 'block', 'bg-light-gray');
     lineContainer.appendChild(daysNumber);
 
     ending.append(endingTitle, lineContainer);
