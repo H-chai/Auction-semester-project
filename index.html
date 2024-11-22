@@ -25,7 +25,6 @@
       <section
         class="main-wrapper bg-light-blue pt-6 md:flex md:flex-row-reverse md:h-[50vh] md:pt-0 md:px-8 md:items-center md:gap-6 lg:h-[60vh] lg:px-32 lg:justify-center lg:gap-16 xl:gap-20"
       >
-        <!-- image slider (latest 4 images) -->
         <div
           class="image-slider-container w-full h-[300px] relative overflow-hidden md:w-1/2 md:h-[400px]"
         ></div>
@@ -43,7 +42,7 @@
       <section
         class="listings-feed pt-14 px-6 pb-20 lg:pt-28 lg:px-24 lg:pb-32"
       >
-        <form name="search" class="relative mb-14 lg:mb-20 lg:w-1/2 lg:mx-auto">
+        <form name="search" class="relative mb-14 lg:mb-28 lg:w-1/2 lg:mx-auto">
           <label for="search">
             <input
               type="search"
@@ -59,18 +58,96 @@
             </button>
           </label>
         </form>
-        <div class="sort-order flex justify-end mb-6 lg:mb-12">
-          <button
-            id="newest"
-            class="font-display py-2 px-6 text-sm bg-blue text-white rounded-l-md hover:underline lg:text-base lg:px-8"
-          >
-            Newest
+        <div class="sort-order flex justify-between mb-4 lg:mb-6 lg:px-2">
+          <button class="sort-by relative">
+            <p class="uppercase text-sm text-blue">
+              sort by<i class="fa-solid fa-plus ml-1"></i>
+            </p>
+            <ul
+              class="sorting-list hidden absolute top-[140%] bg-white p-4 border border-outline-light rounded-md z-50"
+            >
+              <li class="w-fit mb-1 flex">
+                <input
+                  type="radio"
+                  name="sort"
+                  value="newest"
+                  id="newest"
+                  class="mr-1"
+                  checked
+                /><label for="newest" class="cursor-pointer whitespace-nowrap"
+                  >Newest</label
+                >
+              </li>
+              <li class="w-fit mb-1 flex">
+                <input
+                  type="radio"
+                  name="sort"
+                  value="oldest"
+                  id="oldest"
+                  class="mr-1"
+                /><label for="oldest" class="cursor-pointer whitespace-nowrap"
+                  >Oldest</label
+                >
+              </li>
+              <li class="w-fit mb-1 flex">
+                <input
+                  type="radio"
+                  name="sort"
+                  value="endingSoon"
+                  id="endingSoon"
+                  class="mr-1"
+                /><label
+                  for="endingSoon"
+                  class="cursor-pointer whitespace-nowrap"
+                  >Ending soon</label
+                >
+              </li>
+              <li class="w-fit mb-1 flex">
+                <input
+                  type="radio"
+                  name="sort"
+                  value="updated"
+                  id="updated"
+                  class="mr-1"
+                /><label for="updated" class="cursor-pointer whitespace-nowrap"
+                  >Recently updated</label
+                >
+              </li>
+            </ul>
           </button>
-          <button
-            id="oldest"
-            class="font-display py-2 px-6 text-sm bg-white text-blue rounded-r-md border border-blue hover:underline lg:text-base lg:px-8"
-          >
-            Oldest
+          <button class="zzz relative">
+            <p class="uppercase text-sm text-blue">
+              filter<i class="fa-solid fa-filter ml-1"></i>
+            </p>
+            <ul
+              class="aaa hidden absolute top-[140%] right-0 bg-white p-4 border border-outline-light rounded-md z-50"
+            >
+              <li class="w-fit mb-1 flex">
+                <input
+                  type="radio"
+                  name="filter"
+                  value="showActive"
+                  id="showActive"
+                  class="mr-1"
+                  checked
+                /><label
+                  for="showActive"
+                  class="cursor-pointer whitespace-nowrap"
+                  >Show Active</label
+                >
+              </li>
+              <li class="w-fit flex">
+                <input
+                  type="radio"
+                  name="filter"
+                  value="showAll"
+                  id="showAll"
+                  class="mr-1"
+                /><label for="showAll" class="cursor-pointer whitespace-nowrap"
+                  >Show All</label
+                >
+              </li>
+            </ul>
           </button>
         </div>
         <div
