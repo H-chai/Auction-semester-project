@@ -2,6 +2,7 @@ import AuctionAPI from '../api';
 import { generateAuthenticatedHeader } from './components/headers/authenticatedHeader';
 import { generateListingCard } from './components/listing/listingCard';
 import { generateUnAuthenticatedHeader } from './components/headers/unAuthenticatedHeader';
+import { getLatestImages } from './components/utils/getLatestImages';
 
 export default class AuctionApp extends AuctionAPI {
   constructor() {
@@ -50,6 +51,7 @@ export default class AuctionApp extends AuctionAPI {
   views = {
     listingFeed: async () => {
       this.events.headerToggle();
+      this.events.imageSlider();
       this.events.displayListings();
     },
 
@@ -121,9 +123,11 @@ export default class AuctionApp extends AuctionAPI {
 
     displayListings: async (page = 1) => {
       try {
-        const listings = await this.listing.getListings(24, page);
+        const listings = await this.listing.get24Listings(24, page);
         const { data } = listings;
-        console.log(data);
+
+        getLatestImages();
+
         const listingsContainer = document.querySelector('.listings-container');
         listingsContainer.innerHTML = '';
         data.forEach((listing) => {
@@ -132,6 +136,31 @@ export default class AuctionApp extends AuctionAPI {
         });
       } catch (error) {
         alert(error.message);
+      }
+    },
+
+    imageSlider: () => {
+      const imageSliderContainer = document.querySelector(
+        '.image-slider-container',
+      );
+      imageSliderContainer.innerHTML = '';
+      const latestURLs = getLatestImages();
+      console.log(latestURLs);
+      for (let i = 0; i < 3; i++) {
+        const img = document.createElement('img');
+        img.src = latestURLs[i];
+        img.classList.add(
+          `img-${i}`,
+          'absolute',
+          'top-0',
+          'bottom-0',
+          'right-0',
+          'left-0',
+          'm-auto',
+          'h-full',
+          'opacity-0',
+        );
+        imageSliderContainer.appendChild(img);
       }
     },
   };
