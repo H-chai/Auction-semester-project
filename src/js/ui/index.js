@@ -53,6 +53,7 @@ export default class AuctionApp extends AuctionAPI {
       this.events.headerToggle();
       this.events.imageSlider();
       this.events.displayListings();
+      this.sorting.openSorting();
     },
 
     register: async () => {
@@ -121,13 +122,15 @@ export default class AuctionApp extends AuctionAPI {
       }
     },
 
-    displayListings: async (page = 1) => {
+    displayListings: async (page = 1, sort = 'created', sortOrder = 'desc') => {
       try {
-        const listings = await this.listing.get24Listings(24, page);
+        const listings = await this.listing.get24Listings(
+          24,
+          page,
+          sort,
+          sortOrder,
+        );
         const { data } = listings;
-
-        getLatestImages();
-
         const listingsContainer = document.querySelector('.listings-container');
         listingsContainer.innerHTML = '';
         data.forEach((listing) => {
@@ -163,6 +166,59 @@ export default class AuctionApp extends AuctionAPI {
         );
         imageSliderContainer.appendChild(img);
       }
+    },
+  };
+
+  sorting = {
+    openSorting: () => {
+      const sortBy = document.querySelector('.sort-by');
+      const sortOptions = document.querySelector('.sorting-list');
+      sortBy.addEventListener('click', () => {
+        if (sortOptions.classList.contains('hidden')) {
+          sortOptions.classList.toggle('hidden');
+        } else {
+          sortOptions.classList.add('hidden');
+        }
+      });
+      const labels = document.querySelectorAll('.sorting-list label');
+      [...labels].forEach((item) => {
+        item.addEventListener('click', () => {
+          sortOptions.classList.add('hidden');
+        });
+      });
+
+      this.sorting.descending();
+      this.sorting.ascending();
+      this.sorting.endingSoon();
+      this.sorting.resentUpdate();
+    },
+
+    descending: () => {
+      const oldestButton = document.getElementById('newest');
+      oldestButton.addEventListener('click', () => {
+        this.events.displayListings(1, 'created', 'desc');
+      });
+    },
+
+    ascending: () => {
+      const oldestButton = document.getElementById('oldest');
+      oldestButton.addEventListener('click', () => {
+        this.events.displayListings(1, 'created', 'asc');
+      });
+    },
+
+    endingSoon: () => {
+      const oldestButton = document.getElementById('endingSoon');
+      oldestButton.addEventListener('click', () => {
+        this.events.displayListings(1, 'endsAt', 'asc');
+      });
+    },
+
+    resentUpdate: () => {
+      const oldestButton = document.getElementById('updated');
+      oldestButton.addEventListener('click', () => {
+        this.events.displayListings(1, 'updated', 'desc');
+      });
     },
   };
 }
