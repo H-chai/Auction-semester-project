@@ -53,7 +53,7 @@ export default class AuctionApp extends AuctionAPI {
       this.events.headerToggle();
       this.events.imageSlider();
       this.events.displayListings();
-      this.sorting.openSorting();
+      this.filtering.openSorting();
     },
 
     register: async () => {
@@ -169,7 +169,7 @@ export default class AuctionApp extends AuctionAPI {
     },
   };
 
-  sorting = {
+  filtering = {
     openSorting: () => {
       const sortBy = document.querySelector('.sort-by');
       const sortOptions = document.querySelector('.sorting-list');
@@ -187,10 +187,10 @@ export default class AuctionApp extends AuctionAPI {
         });
       });
 
-      this.sorting.descending();
-      this.sorting.ascending();
-      this.sorting.endingSoon();
-      this.sorting.resentUpdate();
+      this.filtering.descending();
+      this.filtering.ascending();
+      this.filtering.endingSoon();
+      this.filtering.resentUpdate();
     },
 
     descending: () => {
