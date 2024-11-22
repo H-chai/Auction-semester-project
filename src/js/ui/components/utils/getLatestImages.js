@@ -1,10 +1,10 @@
 import AuctionAPI from '../../../api';
 
 const api = new AuctionAPI();
-const allListings = await api.listing.getAllListings();
+const listings = await api.listing.get24Listings();
 
 export function getLatestImages() {
-  const { data } = allListings;
+  const { data } = listings;
   //console.log(data);
   const mediaArray = data.map((listing) => listing.media[0]);
   //console.log(mediaArray);
