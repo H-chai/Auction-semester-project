@@ -54,6 +54,7 @@ export default class AuctionApp extends AuctionAPI {
       this.events.imageSlider();
       this.events.displayListings();
       this.filtering.openSorting();
+      this.filtering.openFilter();
     },
 
     register: async () => {
@@ -218,6 +219,24 @@ export default class AuctionApp extends AuctionAPI {
       const oldestButton = document.getElementById('updated');
       oldestButton.addEventListener('click', () => {
         this.events.displayListings(1, 'updated', 'desc');
+      });
+    },
+
+    openFilter: () => {
+      const filterBy = document.querySelector('.filter-by');
+      const filterOptions = document.querySelector('.filtering-list');
+      filterBy.addEventListener('click', () => {
+        if (filterOptions.classList.contains('hidden')) {
+          filterOptions.classList.toggle('hidden');
+        } else {
+          filterOptions.classList.add('hidden');
+        }
+      });
+      const labels = document.querySelectorAll('.filtering-list label');
+      [...labels].forEach((item) => {
+        item.addEventListener('click', () => {
+          filterOptions.classList.add('hidden');
+        });
       });
     },
   };
