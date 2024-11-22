@@ -85,7 +85,7 @@ export default class AuctionAPI {
   };
 
   listing = {
-    getListings: async (limit = 24, page = 1) => {
+    get24Listings: async (limit = 24, page = 1) => {
       const url = new URL(AuctionAPI.paths.listings);
       url.searchParams.append('limit', limit);
       url.searchParams.append('page', page);
@@ -93,6 +93,16 @@ export default class AuctionAPI {
       url.searchParams.append('_bids', true);
 
       const response = await fetch(url.toString(), {
+        headers: headers(),
+        method: 'GET',
+      });
+      const data = await AuctionAPI.responseHandler.handleResponse(response);
+
+      return data;
+    },
+
+    getAllListings: async () => {
+      const response = await fetch(AuctionAPI.paths.listings, {
         headers: headers(),
         method: 'GET',
       });
