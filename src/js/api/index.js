@@ -119,5 +119,16 @@ export default class AuctionAPI {
 
       return data;
     },
+
+    getSingleListing: async (id) => {
+      const response = await fetch(`${AuctionAPI.paths.listings}/${id}`, {
+        headers: headers(),
+        method: 'GET',
+      });
+
+      const data = await AuctionAPI.responseHandler.handleResponse(response);
+
+      return data;
+    },
   };
 }
