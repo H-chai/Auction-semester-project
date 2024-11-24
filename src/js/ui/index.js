@@ -362,6 +362,56 @@ export default class AuctionApp extends AuctionAPI {
         });
         pagination.appendChild(pageButton);
       }
+
+      const previousButton = document.createElement('button');
+      previousButton.classList.add(
+        'w-8',
+        'h-8',
+        'rounded-full',
+        'text-blue',
+        'bg-white',
+        'font-medium',
+        'border',
+        'border-blue',
+      );
+      if (currentPage === 1) {
+        previousButton.disabled = true;
+        previousButton.style.cursor = 'not-allowed';
+        previousButton.style.opacity = '0.4';
+      }
+      previousButton.addEventListener('click', () => {
+        this.events.displayListings(currentPage - 1);
+      });
+      const previousIcon = document.createElement('i');
+      previousIcon.classList.add('fa-solid', 'fa-angle-left');
+      previousButton.appendChild(previousIcon);
+      const firstButton = document.querySelector('[data-page="1"]');
+      pagination.insertBefore(previousButton, firstButton);
+
+      const nextButton = document.createElement('button');
+      nextButton.classList.add(
+        'w-8',
+        'h-8',
+        'rounded-full',
+        'text-blue',
+        'bg-white',
+        'font-medium',
+        'border',
+        'border-blue',
+      );
+      if (currentPage === pageCount) {
+        nextButton.disabled = true;
+        nextButton.style.cursor = 'not-allowed';
+        nextButton.style.opacity = '0.4';
+      }
+      nextButton.addEventListener('click', () => {
+        this.events.displayListings(currentPage + 1);
+      });
+      const nextIcon = document.createElement('i');
+      nextIcon.classList.add('fa-solid', 'fa-angle-right');
+      nextButton.appendChild(nextIcon);
+      pagination.appendChild(nextButton);
+
       return pagination;
     },
   };
