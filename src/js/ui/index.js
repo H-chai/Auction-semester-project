@@ -138,6 +138,7 @@ export default class AuctionApp extends AuctionAPI {
           active,
         );
         const { data } = listings;
+        console.log(data);
         const listingsContainer = document.querySelector('.listings-container');
         listingsContainer.innerHTML = '';
         data.forEach((listing) => {
@@ -176,6 +177,10 @@ export default class AuctionApp extends AuctionAPI {
   };
 
   filtering = {
+    currentSortBy: 'created',
+    currentSortOrder: 'desc',
+    currentFilter: true,
+
     openSorting: () => {
       const sortBy = document.querySelector('.sort-by');
       const sortOptions = document.querySelector('.sorting-list');
@@ -210,7 +215,12 @@ export default class AuctionApp extends AuctionAPI {
       const newestButton = document.getElementById('newest');
       newestButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-        this.events.displayListings(1, 'created', 'desc');
+        this.events.displayListings(
+          1,
+          this.filtering.currentSortBy,
+          this.filtering.currentSortOrder,
+          this.filtering.currentFilter,
+        );
         newestButton.setAttribute('checked', 'checked');
       });
     },
@@ -219,7 +229,13 @@ export default class AuctionApp extends AuctionAPI {
       const oldestButton = document.getElementById('oldest');
       oldestButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-        this.events.displayListings(1, 'created', 'asc');
+        this.filtering.currentSortOrder = 'asc';
+        this.events.displayListings(
+          1,
+          this.filtering.currentSortBy,
+          this.filtering.currentSortOrder,
+          this.filtering.currentFilter,
+        );
         oldestButton.setAttribute('checked', 'checked');
       });
     },
@@ -228,7 +244,14 @@ export default class AuctionApp extends AuctionAPI {
       const endingSoonButton = document.getElementById('endingSoon');
       endingSoonButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-        this.events.displayListings(1, 'endsAt', 'asc');
+        this.filtering.currentSortBy = 'endsAt';
+        this.filtering.currentSortOrder = 'asc';
+        this.events.displayListings(
+          1,
+          this.filtering.currentSortBy,
+          this.filtering.currentSortOrder,
+          this.filtering.currentFilter,
+        );
         endingSoonButton.setAttribute('checked', 'checked');
       });
     },
@@ -237,7 +260,14 @@ export default class AuctionApp extends AuctionAPI {
       const resentUpdateButton = document.getElementById('updated');
       resentUpdateButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-        this.events.displayListings(1, 'updated', 'desc');
+        this.filtering.currentSortBy = 'updated';
+        this.filtering.currentSortOrder = 'desc';
+        this.events.displayListings(
+          1,
+          this.filtering.currentSortBy,
+          this.filtering.currentSortOrder,
+          this.filtering.currentFilter,
+        );
         resentUpdateButton.setAttribute('checked', 'checked');
       });
     },
@@ -267,7 +297,13 @@ export default class AuctionApp extends AuctionAPI {
       const showAll = document.getElementById('showAll');
       const showActive = document.getElementById('showActive');
       showAll.addEventListener('click', () => {
-        this.events.displayListings(1, 'created', 'desc', false);
+        this.filtering.currentFilter = false;
+        this.events.displayListings(
+          1,
+          this.filtering.currentSortBy,
+          this.filtering.currentSortOrder,
+          this.filtering.currentFilter,
+        );
         showActive.removeAttribute('checked');
         showAll.setAttribute('checked', 'checked');
       });
@@ -277,7 +313,13 @@ export default class AuctionApp extends AuctionAPI {
       const showActive = document.getElementById('showActive');
       const showAll = document.getElementById('showAll');
       showActive.addEventListener('click', () => {
-        this.events.displayListings(1, 'created', 'desc', true);
+        this.filtering.currentFilter = true;
+        this.events.displayListings(
+          1,
+          this.filtering.currentSortBy,
+          this.filtering.currentSortOrder,
+          this.filtering.currentFilter,
+        );
         showAll.removeAttribute('checked');
         showActive.setAttribute('checked', 'checked');
       });
