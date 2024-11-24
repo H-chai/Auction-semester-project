@@ -123,13 +123,19 @@ export default class AuctionApp extends AuctionAPI {
       }
     },
 
-    displayListings: async (page = 1, sort = 'created', sortOrder = 'desc') => {
+    displayListings: async (
+      page = 1,
+      sort = 'created',
+      sortOrder = 'desc',
+      active = true,
+    ) => {
       try {
         const listings = await this.listing.get24Listings(
           24,
           page,
           sort,
           sortOrder,
+          active,
         );
         const { data } = listings;
         const listingsContainer = document.querySelector('.listings-container');
@@ -149,7 +155,6 @@ export default class AuctionApp extends AuctionAPI {
       );
       imageSliderContainer.innerHTML = '';
       const latestURLs = getLatestImages();
-      console.log(latestURLs);
       for (let i = 0; i < 3; i++) {
         const img = document.createElement('img');
         img.src = latestURLs[i];
@@ -194,31 +199,46 @@ export default class AuctionApp extends AuctionAPI {
       this.filtering.resentUpdate();
     },
 
+    removeCheckedAttribute: () => {
+      const checkBoxes = document.getElementsByName('sort');
+      checkBoxes.forEach((input) => {
+        input.removeAttribute('checked');
+      });
+    },
+
     descending: () => {
-      const oldestButton = document.getElementById('newest');
-      oldestButton.addEventListener('click', () => {
+      const newestButton = document.getElementById('newest');
+      newestButton.addEventListener('click', () => {
+        this.filtering.removeCheckedAttribute();
         this.events.displayListings(1, 'created', 'desc');
+        newestButton.setAttribute('checked', 'checked');
       });
     },
 
     ascending: () => {
       const oldestButton = document.getElementById('oldest');
       oldestButton.addEventListener('click', () => {
+        this.filtering.removeCheckedAttribute();
         this.events.displayListings(1, 'created', 'asc');
+        oldestButton.setAttribute('checked', 'checked');
       });
     },
 
     endingSoon: () => {
-      const oldestButton = document.getElementById('endingSoon');
-      oldestButton.addEventListener('click', () => {
+      const endingSoonButton = document.getElementById('endingSoon');
+      endingSoonButton.addEventListener('click', () => {
+        this.filtering.removeCheckedAttribute();
         this.events.displayListings(1, 'endsAt', 'asc');
+        endingSoonButton.setAttribute('checked', 'checked');
       });
     },
 
     resentUpdate: () => {
-      const oldestButton = document.getElementById('updated');
-      oldestButton.addEventListener('click', () => {
+      const resentUpdateButton = document.getElementById('updated');
+      resentUpdateButton.addEventListener('click', () => {
+        this.filtering.removeCheckedAttribute();
         this.events.displayListings(1, 'updated', 'desc');
+        resentUpdateButton.setAttribute('checked', 'checked');
       });
     },
 
@@ -237,6 +257,29 @@ export default class AuctionApp extends AuctionAPI {
         item.addEventListener('click', () => {
           filterOptions.classList.add('hidden');
         });
+      });
+
+      this.filtering.showAll();
+      this.filtering.showActive();
+    },
+
+    showAll: () => {
+      const showAll = document.getElementById('showAll');
+      const showActive = document.getElementById('showActive');
+      showAll.addEventListener('click', () => {
+        this.events.displayListings(1, 'created', 'desc', false);
+        showActive.removeAttribute('checked');
+        showAll.setAttribute('checked', 'checked');
+      });
+    },
+
+    showActive: () => {
+      const showActive = document.getElementById('showActive');
+      const showAll = document.getElementById('showAll');
+      showActive.addEventListener('click', () => {
+        this.events.displayListings(1, 'created', 'desc', true);
+        showAll.removeAttribute('checked');
+        showActive.setAttribute('checked', 'checked');
       });
     },
   };
