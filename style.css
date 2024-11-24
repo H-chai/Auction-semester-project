@@ -1566,12 +1566,24 @@ video {
     height: 50vh;
   }
 
+  .md\:h-auto {
+    height: auto;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
 
   .md\:w-1\/6 {
     width: 16.666667%;
+  }
+
+  .md\:w-full {
+    width: 100%;
+  }
+
+  .md\:\!w-full {
+    width: 100% !important;
   }
 
   .md\:flex-row-reverse {
