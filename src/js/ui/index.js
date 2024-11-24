@@ -69,6 +69,7 @@ export default class AuctionApp extends AuctionAPI {
 
     listing: async () => {
       this.events.headerToggle();
+      this.events.displaySingleListing();
     },
 
     listingCreate: async () => {},
@@ -154,6 +155,18 @@ export default class AuctionApp extends AuctionAPI {
           const listingCard = generateListingCard(listing);
           listingsContainer.appendChild(listingCard);
         });
+      } catch (error) {
+        alert(error.message);
+      }
+    },
+
+    displaySingleListing: async () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const listingId = params.get('id');
+        const listing = await this.listing.getSingleListing(listingId);
+        const { data } = listing;
+        console.log(data);
       } catch (error) {
         alert(error.message);
       }
