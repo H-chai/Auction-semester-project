@@ -137,8 +137,17 @@ export default class AuctionApp extends AuctionAPI {
           sortOrder,
           active,
         );
-        const { data } = listings;
-        console.log(data);
+        const { data, meta } = listings;
+
+        const { currentPage, pageCount } = meta;
+        const newUrl = `${window.location.pathname}?page=${page}`;
+        window.history.replaceState({}, '', newUrl);
+        this.pagination.homePagination(currentPage, pageCount);
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+
         const listingsContainer = document.querySelector('.listings-container');
         listingsContainer.innerHTML = '';
         data.forEach((listing) => {
@@ -323,6 +332,37 @@ export default class AuctionApp extends AuctionAPI {
         showAll.removeAttribute('checked');
         showActive.setAttribute('checked', 'checked');
       });
+    },
+  };
+
+  pagination = {
+    homePagination: (currentPage, pageCount) => {
+      const pagination = document.querySelector('.pagination');
+      pagination.innerHTML = '';
+      for (let i = 1; i < pageCount + 1; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.dataset.page = i;
+        pageButton.classList.add(
+          'w-8',
+          'h-8',
+          'rounded-full',
+          'text-blue',
+          'bg-white',
+          'font-medium',
+          'border',
+          'border-blue',
+        );
+        if (currentPage === i) {
+          pageButton.classList.add('current-page', 'text-white', 'bg-blue');
+          pageButton.classList.remove('text-blue', 'bg-white');
+        }
+        pageButton.addEventListener('click', () => {
+          this.events.displayListings(i);
+        });
+        pagination.appendChild(pageButton);
+      }
+      return pagination;
     },
   };
 }
