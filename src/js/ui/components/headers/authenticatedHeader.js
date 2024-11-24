@@ -55,6 +55,7 @@ export function generateAuthenticatedHeader() {
   const dropDownMenu = document.createElement('div');
   dropDownMenu.classList.add(
     'absolute',
+    'z-10',
     'top-full',
     'right-0',
     'bg-white',
