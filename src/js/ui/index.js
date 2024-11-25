@@ -55,6 +55,7 @@ export default class AuctionApp extends AuctionAPI {
       this.events.displayListings();
       this.filtering.openSorting();
       this.filtering.openFilter();
+      this.events.logout();
     },
 
     register: async () => {
@@ -70,15 +71,24 @@ export default class AuctionApp extends AuctionAPI {
     listing: async () => {
       this.events.headerToggle();
       this.events.displaySingleListing();
+      this.events.logout();
     },
 
-    listingCreate: async () => {},
+    listingCreate: async () => {
+      this.events.logout();
+    },
 
-    listingUpdate: async () => {},
+    listingUpdate: async () => {
+      this.events.logout();
+    },
 
-    profile: async () => {},
+    profile: async () => {
+      this.events.logout();
+    },
 
-    profileUpdate: async () => {},
+    profileUpdate: async () => {
+      this.events.logout();
+    },
   };
 
   events = {
@@ -122,6 +132,21 @@ export default class AuctionApp extends AuctionAPI {
         const unAuthenticatedHeader = generateUnAuthenticatedHeader();
         header.appendChild(unAuthenticatedHeader);
       }
+    },
+
+    logout: () => {
+      const logoutButton = document.querySelectorAll('.logout-button');
+      logoutButton.forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          localStorage.removeItem('token');
+          localStorage.removeItem('username');
+          localStorage.removeItem('credits');
+
+          alert('You have successfully logged out.');
+          window.location.href = '/';
+        });
+      });
     },
 
     displayListings: async (

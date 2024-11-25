@@ -92,6 +92,7 @@ export function generateAuthenticatedHeader() {
   const listItemLogout = document.createElement('li');
   const logoutButton = document.createElement('button');
   logoutButton.classList.add(
+    'logout-button',
     'flex',
     'items-center',
     'text-black',
@@ -186,7 +187,7 @@ export function generateAuthenticatedHeader() {
   const menuBoxLogout = document.createElement('li');
   const menuBoxLogoutButton = document.createElement('button');
   menuBoxLogoutButton.classList.add(
-    'my-page',
+    'logout-button',
     'flex',
     'justify-center',
     'items-center',

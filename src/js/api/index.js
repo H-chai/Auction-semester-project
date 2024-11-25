@@ -35,6 +35,10 @@ export default class AuctionAPI {
     localStorage.setItem('username', user);
   }
 
+  static set credits(credits) {
+    localStorage.setItem('credits', credits);
+  }
+
   auth = {
     register: async ({ name, email, password }) => {
       const body = JSON.stringify({ name, email, password });
@@ -57,9 +61,13 @@ export default class AuctionAPI {
       });
       const { data } =
         await AuctionAPI.responseHandler.handleResponse(response);
+      console.log(data);
       const { accessToken: token, name: name } = data;
       AuctionAPI.token = token;
       AuctionAPI.username = name;
+      const profile = await this.profile.getProfile(name);
+      const userCredit = profile.data.credits;
+      AuctionAPI.credits = userCredit;
 
       return data;
     },
