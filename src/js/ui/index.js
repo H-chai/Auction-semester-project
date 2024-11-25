@@ -190,8 +190,8 @@ export default class AuctionApp extends AuctionAPI {
         const params = new URLSearchParams(window.location.search);
         const listingId = params.get('id');
         const listing = await this.listing.getSingleListing(listingId);
-        const { data } = listing;
-        console.log(data);
+
+        console.log(listing);
       } catch (error) {
         alert(error.message);
       }

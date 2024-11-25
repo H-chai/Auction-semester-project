@@ -61,7 +61,6 @@ export default class AuctionAPI {
       });
       const { data } =
         await AuctionAPI.responseHandler.handleResponse(response);
-      console.log(data);
       const { accessToken: token, name: name } = data;
       AuctionAPI.token = token;
       AuctionAPI.username = name;
@@ -129,7 +128,10 @@ export default class AuctionAPI {
     },
 
     getSingleListing: async (id) => {
-      const response = await fetch(`${AuctionAPI.paths.listings}/${id}`, {
+      const url = new URL(`${AuctionAPI.paths.listings}/${id}`);
+      url.searchParams.append('_seller', true);
+      url.searchParams.append('_bids', true);
+      const response = await fetch(url.toString(), {
         headers: headers(),
         method: 'GET',
       });
