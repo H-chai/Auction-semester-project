@@ -78,6 +78,8 @@ export default class AuctionApp extends AuctionAPI {
     listingCreate: async () => {
       this.events.headerToggle();
       this.events.logout();
+      const form = document.forms['createListing'];
+      form.addEventListener('submit', this.events.listing.create);
     },
 
     listingUpdate: async () => {
@@ -236,6 +238,38 @@ export default class AuctionApp extends AuctionAPI {
             'md:object-contain',
           );
           imageSliderContainer.appendChild(img);
+        }
+      },
+
+      create: async (event) => {
+        event.preventDefault();
+        const data = AuctionApp.form.formSubmit(event);
+        console.log(data);
+        const {
+          title,
+          description,
+          endingDate,
+          endingTime,
+          mediaUrl,
+          mediaAlt,
+        } = data;
+        const media = [{ url: mediaUrl, alt: mediaAlt }];
+        const dateCombined = `${endingDate}T${endingTime}:00.000Z`;
+        const date = new Date(dateCombined);
+        const endsAt = date.toISOString();
+        console.log(title);
+        console.log(description);
+        console.log(endingDate);
+        console.log(endingTime);
+        console.log(mediaUrl);
+        console.log(mediaAlt);
+        try {
+          await this.listing.create({ title, description, media, endsAt });
+          alert('You have created a new listing!');
+        } catch (error) {
+          alert(
+            `Could not create the listing.\n${error.message}.\nPlease try again.`,
+          );
         }
       },
     },
