@@ -133,14 +133,25 @@ export default class AuctionAPI {
       return data;
     },
 
-    getUsersListings: async (name) => {
-      const response = await fetch(
-        `${AuctionAPI.paths.profiles}/${name}/listings`,
-        {
-          headers: headers(),
-          method: 'GET',
-        },
-      );
+    getUsersListings: async (
+      limit = 24,
+      page = 1,
+      sort = 'created',
+      sortOrder = 'desc',
+      active = 'true',
+      name,
+    ) => {
+      const url = new URL(`${AuctionAPI.paths.profiles}/${name}/listings`);
+      url.searchParams.append('limit', limit);
+      url.searchParams.append('page', page);
+      url.searchParams.append('_seller', true);
+      url.searchParams.append('_active', active);
+      url.searchParams.append('sort', sort);
+      url.searchParams.append('sortOrder', sortOrder);
+      const response = await fetch(url.toString(), {
+        headers: headers(),
+        method: 'GET',
+      });
       const data = await AuctionAPI.responseHandler.handleResponse(response);
       return data;
     },
