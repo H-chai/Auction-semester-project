@@ -3,6 +3,7 @@ import { generateAuthenticatedHeader } from './components/headers/authenticatedH
 import { generateListingCard } from './components/listing/listingCard';
 import { generateUnAuthenticatedHeader } from './components/headers/unAuthenticatedHeader';
 import { getLatestImages } from './components/utils/getLatestImages';
+import { generateSingleListingHTML } from './components/listing/generateSingleListingHTML';
 
 export default class AuctionApp extends AuctionAPI {
   constructor() {
@@ -190,6 +191,14 @@ export default class AuctionApp extends AuctionAPI {
         const params = new URLSearchParams(window.location.search);
         const listingId = params.get('id');
         const listing = await this.listing.getSingleListing(listingId);
+        const { data } = listing;
+
+        const listingContainer = document.querySelector(
+          '.listing-item-container',
+        );
+        listingContainer.innerHTML = '';
+        const listingHTML = generateSingleListingHTML(data);
+        listingContainer.appendChild(listingHTML);
 
         console.log(listing);
       } catch (error) {

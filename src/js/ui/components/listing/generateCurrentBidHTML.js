@@ -8,17 +8,28 @@ export function generateCurrentBidHTML(listing) {
 
   const bidding = document.createElement('li');
   const biddingTitle = document.createElement('p');
-  biddingTitle.classList.add('text-xs', 'text-gray', 'font-medium', 'mb-1');
+  biddingTitle.classList.add(
+    'text-xs',
+    'text-gray',
+    'font-medium',
+    'mb-1',
+    'lg:text-sm',
+  );
 
   if (days >= 0) {
     if (bidAmount) {
       biddingTitle.textContent = 'Current bid';
       const amount = document.createElement('p');
-      amount.classList.add('text-xl', 'font-semibold', 'lg:text-2xl');
+      amount.classList.add('text-2xl', 'font-semibold', 'lg:text-4xl');
       amount.textContent = bidAmount;
       const unitText = document.createElement('span');
       unitText.textContent = 'credits';
-      unitText.classList.add('text-xs', 'font-semibold', 'ml-1');
+      unitText.classList.add(
+        'text-xs',
+        'font-semibold',
+        'ml-1',
+        'lg:text-base',
+      );
 
       amount.appendChild(unitText);
       bidding.append(biddingTitle, amount);
@@ -27,7 +38,7 @@ export function generateCurrentBidHTML(listing) {
     } else {
       biddingTitle.textContent = 'Current bid';
       const amount = document.createElement('p');
-      amount.classList.add('text-xl', 'font-semibold', 'lg:text-2xl');
+      amount.classList.add('text-2xl', 'font-semibold', 'lg:text-2xl');
       const unitText = document.createElement('span');
       unitText.textContent = 'No bids yet';
       unitText.classList.add('text-base', 'font-semibold');
@@ -41,7 +52,7 @@ export function generateCurrentBidHTML(listing) {
     if (bidAmount) {
       biddingTitle.textContent = 'Final bid';
       const amount = document.createElement('p');
-      amount.classList.add('text-xl', 'font-semibold', 'lg:text-2xl');
+      amount.classList.add('text-2xl', 'font-semibold', 'lg:text-2xl');
       amount.textContent = bidAmount;
       const unitText = document.createElement('span');
       unitText.textContent = 'credits';
@@ -54,7 +65,7 @@ export function generateCurrentBidHTML(listing) {
     } else {
       biddingTitle.textContent = 'Final bid';
       const amount = document.createElement('p');
-      amount.classList.add('text-xl', 'font-semibold', 'lg:text-2xl');
+      amount.classList.add('text-2xl', 'font-semibold', 'lg:text-2xl');
       const unitText = document.createElement('span');
       unitText.textContent = 'No bids placed';
       unitText.classList.add('text-base', 'font-semibold');

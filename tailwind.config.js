@@ -57,6 +57,9 @@ export default {
           '100%': { opacity: 0 },
         },
       },
+      aspectRatio: {
+        '4/3': '4 / 3',
+      },
     },
   },
   plugins: [],

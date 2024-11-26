@@ -20,12 +20,17 @@ export function generateListingCard(listing) {
   cardContainer.href = `/listing/?id=${listing.id}`;
 
   const figure = document.createElement('figure');
-  figure.classList.add('aspect-video', 'overflow-hidden', 'rounded-md', 'mb-3');
+  figure.classList.add(
+    'aspect-square',
+    'overflow-hidden',
+    'rounded-md',
+    'mb-3',
+  );
   const listingImage = document.createElement('img');
   listingImage.classList.add(
     'object-cover',
     'object-center',
-    'aspect-video',
+    'aspect-square',
     'w-full',
     'rounded-md',
     'transition',

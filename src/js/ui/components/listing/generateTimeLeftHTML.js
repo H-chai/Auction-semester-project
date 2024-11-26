@@ -8,16 +8,22 @@ export function generateTimeLeftHTML(listing) {
 
   const ending = document.createElement('li');
   const endingTitle = document.createElement('p');
-  endingTitle.classList.add('text-xs', 'text-gray', 'font-medium', 'mb-1');
+  endingTitle.classList.add(
+    'text-xs',
+    'text-gray',
+    'font-medium',
+    'mb-1',
+    'lg:text-sm',
+  );
 
   if (days > 0) {
     endingTitle.textContent = 'Ending in';
     const daysNumber = document.createElement('p');
-    daysNumber.classList.add('text-xl', 'font-semibold', 'lg:text-2xl');
+    daysNumber.classList.add('text-2xl', 'font-semibold', 'lg:text-4xl');
     daysNumber.textContent = days;
     const unitText = document.createElement('span');
     unitText.textContent = 'days left';
-    unitText.classList.add('text-xs', 'font-semibold', 'ml-1');
+    unitText.classList.add('text-xs', 'font-semibold', 'ml-1', 'lg:text-base');
 
     daysNumber.appendChild(unitText);
     ending.append(endingTitle, daysNumber);
