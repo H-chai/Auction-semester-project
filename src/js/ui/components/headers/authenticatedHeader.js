@@ -85,7 +85,6 @@ export function generateAuthenticatedHeader() {
     'hover:text-blue',
   );
   const username = localStorage.getItem('username');
-  console.log(username);
   profileLink.href = `/profile/?name=${username}`;
   const profileIcon = document.createElement('i');
   profileIcon.classList.add('fa-regular', 'fa-user', 'text-sm', 'mr-2');

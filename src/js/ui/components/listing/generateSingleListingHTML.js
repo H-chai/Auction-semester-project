@@ -118,7 +118,6 @@ export function generateSingleListingHTML(listing) {
 
   const historyList = document.createElement('ul');
   const historyArray = listing.bids;
-  console.log(historyArray.length);
   if (historyArray.length > 0) {
     historyArray.forEach((bid) => {
       const listItem = document.createElement('li');
