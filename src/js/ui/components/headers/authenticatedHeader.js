@@ -11,7 +11,7 @@ export function generateAuthenticatedHeader() {
   logoContainer.href = '/';
   logoContainer.classList.add('block', 'w-1/3', 'md:w-1/6', 'lg:mb-4');
   const logoImage = document.createElement('img');
-  logoImage.src = '../../../../images/Logo.svg';
+  logoImage.src = '/images/Logo.svg';
   logoImage.alt = 'CrediBid logo';
   logoContainer.appendChild(logoImage);
 
@@ -25,7 +25,7 @@ export function generateAuthenticatedHeader() {
     'font-semibold',
   );
   const createLink = document.createElement('a');
-  createLink.href = '../../../../listing/create/';
+  createLink.href = '/listing/create/';
   createLink.classList.add(
     'creating-btn',
     'px-8',
@@ -43,7 +43,7 @@ export function generateAuthenticatedHeader() {
   const userIconContainer = document.createElement('div');
   userIconContainer.classList.add('relative', 'group');
   const userIconImage = document.createElement('img');
-  userIconImage.src = '../../../../images/image copy.png';
+  userIconImage.src = '/images/image copy.png';
   userIconImage.alt = 'User Avatar';
   userIconImage.classList.add(
     'w-12',
@@ -84,6 +84,9 @@ export function generateAuthenticatedHeader() {
     'cursor-pointer',
     'hover:text-blue',
   );
+  const username = localStorage.getItem('username');
+  console.log(username);
+  profileLink.href = `/profile/?name=${username}`;
   const profileIcon = document.createElement('i');
   profileIcon.classList.add('fa-regular', 'fa-user', 'text-sm', 'mr-2');
   const profileLinkText = document.createElement('span');

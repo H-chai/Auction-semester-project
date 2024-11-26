@@ -11,7 +11,7 @@ export function generateUnAuthenticatedHeader() {
   logoContainer.href = '/';
   logoContainer.classList.add('block', 'w-1/3', 'md:w-1/6', 'lg:mb-4');
   const logoImage = document.createElement('img');
-  logoImage.src = '../../../../images/Logo.svg';
+  logoImage.src = '/images/Logo.svg';
   logoImage.alt = 'CrediBid logo';
   logoContainer.appendChild(logoImage);
 
@@ -24,7 +24,7 @@ export function generateUnAuthenticatedHeader() {
     'text-base',
   );
   const loginLink = document.createElement('a');
-  loginLink.href = '../../../../auth/login/';
+  loginLink.href = '/auth/login/';
   loginLink.classList.add(
     'px-8',
     'py-3',
@@ -36,7 +36,7 @@ export function generateUnAuthenticatedHeader() {
   );
   loginLink.textContent = 'Log in';
   const signupLink = document.createElement('a');
-  signupLink.href = '../../../../auth/register/';
+  signupLink.href = '/auth/register/';
   signupLink.classList.add(
     'blue-btn',
     'px-8',
@@ -99,7 +99,7 @@ export function generateUnAuthenticatedHeader() {
   const menuBoxLogin = document.createElement('li');
   menuBoxLogin.classList.add('text-center');
   const menuBoxLoginLink = document.createElement('a');
-  menuBoxLoginLink.href = '../../../../auth/login/';
+  menuBoxLoginLink.href = '/auth/login/';
   menuBoxLoginLink.textContent = 'Log in';
   menuBoxLoginLink.classList.add(
     'menu-item',
@@ -114,7 +114,7 @@ export function generateUnAuthenticatedHeader() {
   const menuBoxSignup = document.createElement('li');
   menuBoxSignup.classList.add('text-center');
   const menuBoxSignupLink = document.createElement('a');
-  menuBoxSignupLink.href = '../../../../auth/register/';
+  menuBoxSignupLink.href = '/auth/register/';
   menuBoxSignupLink.textContent = 'Sign up';
   menuBoxSignupLink.classList.add(
     'menu-item',

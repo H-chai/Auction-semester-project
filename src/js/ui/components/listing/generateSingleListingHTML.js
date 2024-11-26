@@ -12,7 +12,7 @@ export function generateSingleListingHTML(listing) {
     listingImage.src = listing.media[0].url;
     listingImage.alt = listing.media[0].alt;
   } else {
-    listingImage.src = '../../../../images/noImageAvailable.svg';
+    listingImage.src = '/images/noImageAvailable.svg';
     listingImage.alt = 'No image available';
   }
   listingImage.classList.add(
