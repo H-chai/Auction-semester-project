@@ -76,21 +76,25 @@ export default class AuctionApp extends AuctionAPI {
     },
 
     listingCreate: async () => {
+      this.events.headerToggle();
       this.events.logout();
     },
 
     listingUpdate: async () => {
+      this.events.headerToggle();
       this.events.logout();
     },
 
     profile: async () => {
-      this.events.logout();
+      this.events.headerToggle();
       this.events.profile.displayProfile();
       this.filtering.openSorting();
       this.filtering.openFilter();
+      this.events.logout();
     },
 
     profileUpdate: async () => {
+      this.events.headerToggle();
       this.events.logout();
     },
   };
@@ -249,7 +253,6 @@ export default class AuctionApp extends AuctionAPI {
         try {
           const profile = await this.profile.getProfile(name);
           const { data } = profile;
-          console.log(data);
           const header = document.querySelector('.header-authenticated');
           header.style.backgroundImage = `url(${data.banner.url})`;
           header.style.backgroundRepeat = 'no repeat';
@@ -283,7 +286,8 @@ export default class AuctionApp extends AuctionAPI {
             name,
           );
           const listings = userListings.data;
-          console.log(listings);
+          const meta = userListings.meta;
+
           const listingContainer = document.querySelector(
             '.user-listings-container',
           );
@@ -291,6 +295,17 @@ export default class AuctionApp extends AuctionAPI {
           listings.forEach((listing) => {
             const listingCard = generateListingCard(listing);
             listingContainer.appendChild(listingCard);
+          });
+
+          const { currentPage, pageCount } = meta;
+          console.log(currentPage);
+          console.log(pageCount);
+          const newUrl = `${window.location.pathname}?name=${name}&page=${page}`;
+          window.history.replaceState({}, '', newUrl);
+          this.pagination.homePagination(currentPage, pageCount);
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
           });
         } catch (error) {
           alert(error.message);
@@ -341,6 +356,7 @@ export default class AuctionApp extends AuctionAPI {
         this.filtering.removeCheckedAttribute();
 
         if (path === '/') {
+          this.currentSortOrder = 'desc';
           this.events.listing.displayListings(
             1,
             this.currentSortBy,
@@ -348,6 +364,7 @@ export default class AuctionApp extends AuctionAPI {
             this.currentFilter,
           );
         } else if (path === '/profile/') {
+          this.currentSortOrder = 'desc';
           this.events.profile.displayProfile(
             1,
             this.currentSortBy,
@@ -530,6 +547,7 @@ export default class AuctionApp extends AuctionAPI {
     homePagination: (currentPage, pageCount) => {
       const pagination = document.querySelector('.pagination');
       pagination.innerHTML = '';
+      const path = window.location.pathname;
 
       const createEllipsis = () => {
         const ellipsis = document.createElement('span');
@@ -555,13 +573,23 @@ export default class AuctionApp extends AuctionAPI {
           button.classList.add('current-page', 'text-white', 'bg-blue');
           button.classList.remove('text-blue', 'bg-white');
         }
+
         button.addEventListener('click', () => {
-          this.events.listing.displayListings(
-            pageData,
-            this.currentSortBy,
-            this.currentSortOrder,
-            this.currentFilter,
-          );
+          if (path === '/') {
+            this.events.listing.displayListings(
+              pageData,
+              this.currentSortBy,
+              this.currentSortOrder,
+              this.currentFilter,
+            );
+          } else if (path === '/profile/') {
+            this.events.profile.displayProfile(
+              pageData,
+              this.currentSortBy,
+              this.currentSortOrder,
+              this.currentFilter,
+            );
+          }
         });
         return button;
       };
@@ -627,12 +655,21 @@ export default class AuctionApp extends AuctionAPI {
         previousButton.style.opacity = '0.4';
       }
       previousButton.addEventListener('click', () => {
-        this.events.listing.displayListings(
-          currentPage - 1,
-          this.currentSortBy,
-          this.currentSortOrder,
-          this.currentFilter,
-        );
+        if (path === '/') {
+          this.events.listing.displayListings(
+            currentPage - 1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        } else if (path === '/profile/') {
+          this.events.profile.displayProfile(
+            currentPage - 1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        }
       });
       const previousIcon = document.createElement('i');
       previousIcon.classList.add('fa-solid', 'fa-angle-left');
@@ -651,18 +688,27 @@ export default class AuctionApp extends AuctionAPI {
         'border',
         'border-blue',
       );
-      if (currentPage === pageCount) {
+      if (currentPage === pageCount || pageCount === 0) {
         nextButton.disabled = true;
         nextButton.style.cursor = 'not-allowed';
         nextButton.style.opacity = '0.4';
       }
       nextButton.addEventListener('click', () => {
-        this.events.listing.displayListings(
-          currentPage + 1,
-          this.currentSortBy,
-          this.currentSortOrder,
-          this.currentFilter,
-        );
+        if (path === '/') {
+          this.events.listing.displayListings(
+            currentPage + 1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        } else if (path === '/profile/') {
+          this.events.profile.displayProfile(
+            currentPage + 1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        }
       });
       const nextIcon = document.createElement('i');
       nextIcon.classList.add('fa-solid', 'fa-angle-right');
