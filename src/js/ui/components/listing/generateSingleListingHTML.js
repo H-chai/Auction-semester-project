@@ -74,6 +74,14 @@ export function generateSingleListingHTML(listing) {
     'w-2/5',
   );
   button.type = 'submit';
+  const loggedInUser = localStorage.getItem('username');
+  if (listing.seller.name === loggedInUser) {
+    input.disabled = true;
+    input.style.cursor = 'not-allowed';
+    input.placeholder = 'Bidding disabled for your listing';
+    button.disabled = true;
+    button.style.cursor = 'not-allowed';
+  }
 
   label.appendChild(input);
   form.append(label, button);
