@@ -14,6 +14,7 @@
       src="https://kit.fontawesome.com/98d292e689.js"
       crossorigin="anonymous"
     ></script>
+    <script type="module" src="../src/main.js" defer></script>
   </head>
   <body class="font-body text-black">
     <header
@@ -55,11 +56,13 @@
           </div>
         </div>
       </nav>
-      <nav class="lg:hidden">
+      <nav
+        class="bg-white w-14 h-14 rounded-full flex items-center justify-center lg:hidden"
+      >
         <input type="checkbox" class="menu-btn hidden" id="menu-btn" />
         <label
           for="menu-btn"
-          class="menu-icon inline-block relative cursor-pointer py-6 px-3"
+          class="menu-icon inline-block relative cursor-pointer"
           ><span class="navicon bg-blue block relative h-[2px] w-[28px]"></span
         ></label>
         <ul
@@ -90,34 +93,32 @@
     <main
       class="px-6 pt-6 pb-28 relative lg:pt-24 lg:w-3/4 lg:px-0 lg:pb-32 lg:mx-auto"
     >
-      <section class="profile">
+      <section class="profile pt-16">
         <div
           class="user-info pb-10 border-b border-outline-light mb-10 lg:flex lg:items-start lg:gap-6 lg:pb-16 lg:mb-16"
         >
           <img
-            src="../images/image copy.png"
-            alt="user's avatar"
-            class="w-32 h-32 rounded-full absolute top-0 -translate-y-1/2 lg:relative lg:translate-y-0"
+            src=""
+            alt=""
+            class="avatar w-32 h-32 rounded-full absolute top-0 -translate-y-1/2 lg:relative lg:translate-y-0"
           />
-          <div class="user-profile lg:relative lg:w-full">
+          <div class="user-profile relative lg:relative lg:w-full">
             <button
-              class="profile-update-btn block px-6 py-2 font-display text-sm font-semibold bg-green rounded-md mr-0 ml-auto mb-6 lg:px-8 lg:py-3 lg:absolute lg:bottom-0 lg:right-0 lg:mb-0 hover:text-green"
+              class="profile-update-btn absolute top-0 right-0 px-6 py-2 font-display text-sm font-semibold bg-green rounded-md mr-0 ml-auto mb-6 lg:px-8 lg:py-3 lg:absolute lg:bottom-0 lg:right-0 lg:mb-0 hover:text-green"
             >
               Update Profile
             </button>
-            <h1 class="username font-display font-bold text-2xl mb-1">
-              Teddy Bear
-            </h1>
-            <p class="bio mb-3">This is example text This is example</p>
+            <h1 class="username font-display font-bold text-2xl mb-1"></h1>
+            <p class="bio mb-3"></p>
             <p>
               Credits:
-              <span class="credits font-display text-lg font-bold ml-1">3</span>
+              <span class="credits font-display text-lg font-bold ml-1"></span>
             </p>
             <p>
               Items:
-              <span class="item-count font-display text-lg font-bold ml-1"
-                >3</span
-              >
+              <span
+                class="item-count font-display text-lg font-bold ml-1"
+              ></span>
             </p>
           </div>
         </div>
@@ -137,7 +138,9 @@
             Oldest
           </button>
         </div>
-        <div class="user-listings-container"></div>
+        <div
+          class="user-listings-container grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
+        ></div>
         <div class="profile-pagination"></div>
       </section>
     </main>

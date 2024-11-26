@@ -52,8 +52,8 @@ export default class AuctionApp extends AuctionAPI {
   views = {
     listingFeed: async () => {
       this.events.headerToggle();
-      this.events.imageSlider();
-      this.events.displayListings();
+      this.events.listing.imageSlider();
+      this.events.listing.displayListings();
       this.filtering.openSorting();
       this.filtering.openFilter();
       this.events.logout();
@@ -71,7 +71,7 @@ export default class AuctionApp extends AuctionAPI {
 
     listing: async () => {
       this.events.headerToggle();
-      this.events.displaySingleListing();
+      this.events.listing.displaySingleListing();
       this.events.logout();
     },
 
@@ -85,6 +85,7 @@ export default class AuctionApp extends AuctionAPI {
 
     profile: async () => {
       this.events.logout();
+      this.events.profile.displayProfile();
     },
 
     profileUpdate: async () => {
@@ -150,85 +151,137 @@ export default class AuctionApp extends AuctionAPI {
       });
     },
 
-    displayListings: async (
-      page = 1,
-      sort = 'created',
-      sortOrder = 'desc',
-      active = true,
-    ) => {
-      try {
-        const listings = await this.listing.get24Listings(
-          24,
-          page,
-          sort,
-          sortOrder,
-          active,
+    listing: {
+      displayListings: async (
+        page = 1,
+        sort = 'created',
+        sortOrder = 'desc',
+        active = true,
+      ) => {
+        try {
+          const listings = await this.listing.get24Listings(
+            24,
+            page,
+            sort,
+            sortOrder,
+            active,
+          );
+          const { data, meta } = listings;
+
+          const { currentPage, pageCount } = meta;
+          const newUrl = `${window.location.pathname}?page=${page}`;
+          window.history.replaceState({}, '', newUrl);
+          this.pagination.homePagination(currentPage, pageCount);
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+
+          const listingsContainer = document.querySelector(
+            '.listings-container',
+          );
+          listingsContainer.innerHTML = '';
+          data.forEach((listing) => {
+            const listingCard = generateListingCard(listing);
+            listingsContainer.appendChild(listingCard);
+          });
+        } catch (error) {
+          alert(error.message);
+        }
+      },
+
+      displaySingleListing: async () => {
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const listingId = params.get('id');
+          const listing = await this.listing.getSingleListing(listingId);
+          const { data } = listing;
+
+          const listingContainer = document.querySelector(
+            '.listing-item-container',
+          );
+          listingContainer.innerHTML = '';
+          const listingHTML = generateSingleListingHTML(data);
+          listingContainer.appendChild(listingHTML);
+        } catch (error) {
+          alert(error.message);
+        }
+      },
+
+      imageSlider: () => {
+        const imageSliderContainer = document.querySelector(
+          '.image-slider-container',
         );
-        const { data, meta } = listings;
-
-        const { currentPage, pageCount } = meta;
-        const newUrl = `${window.location.pathname}?page=${page}`;
-        window.history.replaceState({}, '', newUrl);
-        this.pagination.homePagination(currentPage, pageCount);
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-
-        const listingsContainer = document.querySelector('.listings-container');
-        listingsContainer.innerHTML = '';
-        data.forEach((listing) => {
-          const listingCard = generateListingCard(listing);
-          listingsContainer.appendChild(listingCard);
-        });
-      } catch (error) {
-        alert(error.message);
-      }
+        imageSliderContainer.innerHTML = '';
+        const latestURLs = getLatestImages();
+        for (let i = 0; i < 3; i++) {
+          const img = document.createElement('img');
+          img.src = latestURLs[i];
+          img.classList.add(
+            `img-${i}`,
+            'absolute',
+            'top-0',
+            'bottom-0',
+            'right-0',
+            'left-0',
+            'm-auto',
+            'h-full',
+            'opacity-0',
+            'md:object-contain',
+          );
+          imageSliderContainer.appendChild(img);
+        }
+      },
     },
 
-    displaySingleListing: async () => {
-      try {
+    profile: {
+      displayProfile: async () => {
         const params = new URLSearchParams(window.location.search);
-        const listingId = params.get('id');
-        const listing = await this.listing.getSingleListing(listingId);
-        const { data } = listing;
+        const name = params.get('name');
 
-        const listingContainer = document.querySelector(
-          '.listing-item-container',
-        );
-        listingContainer.innerHTML = '';
-        const listingHTML = generateSingleListingHTML(data);
-        listingContainer.appendChild(listingHTML);
+        try {
+          const profile = await this.profile.getProfile(name);
+          const { data } = profile;
+          console.log(data);
+          const header = document.querySelector('.header-authenticated');
+          header.style.backgroundImage = `url(${data.banner.url})`;
+          header.style.backgroundRepeat = 'no repeat';
+          header.style.backgroundSize = 'cover';
+          header.style.backgroundPosition = 'center';
+          const avatar = document.querySelector('.avatar');
+          avatar.src = data.avatar.url;
+          avatar.alt = data.avatar.alt;
+          const updateButton = document.querySelector('.profile-update-btn');
+          const loggedInUser = localStorage.getItem('username');
+          if (name === loggedInUser) {
+            updateButton.classList.add('block');
+          } else {
+            updateButton.classList.add('hidden');
+          }
+          const username = document.querySelector('.username');
+          username.textContent = data.name;
+          const bio = document.querySelector('.bio');
+          bio.textContent = data.bio;
+          const credits = document.querySelector('.credits');
+          credits.textContent = data.credits;
+          const itemCount = document.querySelector('.item-count');
+          itemCount.textContent = data._count.listings;
 
-        console.log(listing);
-      } catch (error) {
-        alert(error.message);
-      }
-    },
-
-    imageSlider: () => {
-      const imageSliderContainer = document.querySelector(
-        '.image-slider-container',
-      );
-      imageSliderContainer.innerHTML = '';
-      const latestURLs = getLatestImages();
-      for (let i = 0; i < 3; i++) {
-        const img = document.createElement('img');
-        img.src = latestURLs[i];
-        img.classList.add(
-          `img-${i}`,
-          'absolute',
-          'top-0',
-          'bottom-0',
-          'right-0',
-          'left-0',
-          'm-auto',
-          'h-full',
-          'opacity-0',
-          'md:object-contain',
-        );
-        imageSliderContainer.appendChild(img);
-      }
+          const userListings = await this.listing.getUsersListings(name);
+          const listings = userListings.data;
+          console.log(listings);
+          const listingContainer = document.querySelector(
+            '.user-listings-container',
+          );
+          listingContainer.innerHTML = '';
+          listings.forEach((listing) => {
+            const listingCard = generateListingCard(listing);
+            listingContainer.appendChild(listingCard);
+          });
+        } catch (error) {
+          alert(error.message);
+        }
+      },
     },
   };
 
@@ -271,7 +324,7 @@ export default class AuctionApp extends AuctionAPI {
       const newestButton = document.getElementById('newest');
       newestButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-        this.events.displayListings(
+        this.events.listing.displayListings(
           1,
           this.currentSortBy,
           this.currentSortOrder,
@@ -286,7 +339,7 @@ export default class AuctionApp extends AuctionAPI {
       oldestButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
         this.currentSortOrder = 'asc';
-        this.events.displayListings(
+        this.events.listing.displayListings(
           1,
           this.currentSortBy,
           this.currentSortOrder,
@@ -302,7 +355,7 @@ export default class AuctionApp extends AuctionAPI {
         this.filtering.removeCheckedAttribute();
         this.currentSortBy = 'endsAt';
         this.currentSortOrder = 'asc';
-        this.events.displayListings(
+        this.events.listing.displayListings(
           1,
           this.currentSortBy,
           this.currentSortOrder,
@@ -318,7 +371,7 @@ export default class AuctionApp extends AuctionAPI {
         this.filtering.removeCheckedAttribute();
         this.currentSortBy = 'updated';
         this.currentSortOrder = 'desc';
-        this.events.displayListings(
+        this.events.listing.displayListings(
           1,
           this.currentSortBy,
           this.currentSortOrder,
@@ -354,7 +407,7 @@ export default class AuctionApp extends AuctionAPI {
       const showActive = document.getElementById('showActive');
       showAll.addEventListener('click', () => {
         this.currentFilter = false;
-        this.events.displayListings(
+        this.events.listing.displayListings(
           1,
           this.currentSortBy,
           this.currentSortOrder,
@@ -370,7 +423,7 @@ export default class AuctionApp extends AuctionAPI {
       const showAll = document.getElementById('showAll');
       showActive.addEventListener('click', () => {
         this.currentFilter = true;
-        this.events.displayListings(
+        this.events.listing.displayListings(
           1,
           this.currentSortBy,
           this.currentSortOrder,
@@ -412,7 +465,7 @@ export default class AuctionApp extends AuctionAPI {
           button.classList.remove('text-blue', 'bg-white');
         }
         button.addEventListener('click', () => {
-          this.events.displayListings(
+          this.events.listing.displayListings(
             pageData,
             this.currentSortBy,
             this.currentSortOrder,
@@ -483,7 +536,7 @@ export default class AuctionApp extends AuctionAPI {
         previousButton.style.opacity = '0.4';
       }
       previousButton.addEventListener('click', () => {
-        this.events.displayListings(
+        this.events.listing.displayListings(
           currentPage - 1,
           this.currentSortBy,
           this.currentSortOrder,
@@ -513,7 +566,7 @@ export default class AuctionApp extends AuctionAPI {
         nextButton.style.opacity = '0.4';
       }
       nextButton.addEventListener('click', () => {
-        this.events.displayListings(
+        this.events.listing.displayListings(
           currentPage + 1,
           this.currentSortBy,
           this.currentSortOrder,
