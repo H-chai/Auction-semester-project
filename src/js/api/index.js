@@ -73,17 +73,9 @@ export default class AuctionAPI {
   };
 
   profile = {
-    getUserName: () => {
-      try {
-        return JSON.parse(localStorage.getItem('username'));
-      } catch (error) {
-        return error;
-      }
-    },
-
-    getProfile: async function getProfile(name) {
+    getProfile: async (name) => {
       const response = await fetch(`${AuctionAPI.paths.profiles}/${name}`, {
-        headers: headers(true),
+        headers: headers(),
         method: 'GET',
       });
       const data = await AuctionAPI.responseHandler.handleResponse(response);
@@ -138,6 +130,18 @@ export default class AuctionAPI {
 
       const data = await AuctionAPI.responseHandler.handleResponse(response);
 
+      return data;
+    },
+
+    getUsersListings: async (name) => {
+      const response = await fetch(
+        `${AuctionAPI.paths.profiles}/${name}/listings`,
+        {
+          headers: headers(),
+          method: 'GET',
+        },
+      );
+      const data = await AuctionAPI.responseHandler.handleResponse(response);
       return data;
     },
   };
