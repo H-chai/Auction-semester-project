@@ -86,6 +86,8 @@ export default class AuctionApp extends AuctionAPI {
     profile: async () => {
       this.events.logout();
       this.events.profile.displayProfile();
+      this.filtering.openSorting();
+      this.filtering.openFilter();
     },
 
     profileUpdate: async () => {
@@ -235,7 +237,12 @@ export default class AuctionApp extends AuctionAPI {
     },
 
     profile: {
-      displayProfile: async () => {
+      displayProfile: async (
+        page = 1,
+        sort = 'created',
+        sortOrder = 'desc',
+        active = true,
+      ) => {
         const params = new URLSearchParams(window.location.search);
         const name = params.get('name');
 
@@ -267,7 +274,14 @@ export default class AuctionApp extends AuctionAPI {
           const itemCount = document.querySelector('.item-count');
           itemCount.textContent = data._count.listings;
 
-          const userListings = await this.listing.getUsersListings(name);
+          const userListings = await this.listing.getUsersListings(
+            24,
+            page,
+            sort,
+            sortOrder,
+            active,
+            name,
+          );
           const listings = userListings.data;
           console.log(listings);
           const listingContainer = document.querySelector(
@@ -322,61 +336,114 @@ export default class AuctionApp extends AuctionAPI {
 
     descending: () => {
       const newestButton = document.getElementById('newest');
+      const path = window.location.pathname;
       newestButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-        this.events.listing.displayListings(
-          1,
-          this.currentSortBy,
-          this.currentSortOrder,
-          this.currentFilter,
-        );
+
+        if (path === '/') {
+          this.events.listing.displayListings(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        } else if (path === '/profile/') {
+          this.events.profile.displayProfile(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        }
+
         newestButton.setAttribute('checked', 'checked');
       });
     },
 
     ascending: () => {
       const oldestButton = document.getElementById('oldest');
+      const path = window.location.pathname;
       oldestButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-        this.currentSortOrder = 'asc';
-        this.events.listing.displayListings(
-          1,
-          this.currentSortBy,
-          this.currentSortOrder,
-          this.currentFilter,
-        );
+
+        if (path === '/') {
+          this.currentSortOrder = 'asc';
+          this.events.listing.displayListings(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        } else if (path === '/profile/') {
+          this.currentSortOrder = 'asc';
+          this.events.profile.displayProfile(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        }
+
         oldestButton.setAttribute('checked', 'checked');
       });
     },
 
     endingSoon: () => {
       const endingSoonButton = document.getElementById('endingSoon');
+      const path = window.location.pathname;
       endingSoonButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-        this.currentSortBy = 'endsAt';
-        this.currentSortOrder = 'asc';
-        this.events.listing.displayListings(
-          1,
-          this.currentSortBy,
-          this.currentSortOrder,
-          this.currentFilter,
-        );
+
+        if (path === '/') {
+          this.currentSortBy = 'endsAt';
+          this.currentSortOrder = 'asc';
+          this.events.listing.displayListings(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        } else if (path === '/profile/') {
+          this.currentSortBy = 'endsAt';
+          this.currentSortOrder = 'asc';
+          this.events.profile.displayProfile(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        }
+
         endingSoonButton.setAttribute('checked', 'checked');
       });
     },
 
     resentUpdate: () => {
       const resentUpdateButton = document.getElementById('updated');
+      const path = window.location.pathname;
       resentUpdateButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-        this.currentSortBy = 'updated';
-        this.currentSortOrder = 'desc';
-        this.events.listing.displayListings(
-          1,
-          this.currentSortBy,
-          this.currentSortOrder,
-          this.currentFilter,
-        );
+
+        if (path === '/') {
+          this.currentSortBy = 'updated';
+          this.currentSortOrder = 'desc';
+          this.events.listing.displayListings(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        } else if (path === '/profile/') {
+          this.currentSortBy = 'updated';
+          this.currentSortOrder = 'desc';
+          this.events.profile.displayProfile(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        }
+
         resentUpdateButton.setAttribute('checked', 'checked');
       });
     },
@@ -405,14 +472,26 @@ export default class AuctionApp extends AuctionAPI {
     showAll: () => {
       const showAll = document.getElementById('showAll');
       const showActive = document.getElementById('showActive');
+      const path = window.location.pathname;
       showAll.addEventListener('click', () => {
-        this.currentFilter = false;
-        this.events.listing.displayListings(
-          1,
-          this.currentSortBy,
-          this.currentSortOrder,
-          this.currentFilter,
-        );
+        if (path === '/') {
+          this.currentFilter = false;
+          this.events.listing.displayListings(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        } else if (path === '/profile/') {
+          this.currentFilter = false;
+          this.events.profile.displayProfile(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        }
+
         showActive.removeAttribute('checked');
         showAll.setAttribute('checked', 'checked');
       });
@@ -421,14 +500,26 @@ export default class AuctionApp extends AuctionAPI {
     showActive: () => {
       const showActive = document.getElementById('showActive');
       const showAll = document.getElementById('showAll');
+      const path = window.location.pathname;
       showActive.addEventListener('click', () => {
-        this.currentFilter = true;
-        this.events.listing.displayListings(
-          1,
-          this.currentSortBy,
-          this.currentSortOrder,
-          this.currentFilter,
-        );
+        if (path === '/') {
+          this.currentFilter = true;
+          this.events.listing.displayListings(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        } else if (path === '/profile/') {
+          this.currentFilter = true;
+          this.events.profile.displayProfile(
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+            this.currentFilter,
+          );
+        }
+
         showAll.removeAttribute('checked');
         showActive.setAttribute('checked', 'checked');
       });
