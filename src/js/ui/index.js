@@ -219,8 +219,10 @@ export default class AuctionApp extends AuctionAPI {
                 'update-btn',
                 'px-6',
                 'py-2',
+                'text-sm',
                 'lg:px-8',
                 'lg:py-3',
+                'lg:text-base',
                 'inline-block',
                 'bg-green',
                 'text-black',
@@ -230,6 +232,9 @@ export default class AuctionApp extends AuctionAPI {
                 'duration-500',
                 'hover:text-green',
               );
+              updateBtn.addEventListener('click', () => {
+                window.location.href = `/listing/update/?id=${listingId}`;
+              });
               div.appendChild(updateBtn);
             });
           }
