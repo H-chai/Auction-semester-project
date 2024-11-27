@@ -48,27 +48,31 @@
             required
         /></label>
         <div class="lg:flex lg:justify-between lg:items-center lg:gap-4">
-          <label for="ending-date" class="font-display font-semibold lg:w-1/2"
-            >Ending-date<input
+          <label
+            for="endingDate"
+            class="font-display font-semibold lg:w-1/2 text-gray"
+            >Ending date (Ending date cannot be changed.)<input
               type="date"
-              name="ending-date"
-              id="ending-date"
-              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
-              required
+              name="endingDate"
+              id="endingDate"
+              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4 cursor-not-allowed"
+              disabled
           /></label>
-          <label for="ending-time" class="font-display font-semibold lg:w-1/2"
-            >Ending-time<input
+          <label
+            for="endingTime"
+            class="font-display font-semibold lg:w-1/2 text-gray"
+            >Ending time (Ending time cannot be changed.)<input
               type="time"
-              name="ending-time"
-              id="ending-time"
-              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
-              required
+              name="endingTime"
+              id="endingTime"
+              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4 cursor-not-allowed"
+              disabled
           /></label>
         </div>
         <label for="img-url" class="font-display font-semibold"
           >Image URL<input
             type="url"
-            name="media[url]"
+            name="mediaUrl"
             id="img-url"
             class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
             required
@@ -76,7 +80,7 @@
         <label for="img-alt" class="font-display font-semibold"
           >Image alt<input
             type="text"
-            name="media[alt]"
+            name="mediaAlt"
             id="img-alt"
             class="border border-outline p-4 block w-full rounded-md mt-1 mb-4 lg:mb-10"
             required
@@ -89,7 +93,7 @@
             Update Listing
           </button>
           <button
-            type="submit"
+            type="button"
             class="delete-btn relative bg-red text-white font-display font-semibold text-sm rounded-md w-1/4 py-3 lg:text-base hover:text-red"
           >
             Delete Listing
