@@ -167,5 +167,17 @@ export default class AuctionAPI {
         await AuctionAPI.responseHandler.handleResponse(response);
       return data;
     },
+
+    update: async (id, { title, description, media, endsAt }) => {
+      const body = JSON.stringify({ title, description, media, endsAt });
+      const response = await fetch(`${AuctionAPI.paths.listings}/${id}`, {
+        headers: headers(true),
+        method: 'PUT',
+        body,
+      });
+      const { data } =
+        await AuctionAPI.responseHandler.handleResponse(response);
+      return data;
+    },
   };
 }
