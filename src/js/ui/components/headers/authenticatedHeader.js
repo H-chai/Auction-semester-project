@@ -169,6 +169,7 @@ export function generateAuthenticatedHeader() {
   const itemContainer = document.createElement('div');
   const menuBoxProfile = document.createElement('li');
   const menuBoxProfileLink = document.createElement('a');
+  menuBoxProfileLink.href = `/profile/?name=${username}`;
   menuBoxProfileLink.classList.add(
     'my-page',
     'flex',
