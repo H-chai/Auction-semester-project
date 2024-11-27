@@ -54,6 +54,7 @@ export function generateListingCard(listing) {
     'font-bold',
     'text-2xl',
     'mb-2',
+    'break-words',
     'lg:pb-3',
     'lg:mb-4',
     'lg:border-b',

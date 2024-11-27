@@ -40,7 +40,13 @@ export function generateSingleListingHTML(listing) {
   );
   const title = document.createElement('h1');
   title.textContent = listing.title;
-  title.classList.add('text-2xl', 'font-display', 'font-bold', 'mb-2');
+  title.classList.add(
+    'text-2xl',
+    'font-display',
+    'font-bold',
+    'mb-2',
+    'break-words',
+  );
   const description = document.createElement('p');
   description.textContent = listing.description;
   description.classList.add('text-base', 'mb-6');
