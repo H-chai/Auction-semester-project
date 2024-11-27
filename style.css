@@ -856,6 +856,10 @@ video {
   cursor: pointer;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 .list-none {
   list-style-type: none;
 }

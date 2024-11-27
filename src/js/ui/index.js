@@ -85,6 +85,7 @@ export default class AuctionApp extends AuctionAPI {
     listingUpdate: async () => {
       this.events.headerToggle();
       this.events.logout();
+      this.events.listing.update();
     },
 
     profile: async () => {
@@ -271,7 +272,6 @@ export default class AuctionApp extends AuctionAPI {
       create: async (event) => {
         event.preventDefault();
         const data = AuctionApp.form.formSubmit(event);
-        console.log(data);
         const {
           title,
           description,
@@ -284,12 +284,6 @@ export default class AuctionApp extends AuctionAPI {
         const dateCombined = `${endingDate}T${endingTime}:00.000Z`;
         const date = new Date(dateCombined);
         const endsAt = date.toISOString();
-        console.log(title);
-        console.log(description);
-        console.log(endingDate);
-        console.log(endingTime);
-        console.log(mediaUrl);
-        console.log(mediaAlt);
         try {
           await this.listing.create({ title, description, media, endsAt });
           alert('You have created a new listing!');
@@ -297,6 +291,53 @@ export default class AuctionApp extends AuctionAPI {
         } catch (error) {
           alert(
             `Could not create the listing.\n${error.message}.\nPlease try again.`,
+          );
+        }
+      },
+
+      update: async () => {
+        const params = new URLSearchParams(window.location.search);
+        const listingId = params.get('id');
+        const listing = await this.listing.getSingleListing(listingId);
+        const { data } = listing;
+        const title = document.getElementById('title');
+        title.value = data.title;
+        const description = document.getElementById('description');
+        description.value = data.description;
+        const imgUrl = document.getElementById('img-url');
+        imgUrl.value = data.media[0].url;
+        const imgAlt = document.getElementById('img-alt');
+        imgAlt.value = data.media[0].alt;
+        const isoString = data.endsAt;
+        const end = new Date(isoString);
+        const date = end.toISOString().split('T')[0];
+        const time = end.toLocaleTimeString('en-US', {
+          hour12: false,
+          hour: '2-digit',
+          minute: '2-digit',
+        });
+        const endingDate = document.getElementById('endingDate');
+        endingDate.value = date;
+        const endingTime = document.getElementById('endingTime');
+        endingTime.value = time;
+
+        try {
+          const form = document.forms['updateListing'];
+          form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = AuctionApp.form.formSubmit(event);
+            const { title, description, mediaUrl, mediaAlt } = formData;
+            const media = [{ url: mediaUrl, alt: mediaAlt }];
+            this.listing.update(listingId, {
+              title,
+              description,
+              media,
+            });
+            //window.location.href = `/listing/?id=${listingId}`;
+          });
+        } catch (error) {
+          alert(
+            `Could not update the listing.\n${error.message}.\nPlease try again.`,
           );
         }
       },

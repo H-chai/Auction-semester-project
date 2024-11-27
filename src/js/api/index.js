@@ -168,16 +168,15 @@ export default class AuctionAPI {
       return data;
     },
 
-    update: async (id, { title, description, media, endsAt }) => {
-      const body = JSON.stringify({ title, description, media, endsAt });
+    update: async (id, { title, description, media }) => {
+      const body = JSON.stringify({ title, description, media });
       const response = await fetch(`${AuctionAPI.paths.listings}/${id}`, {
         headers: headers(true),
         method: 'PUT',
         body,
       });
-      const { data } =
-        await AuctionAPI.responseHandler.handleResponse(response);
-      return data;
+      await AuctionAPI.responseHandler.handleResponse(response);
+      window.location.href = `/listing/?id=${id}`;
     },
   };
 }
