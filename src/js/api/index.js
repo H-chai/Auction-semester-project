@@ -207,14 +207,13 @@ export default class AuctionAPI {
       page = 1,
       sort = 'created',
       sortOrder = 'desc',
-      active = 'true',
     ) => {
-      const url = new URL(`${AuctionAPI.paths.search}?q=${query}`);
+      const url = new URL(AuctionAPI.paths.search);
       url.searchParams.append('limit', limit);
       url.searchParams.append('page', page);
-      url.searchParams.append('_active', active);
       url.searchParams.append('sort', sort);
       url.searchParams.append('sortOrder', sortOrder);
+      url.searchParams.append('q', query);
       const response = await fetch(url.toString(), {
         headers: headers(true),
         method: 'GET',

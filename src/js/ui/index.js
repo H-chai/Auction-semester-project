@@ -375,7 +375,6 @@ export default class AuctionApp extends AuctionAPI {
         page = 1,
         sort = 'created',
         sortOrder = 'desc',
-        active = true,
       ) => {
         try {
           const listings = await this.listing.search(
@@ -384,7 +383,6 @@ export default class AuctionApp extends AuctionAPI {
             page,
             sort,
             sortOrder,
-            active,
           );
           const { data, meta } = listings;
           const { currentPage, pageCount } = meta;
@@ -416,10 +414,10 @@ export default class AuctionApp extends AuctionAPI {
         result.textContent = '';
         const listings = await this.listing.search(query);
         const { meta } = listings;
-        console.log(meta);
         const totalCount = meta.totalCount;
-        console.log(totalCount);
         try {
+          this.currentQuery = query;
+          console.log(this.currentQuery);
           this.events.listing.displaySearchResult(query);
           const newQuery =
             query.charAt(0).toUpperCase() + query.substring(1).toLowerCase();
@@ -584,6 +582,7 @@ export default class AuctionApp extends AuctionAPI {
   currentSortBy = 'created';
   currentSortOrder = 'desc';
   currentFilter = true;
+  currentQuery = new URLSearchParams(window.location.search).get('query') || '';
 
   filtering = {
     openSorting: () => {
@@ -619,10 +618,19 @@ export default class AuctionApp extends AuctionAPI {
     descending: () => {
       const newestButton = document.getElementById('newest');
       const path = window.location.pathname;
+      // const urlParams = new URLSearchParams(window.location.search);
+      // const query = urlParams.get('query') || '';
       newestButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-
-        if (path === '/') {
+        if (this.currentQuery) {
+          this.currentSortOrder = 'desc';
+          this.events.listing.displaySearchResult(
+            this.currentQuery,
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+          );
+        } else if (!this.currentQuery && path === '/') {
           this.currentSortOrder = 'desc';
           this.events.listing.displayListings(
             1,
@@ -649,8 +657,15 @@ export default class AuctionApp extends AuctionAPI {
       const path = window.location.pathname;
       oldestButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-
-        if (path === '/') {
+        if (this.currentQuery) {
+          this.currentSortOrder = 'asc';
+          this.events.listing.displaySearchResult(
+            this.currentQuery,
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+          );
+        } else if (!this.currentQuery && path === '/') {
           this.currentSortOrder = 'asc';
           this.events.listing.displayListings(
             1,
@@ -675,10 +690,20 @@ export default class AuctionApp extends AuctionAPI {
     endingSoon: () => {
       const endingSoonButton = document.getElementById('endingSoon');
       const path = window.location.pathname;
+      // const urlParams = new URLSearchParams(window.location.search);
+      // const query = urlParams.get('query') || '';
       endingSoonButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-
-        if (path === '/') {
+        if (this.currentQuery) {
+          this.currentSortBy = 'endsAt';
+          this.currentSortOrder = 'asc';
+          this.events.listing.displaySearchResult(
+            this.currentQuery,
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+          );
+        } else if (!this.currentQuery && path === '/') {
           this.currentSortBy = 'endsAt';
           this.currentSortOrder = 'asc';
           this.events.listing.displayListings(
@@ -705,10 +730,20 @@ export default class AuctionApp extends AuctionAPI {
     resentUpdate: () => {
       const resentUpdateButton = document.getElementById('updated');
       const path = window.location.pathname;
+      // const urlParams = new URLSearchParams(window.location.search);
+      // const query = urlParams.get('query') || '';
       resentUpdateButton.addEventListener('click', () => {
         this.filtering.removeCheckedAttribute();
-
-        if (path === '/') {
+        if (this.currentQuery) {
+          this.currentSortBy = 'updated';
+          this.currentSortOrder = 'desc';
+          this.events.listing.displaySearchResult(
+            this.currentQuery,
+            1,
+            this.currentSortBy,
+            this.currentSortOrder,
+          );
+        } else if (!this.currentQuery && path === '/') {
           this.currentSortBy = 'updated';
           this.currentSortOrder = 'desc';
           this.events.listing.displayListings(
@@ -741,6 +776,17 @@ export default class AuctionApp extends AuctionAPI {
         } else {
           filterOptions.classList.add('hidden');
         }
+        if (this.currentQuery) {
+          const showActive = document.getElementById('showActive');
+          showActive.disabled = true;
+          const showAll = document.getElementById('showAll');
+          showAll.disabled = true;
+          const notAvailable = filterOptions.querySelectorAll('input, label');
+          console.log(notAvailable);
+          notAvailable.forEach((element) => {
+            element.style.cursor = 'not-allowed';
+          });
+        }
       });
       const labels = document.querySelectorAll('.filtering-list label');
       [...labels].forEach((item) => {
@@ -757,6 +803,7 @@ export default class AuctionApp extends AuctionAPI {
       const showAll = document.getElementById('showAll');
       const showActive = document.getElementById('showActive');
       const path = window.location.pathname;
+
       showAll.addEventListener('click', () => {
         if (path === '/') {
           this.currentFilter = false;
@@ -785,6 +832,7 @@ export default class AuctionApp extends AuctionAPI {
       const showActive = document.getElementById('showActive');
       const showAll = document.getElementById('showAll');
       const path = window.location.pathname;
+
       showActive.addEventListener('click', () => {
         if (path === '/') {
           this.currentFilter = true;
