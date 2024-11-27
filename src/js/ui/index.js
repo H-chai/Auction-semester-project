@@ -49,6 +49,10 @@ export default class AuctionApp extends AuctionAPI {
     },
   };
 
+  static get user() {
+    return localStorage.getItem('username');
+  }
+
   views = {
     listingFeed: async () => {
       this.events.headerToggle();
@@ -86,6 +90,7 @@ export default class AuctionApp extends AuctionAPI {
       this.events.headerToggle();
       this.events.logout();
       this.events.listing.update();
+      this.events.listing.delete();
     },
 
     profile: async () => {
@@ -99,6 +104,7 @@ export default class AuctionApp extends AuctionAPI {
     profileUpdate: async () => {
       this.events.headerToggle();
       this.events.logout();
+      this.events.profile.updateProfile();
     },
   };
 
@@ -211,7 +217,7 @@ export default class AuctionApp extends AuctionAPI {
           listingContainer.innerHTML = '';
           const listingHTML = generateSingleListingHTML(data);
           listingContainer.appendChild(listingHTML);
-          if (data.seller.name === localStorage.getItem('username')) {
+          if (data.seller.name === AuctionApp.user) {
             const update = document.querySelectorAll('.update');
             update.forEach((div) => {
               const updateBtn = document.createElement('a');
@@ -228,6 +234,7 @@ export default class AuctionApp extends AuctionAPI {
                 'bg-green',
                 'text-black',
                 'rounded-md',
+                'cursor-pointer',
                 'relative',
                 'transition',
                 'duration-500',
@@ -333,13 +340,32 @@ export default class AuctionApp extends AuctionAPI {
               description,
               media,
             });
-            //window.location.href = `/listing/?id=${listingId}`;
           });
         } catch (error) {
           alert(
             `Could not update the listing.\n${error.message}.\nPlease try again.`,
           );
         }
+      },
+
+      delete: async () => {
+        const deleteBtn = document.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', () => {
+          const params = new URLSearchParams(window.location.search);
+          const listingId = params.get('id');
+          try {
+            const isConfirm = window.confirm(
+              'Are you sure you want to delete this?',
+            );
+            if (isConfirm) {
+              this.listing.delete(listingId);
+            }
+          } catch (error) {
+            alert(
+              `Could not delete the listing.\n${error.message}.\nPlease try again.`,
+            );
+          }
+        });
       },
     },
 
@@ -364,12 +390,36 @@ export default class AuctionApp extends AuctionAPI {
           const avatar = document.querySelector('.avatar');
           avatar.src = data.avatar.url;
           avatar.alt = data.avatar.alt;
-          const updateButton = document.querySelector('.update-btn');
-          const loggedInUser = localStorage.getItem('username');
-          if (name === loggedInUser) {
-            updateButton.classList.add('block');
-          } else {
-            updateButton.classList.add('hidden');
+          const updateButtonContainer = document.querySelector(
+            '.update-btn-container',
+          );
+          updateButtonContainer.classList.add(
+            'absolute',
+            '-top-1/2',
+            'lg:top-0',
+            'right-0',
+          );
+          const updateButton = document.createElement('a');
+          updateButton.classList.add(
+            'update-btn',
+            'px-6',
+            'py-2',
+            'font-display',
+            'text-sm',
+            'font-semibold',
+            'bg-green',
+            'rounded-md',
+            'inline-block',
+            'cursor-pointer',
+            'lg:px-8',
+            'lg:py-3',
+            'lg:text-base',
+            'hover:text-green',
+          );
+          updateButton.textContent = 'Update Profile';
+          updateButton.href = '/profile/update/';
+          if (name === AuctionApp.user) {
+            updateButtonContainer.appendChild(updateButton);
           }
           const username = document.querySelector('.username');
           username.textContent = data.name;
@@ -401,8 +451,6 @@ export default class AuctionApp extends AuctionAPI {
           });
 
           const { currentPage, pageCount } = meta;
-          console.log(currentPage);
-          console.log(pageCount);
           const newUrl = `${window.location.pathname}?name=${name}&page=${page}`;
           window.history.replaceState({}, '', newUrl);
           this.pagination.homePagination(currentPage, pageCount);
@@ -412,6 +460,41 @@ export default class AuctionApp extends AuctionAPI {
           });
         } catch (error) {
           alert(error.message);
+        }
+      },
+
+      updateProfile: async () => {
+        const { data } = await this.profile.getProfile(AuctionApp.user);
+        const bio = document.getElementById('bio');
+        bio.value = data.bio;
+        const bannerUrl = document.getElementById('banner-url');
+        bannerUrl.value = data.banner.url;
+        const bannerAlt = document.getElementById('banner-alt');
+        bannerAlt.value = data.banner.alt;
+        const avatarUrl = document.getElementById('avatar-url');
+        avatarUrl.value = data.avatar.url;
+        const avatarAlt = document.getElementById('avatar-alt');
+        avatarAlt.value = data.avatar.alt;
+
+        try {
+          const form = document.forms['updateProfile'];
+          form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = AuctionApp.form.formSubmit(event);
+            const { bio, bannerUrl, bannerAlt, avatarUrl, avatarAlt } =
+              formData;
+            const banner = { url: bannerUrl, alt: bannerAlt };
+            const avatar = { url: avatarUrl, alt: avatarAlt };
+            this.profile.updateProfile(AuctionApp.user, {
+              bio,
+              banner,
+              avatar,
+            });
+          });
+        } catch (error) {
+          alert(
+            `Could not update your profile.\n${error.message}.\nPlease try again.`,
+          );
         }
       },
     },

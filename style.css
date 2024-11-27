@@ -619,6 +619,10 @@ video {
   top: 100%;
 }
 
+.-top-1\/2 {
+  top: -50%;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1661,6 +1665,10 @@ video {
 
   .lg\:right-7 {
     right: 1.75rem;
+  }
+
+  .lg\:top-0 {
+    top: 0px;
   }
 
   .lg\:mx-auto {
