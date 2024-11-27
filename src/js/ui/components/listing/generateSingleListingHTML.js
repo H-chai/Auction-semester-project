@@ -87,7 +87,7 @@ export function generateSingleListingHTML(listing) {
   if (listing.seller.name === loggedInUser) {
     input.disabled = true;
     input.style.cursor = 'not-allowed';
-    input.placeholder = 'Bidding disabled for your listing';
+    input.placeholder = 'Bidding disabled';
     button.disabled = true;
     button.style.cursor = 'not-allowed';
   }
