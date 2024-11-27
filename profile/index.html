@@ -30,16 +30,14 @@
           <img
             src=""
             alt=""
-            class="avatar w-32 h-32 rounded-full absolute top-0 -translate-y-1/2 lg:relative lg:translate-y-0"
+            class="avatar w-32 h-32 rounded-full object-cover absolute top-0 -translate-y-1/2 lg:relative lg:translate-y-0"
           />
           <div class="user-profile relative lg:relative lg:w-full">
-            <button
-              class="update-btn absolute top-0 right-0 px-6 py-2 font-display text-sm font-semibold bg-green rounded-md mr-0 ml-auto mb-6 lg:px-8 lg:py-3 lg:mb-0 hover:text-green"
-            >
-              Update Profile
-            </button>
-            <h1 class="username font-display font-bold text-2xl mb-1"></h1>
-            <p class="bio mb-3"></p>
+            <div class="update-btn-container"></div>
+            <h1
+              class="username font-display font-bold text-2xl mb-1 lg:text-3xl"
+            ></h1>
+            <p class="bio mb-3 lg:font-medium"></p>
             <p>
               Credits:
               <span class="credits font-display text-lg font-bold ml-1"></span>
