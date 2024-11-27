@@ -220,7 +220,6 @@ export default class AuctionAPI {
         method: 'GET',
       });
       const data = await AuctionAPI.responseHandler.handleResponse(response);
-      console.log(data);
       return data;
     },
   };

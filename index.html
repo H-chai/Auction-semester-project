@@ -44,7 +44,7 @@
       >
         <form
           name="search"
-          class="relative flex items-center justify-between gap-4 mb-14 lg:mb-28 lg:w-1/2 lg:mx-auto"
+          class="search-form relative flex items-center justify-between gap-2 lg:gap-4 lg:w-1/2 lg:mx-auto"
         >
           <label for="search" class="w-full">
             <input
@@ -52,7 +52,7 @@
               name="search"
               id="search"
               placeholder="Search item"
-              class="text-lg border border-outline rounded-full p-4 w-full placeholder-light-gray lg:px-7"
+              class="border border-outline rounded-full px-5 py-2 w-full placeholder-light-gray lg:text-lg lg:px-7 lg:py-4"
             />
           </label>
           <button
@@ -62,23 +62,10 @@
             <i class="fa-solid fa-magnifying-glass text-2xl"></i>
           </button>
         </form>
-        <!-- <form name="search" class="relative mb-14 lg:mb-28 lg:w-1/2 lg:mx-auto">
-          <label for="search">
-            <input
-              type="search"
-              name="search"
-              placeholder="Search item"
-              class="border border-outline rounded-full py-4 pl-4 pr-24 w-full placeholder-light-gray lg:pl-7"
-            />
-            <button
-              type="submit"
-              class="bg-blue absolute top-1/2 -translate-y-1/2 right-0 text-white w-[58px] h-[58px] rounded-full transition-all duration-200 ease-linear hover:scale-125"
-            >
-              <i class="fa-solid fa-magnifying-glass text-lg"></i>
-            </button>
-          </label>
-        </form> -->
-        <div class="sort-order flex justify-between mb-4 lg:mb-6 lg:px-2">
+        <p class="result"></p>
+        <div
+          class="sort-order flex justify-between mt-6 mb-4 lg:mt-20 lg:mb-6 lg:px-2"
+        >
           <button class="sort-by relative">
             <p class="uppercase text-sm text-blue underline">
               sort by<i class="fa-solid fa-plus ml-1"></i>

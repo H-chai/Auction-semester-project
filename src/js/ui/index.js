@@ -395,7 +395,6 @@ export default class AuctionApp extends AuctionAPI {
             top: 0,
             behavior: 'smooth',
           });
-
           const listingsContainer = document.querySelector(
             '.listings-container',
           );
@@ -413,9 +412,38 @@ export default class AuctionApp extends AuctionAPI {
         event.preventDefault();
         const data = AuctionApp.form.formSubmit(event);
         const query = data.search;
+        const result = document.querySelector('.result');
+        result.textContent = '';
+        const listings = await this.listing.search(query);
+        const { meta } = listings;
+        console.log(meta);
+        const totalCount = meta.totalCount;
+        console.log(totalCount);
         try {
-          this.currentQuery = query;
           this.events.listing.displaySearchResult(query);
+          const newQuery =
+            query.charAt(0).toUpperCase() + query.substring(1).toLowerCase();
+          result.textContent = newQuery;
+          result.classList.add(
+            'font-bold',
+            'text-center',
+            'text-2xl',
+            'mt-6',
+            'lg:text-4xl',
+            'lg:mt-10',
+          );
+          const resultNumber = document.createElement('span');
+          resultNumber.textContent = ` (${totalCount})`;
+          resultNumber.classList.add(
+            'font-normal',
+            'text-lg',
+            'leading-8',
+            'font-display',
+            'lg:text-2xl',
+          );
+          result.appendChild(resultNumber);
+          const form = document.querySelector('.search-form');
+          form.insertAdjacentElement('afterend', result);
         } catch (error) {
           alert('Something went wrong while searching: ' + error.message);
         }
