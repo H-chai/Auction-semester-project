@@ -119,7 +119,7 @@
   }
 }
 
-.profile-update-btn {
+.update-btn {
   &::before {
     content: '';
     position: absolute;

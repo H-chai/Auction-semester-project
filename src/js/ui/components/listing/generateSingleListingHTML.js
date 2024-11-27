@@ -29,6 +29,15 @@ export function generateSingleListingHTML(listing) {
   const listingDetail = document.createElement('div');
   listingDetail.classList.add('lg:w-1/2');
 
+  const update = document.createElement('div');
+  update.classList.add(
+    'update',
+    'font-semibold',
+    'font-display',
+    'mb-3',
+    'text-end',
+    'lg:hidden',
+  );
   const title = document.createElement('h1');
   title.textContent = listing.title;
   title.classList.add('text-2xl', 'font-display', 'font-bold', 'mb-2');
@@ -175,6 +184,7 @@ export function generateSingleListingHTML(listing) {
     history.append(historyTitle, text);
   }
   listingDetail.append(
+    update,
     title,
     description,
     bidAndTime,

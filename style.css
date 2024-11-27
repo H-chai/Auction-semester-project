@@ -1085,6 +1085,10 @@ video {
   text-align: center;
 }
 
+.text-end {
+  text-align: end;
+}
+
 .font-body {
   font-family:
     General Sans,
@@ -1360,7 +1364,7 @@ video {
   }
 }
 
-.profile-update-btn {
+.update-btn {
   &::before {
     content: '';
     position: absolute;
@@ -1927,5 +1931,10 @@ video {
 
   .xl\:gap-20 {
     gap: 5rem;
+  }
+
+  .xl\:px-20 {
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 }

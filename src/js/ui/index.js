@@ -204,13 +204,35 @@ export default class AuctionApp extends AuctionAPI {
           const listingId = params.get('id');
           const listing = await this.listing.getSingleListing(listingId);
           const { data } = listing;
-
           const listingContainer = document.querySelector(
             '.listing-item-container',
           );
           listingContainer.innerHTML = '';
           const listingHTML = generateSingleListingHTML(data);
           listingContainer.appendChild(listingHTML);
+          if (data.seller.name === localStorage.getItem('username')) {
+            const update = document.querySelectorAll('.update');
+            update.forEach((div) => {
+              const updateBtn = document.createElement('a');
+              updateBtn.textContent = 'Update Listing';
+              updateBtn.classList.add(
+                'update-btn',
+                'px-6',
+                'py-2',
+                'lg:px-8',
+                'lg:py-3',
+                'inline-block',
+                'bg-green',
+                'text-black',
+                'rounded-md',
+                'relative',
+                'transition',
+                'duration-500',
+                'hover:text-green',
+              );
+              div.appendChild(updateBtn);
+            });
+          }
         } catch (error) {
           alert(error.message);
         }
@@ -295,7 +317,7 @@ export default class AuctionApp extends AuctionAPI {
           const avatar = document.querySelector('.avatar');
           avatar.src = data.avatar.url;
           avatar.alt = data.avatar.alt;
-          const updateButton = document.querySelector('.profile-update-btn');
+          const updateButton = document.querySelector('.update-btn');
           const loggedInUser = localStorage.getItem('username');
           if (name === loggedInUser) {
             updateButton.classList.add('block');

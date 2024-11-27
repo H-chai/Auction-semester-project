@@ -24,6 +24,8 @@ export function generateAuthenticatedHeader() {
     'font-display',
     'font-semibold',
   );
+  const updateLink = document.createElement('div');
+  updateLink.classList.add('update', 'mb-4');
   const createLink = document.createElement('a');
   createLink.href = '/listing/create/';
   createLink.classList.add(
@@ -118,7 +120,7 @@ export function generateAuthenticatedHeader() {
   menuList.append(listItemProfile, listItemLogout);
   dropDownMenu.appendChild(menuList);
   userIconContainer.append(userIconImage, dropDownMenu);
-  pcNavigation.append(createLink, userIconContainer);
+  pcNavigation.append(updateLink, createLink, userIconContainer);
 
   const mobileNavigation = document.createElement('nav');
   mobileNavigation.classList.add('lg:hidden');
