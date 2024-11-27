@@ -202,7 +202,7 @@ export function generateSingleListingHTML(listing) {
     'underline',
     'font-display',
     'font-medium',
-    'text-sm',
+    'text-base',
     'mt-8',
     'lg:mt-14',
   );
