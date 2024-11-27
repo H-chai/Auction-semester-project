@@ -293,6 +293,7 @@ export default class AuctionApp extends AuctionAPI {
         try {
           await this.listing.create({ title, description, media, endsAt });
           alert('You have created a new listing!');
+          window.location.href = '/';
         } catch (error) {
           alert(
             `Could not create the listing.\n${error.message}.\nPlease try again.`,
