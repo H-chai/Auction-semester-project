@@ -81,6 +81,17 @@ export default class AuctionAPI {
       const data = await AuctionAPI.responseHandler.handleResponse(response);
       return data;
     },
+
+    updateProfile: async (name, { bio, banner, avatar }) => {
+      const body = JSON.stringify({ bio, banner, avatar });
+      const response = await fetch(`${AuctionAPI.paths.profiles}/${name}`, {
+        headers: headers(true),
+        method: 'PUT',
+        body,
+      });
+      await AuctionAPI.responseHandler.handleResponse(response);
+      window.location.href = `/profile/?name=${name}`;
+    },
   };
 
   listing = {
@@ -177,6 +188,16 @@ export default class AuctionAPI {
       });
       await AuctionAPI.responseHandler.handleResponse(response);
       window.location.href = `/listing/?id=${id}`;
+    },
+
+    delete: async (id) => {
+      const response = await fetch(`${AuctionAPI.paths.listings}/${id}`, {
+        headers: headers(true),
+        method: 'DELETE',
+      });
+      await AuctionAPI.responseHandler.handleResponse(response);
+      const username = localStorage.getItem('username');
+      window.location.href = `/profile/?name=${username}`;
     },
   };
 }
