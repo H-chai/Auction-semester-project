@@ -61,6 +61,8 @@ export default class AuctionApp extends AuctionAPI {
       this.filtering.openSorting();
       this.filtering.openFilter();
       this.events.logout();
+      const form = document.forms['search'];
+      form.addEventListener('submit', this.events.listing.search);
     },
 
     register: async () => {
@@ -366,6 +368,57 @@ export default class AuctionApp extends AuctionAPI {
             );
           }
         });
+      },
+
+      displaySearchResult: async (
+        query,
+        page = 1,
+        sort = 'created',
+        sortOrder = 'desc',
+        active = true,
+      ) => {
+        try {
+          const listings = await this.listing.search(
+            query,
+            24,
+            page,
+            sort,
+            sortOrder,
+            active,
+          );
+          const { data, meta } = listings;
+          const { currentPage, pageCount } = meta;
+          const newUrl = `${window.location.pathname}?page=${page}&query=${query}`;
+          window.history.replaceState({}, '', newUrl);
+          this.pagination.homePagination(currentPage, pageCount);
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+
+          const listingsContainer = document.querySelector(
+            '.listings-container',
+          );
+          listingsContainer.innerHTML = '';
+          data.forEach((listing) => {
+            const listingCard = generateListingCard(listing);
+            listingsContainer.appendChild(listingCard);
+          });
+        } catch (error) {
+          alert(error.message);
+        }
+      },
+
+      search: async (event) => {
+        event.preventDefault();
+        const data = AuctionApp.form.formSubmit(event);
+        const query = data.search;
+        try {
+          this.currentQuery = query;
+          this.events.listing.displaySearchResult(query);
+        } catch (error) {
+          alert('Something went wrong while searching: ' + error.message);
+        }
       },
     },
 
@@ -761,7 +814,17 @@ export default class AuctionApp extends AuctionAPI {
         }
 
         button.addEventListener('click', () => {
-          if (path === '/') {
+          const urlParams = new URLSearchParams(window.location.search);
+          const query = urlParams.get('query') || '';
+          if (query) {
+            this.events.listing.displaySearchResult(
+              query,
+              pageData,
+              this.currentSortBy,
+              this.currentSortOrder,
+              this.currentFilter,
+            );
+          } else if (path === '/') {
             this.events.listing.displayListings(
               pageData,
               this.currentSortBy,

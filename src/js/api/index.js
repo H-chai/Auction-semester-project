@@ -10,6 +10,7 @@ export default class AuctionAPI {
     login: `${AuctionAPI.apiAuthBase}/login`,
     listings: `${AuctionAPI.apiAuctionBase}/listings`,
     profiles: `${AuctionAPI.apiAuctionBase}/profiles`,
+    search: `${AuctionAPI.apiAuctionBase}/listings/search`,
   };
 
   static responseHandler = {
@@ -198,6 +199,29 @@ export default class AuctionAPI {
       await AuctionAPI.responseHandler.handleResponse(response);
       const username = localStorage.getItem('username');
       window.location.href = `/profile/?name=${username}`;
+    },
+
+    search: async (
+      query,
+      limit = 24,
+      page = 1,
+      sort = 'created',
+      sortOrder = 'desc',
+      active = 'true',
+    ) => {
+      const url = new URL(`${AuctionAPI.paths.search}?q=${query}`);
+      url.searchParams.append('limit', limit);
+      url.searchParams.append('page', page);
+      url.searchParams.append('_active', active);
+      url.searchParams.append('sort', sort);
+      url.searchParams.append('sortOrder', sortOrder);
+      const response = await fetch(url.toString(), {
+        headers: headers(true),
+        method: 'GET',
+      });
+      const data = await AuctionAPI.responseHandler.handleResponse(response);
+      console.log(data);
+      return data;
     },
   };
 }
