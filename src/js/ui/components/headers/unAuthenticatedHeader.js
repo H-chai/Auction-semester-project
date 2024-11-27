@@ -66,6 +66,8 @@ export function generateUnAuthenticatedHeader() {
     'cursor-pointer',
     'py-6',
     'px-3',
+    'bg-white',
+    'rounded-full',
   );
   const hamburgerMenuIcon = document.createElement('span');
   hamburgerMenuIcon.classList.add(

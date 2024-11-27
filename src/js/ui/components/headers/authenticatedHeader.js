@@ -137,6 +137,8 @@ export function generateAuthenticatedHeader() {
     'cursor-pointer',
     'py-6',
     'px-3',
+    'bg-white',
+    'rounded-full',
   );
   const hamburgerMenuIcon = document.createElement('span');
   hamburgerMenuIcon.classList.add(
@@ -144,7 +146,7 @@ export function generateAuthenticatedHeader() {
     'bg-blue',
     'relative',
     'h-[2px]',
-    'w-[28px]',
+    'w-[24px]',
     'block',
   );
   const menuBox = document.createElement('ul');
