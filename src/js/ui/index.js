@@ -541,7 +541,14 @@ export default class AuctionApp extends AuctionAPI {
           window.history.replaceState({}, '', newUrl);
           this.pagination.homePagination(currentPage, pageCount);
         } catch (error) {
-          alert(error.message);
+          if (!AuctionApp.user) {
+            alert(
+              'You need to log in to access this profile.\nPlease log in or create an account to continue.',
+            );
+            window.location.href = '/';
+          } else {
+            alert(error.message);
+          }
         }
       },
 
