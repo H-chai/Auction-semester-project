@@ -36,10 +36,6 @@ export default class AuctionAPI {
     localStorage.setItem('username', user);
   }
 
-  static set credits(credits) {
-    localStorage.setItem('credits', credits);
-  }
-
   auth = {
     register: async ({ name, email, password }) => {
       const body = JSON.stringify({ name, email, password });
@@ -219,6 +215,20 @@ export default class AuctionAPI {
         method: 'GET',
       });
       const data = await AuctionAPI.responseHandler.handleResponse(response);
+      return data;
+    },
+  };
+
+  bid = {
+    bid: async (id, { amount }) => {
+      const body = JSON.stringify({ amount });
+      const response = await fetch(`${AuctionAPI.paths.listings}/${id}/bids`, {
+        headers: headers(true),
+        method: 'POST',
+        body,
+      });
+      const { data } =
+        await AuctionAPI.responseHandler.handleResponse(response);
       return data;
     },
   };
