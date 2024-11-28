@@ -406,20 +406,27 @@ export default class AuctionApp extends AuctionAPI {
         const listings = await this.listing.search(query);
         const { meta } = listings;
         const totalCount = meta.totalCount;
+        const searchInput = document.getElementById('search');
         try {
           this.currentQuery = query;
-          console.log(this.currentQuery);
           this.events.listing.displaySearchResult(query);
           const newQuery =
             query.charAt(0).toUpperCase() + query.substring(1).toLowerCase();
-          result.textContent = newQuery;
-          result.classList.add(
-            'font-bold',
+          const resultText = document.createElement('p');
+          resultText.textContent = newQuery;
+          resultText.classList.add(
+            'font-semibold',
             'text-center',
-            'text-2xl',
+            'text-lg',
             'mt-6',
-            'lg:text-4xl',
+            'border',
+            'border-outline-light',
+            'px-4',
+            'bg-off-white',
+            'rounded-full',
+            'inline-block',
             'lg:mt-10',
+            'lg:text-2xl',
           );
           const resultNumber = document.createElement('span');
           resultNumber.textContent = ` (${totalCount})`;
@@ -428,11 +435,20 @@ export default class AuctionApp extends AuctionAPI {
             'text-lg',
             'leading-8',
             'font-display',
-            'lg:text-2xl',
           );
-          result.appendChild(resultNumber);
+          const clearButton = document.createElement('button');
+          clearButton.classList.add('ml-3');
+          clearButton.innerHTML = `<i class="fa-solid fa-xmark text-gray text-sm"></i>`;
+          resultText.append(resultNumber, clearButton);
+          result.append(resultText);
           const form = document.querySelector('.search-form');
           form.insertAdjacentElement('afterend', result);
+
+          clearButton.addEventListener('click', () => {
+            searchInput.value = '';
+            resultText.remove();
+            this.events.listing.displayListings();
+          });
         } catch (error) {
           alert('Something went wrong while searching: ' + error.message);
         }
