@@ -110,6 +110,15 @@ export function generateSingleListingHTML(listing) {
   userCredits.classList.add('font-bold', 'ml-1', 'text-base');
   credits.appendChild(userCredits);
 
+  if (!loggedInUser) {
+    input.disabled = true;
+    input.style.cursor = 'not-allowed';
+    button.disabled = true;
+    button.style.cursor = 'not-allowed';
+    credits.textContent = 'Please log in to place a bid on this listing.';
+    credits.classList.add('font-medium');
+  }
+
   const owner = document.createElement('div');
   owner.classList.add('mb-10');
   const ownerTitle = document.createElement('p');
