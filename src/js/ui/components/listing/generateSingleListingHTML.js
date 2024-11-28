@@ -1,10 +1,5 @@
-import AuctionAPI from '../../../api';
 import { generateCurrentBidHTML } from './generateCurrentBidHTML';
 import { generateTimeLeftHTML } from './generateTimeLeftHTML';
-
-const api = new AuctionAPI();
-const localStorageUser = localStorage.getItem('username');
-const loggedInUserProfile = await api.profile.getProfile(localStorageUser);
 
 export function generateSingleListingHTML(listing) {
   const listingSection = document.createElement('div');
@@ -110,7 +105,8 @@ export function generateSingleListingHTML(listing) {
   credits.textContent = 'Your current credits:';
   credits.classList.add('text-sm', 'mb-8');
   const userCredits = document.createElement('span');
-  userCredits.textContent = loggedInUserProfile.data.credits;
+  const creditsAmount = localStorage.getItem('credits');
+  userCredits.textContent = creditsAmount;
   userCredits.classList.add('font-bold', 'ml-1', 'text-base');
   credits.appendChild(userCredits);
 

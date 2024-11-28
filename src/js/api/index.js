@@ -36,6 +36,10 @@ export default class AuctionAPI {
     localStorage.setItem('username', user);
   }
 
+  static set credits(credits) {
+    localStorage.setItem('credits', credits);
+  }
+
   auth = {
     register: async ({ name, email, password }) => {
       const body = JSON.stringify({ name, email, password });

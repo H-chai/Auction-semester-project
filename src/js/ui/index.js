@@ -160,6 +160,7 @@ export default class AuctionApp extends AuctionAPI {
           event.preventDefault();
           localStorage.removeItem('token');
           localStorage.removeItem('username');
+          localStorage.removeItem('credits');
 
           alert('You have successfully logged out.');
           window.location.href = '/';
@@ -444,7 +445,6 @@ export default class AuctionApp extends AuctionAPI {
           result.append(resultText);
           const form = document.querySelector('.search-form');
           form.insertAdjacentElement('afterend', result);
-
           clearButton.addEventListener('click', () => {
             searchInput.value = '';
             resultText.remove();
@@ -590,11 +590,16 @@ export default class AuctionApp extends AuctionAPI {
     },
 
     bid: async (event) => {
-      const data = AuctionApp.form.formSubmit(event);
+      const formData = AuctionApp.form.formSubmit(event);
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id');
       try {
-        await this.bid.bid(id, { amount: Number(data.amount) });
+        await this.bid.bid(id, { amount: Number(formData.amount) });
+        console.log(localStorage.getItem('credits'));
+        const { data } = await this.profile.getProfile(
+          localStorage.getItem('username'),
+        );
+        localStorage.setItem('credits', data.credits);
         alert('Success! Your bid has been placed. Good luck!');
         window.location.href = `/listing/?id=${id}`;
       } catch (error) {
