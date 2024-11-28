@@ -160,7 +160,6 @@ export default class AuctionApp extends AuctionAPI {
           event.preventDefault();
           localStorage.removeItem('token');
           localStorage.removeItem('username');
-          localStorage.removeItem('credits');
 
           alert('You have successfully logged out.');
           window.location.href = '/';
@@ -243,6 +242,8 @@ export default class AuctionApp extends AuctionAPI {
               div.appendChild(updateBtn);
             });
           }
+          const form = document.forms['bid'];
+          form.addEventListener('submit', this.events.bid);
         } catch (error) {
           alert(error.message);
         }
@@ -586,6 +587,21 @@ export default class AuctionApp extends AuctionAPI {
           );
         }
       },
+    },
+
+    bid: async (event) => {
+      const data = AuctionApp.form.formSubmit(event);
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      try {
+        await this.bid.bid(id, { amount: Number(data.amount) });
+        alert('Success! Your bid has been placed. Good luck!');
+        window.location.href = `/listing/?id=${id}`;
+      } catch (error) {
+        alert(
+          `Could not bid on this listing.\n${error.message}.\nPlease try again.`,
+        );
+      }
     },
   };
 
