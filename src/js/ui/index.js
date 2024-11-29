@@ -412,6 +412,10 @@ export default class AuctionApp extends AuctionAPI {
         try {
           this.currentQuery = query;
           this.events.listing.displaySearchResult(query);
+          const sortOptions = document.querySelector('.sorting-list');
+          sortOptions.classList.add('hidden');
+          const filterOptions = document.querySelector('.filtering-list');
+          filterOptions.classList.add('hidden');
           const newQuery =
             query.charAt(0).toUpperCase() + query.substring(1).toLowerCase();
           const resultText = document.createElement('p');
@@ -443,11 +447,15 @@ export default class AuctionApp extends AuctionAPI {
           newestButton.checked = true;
 
           const showActive = document.getElementById('showActive');
-          showActive.disabled = true;
           const showAll = document.getElementById('showAll');
+          showActive.disabled = true;
           showAll.disabled = true;
           showActive.checked = false;
           showAll.checked = true;
+          const notAvailable = filterOptions.querySelectorAll('input, label');
+          notAvailable.forEach((element) => {
+            element.style.cursor = 'not-allowed';
+          });
 
           const clearButton = document.createElement('button');
           clearButton.classList.add('ml-3');
@@ -466,20 +474,18 @@ export default class AuctionApp extends AuctionAPI {
             showAll.disabled = false;
             showActive.checked = true;
             showAll.checked = false;
-            const filterOptions = document.querySelector('.filtering-list');
             filterOptions.classList.add('hidden');
+            const notAvailable = filterOptions.querySelectorAll('input, label');
+            notAvailable.forEach((element) => {
+              element.style.cursor = 'pointer';
+            });
             this.events.listing.displayListings();
 
             this.filtering.removeCheckedAttribute();
             const newestButton = document.getElementById('newest');
             newestButton.checked = true;
-            const sortOptions = document.querySelector('.sorting-list');
             sortOptions.classList.add('hidden');
           });
-          const sortOptions = document.querySelector('.sorting-list');
-          sortOptions.classList.add('hidden');
-          const filterOptions = document.querySelector('.filtering-list');
-          filterOptions.classList.add('hidden');
         } catch (error) {
           alert('Something went wrong while searching: ' + error.message);
         }
@@ -834,12 +840,6 @@ export default class AuctionApp extends AuctionAPI {
           filterOptions.classList.toggle('hidden');
         } else {
           filterOptions.classList.add('hidden');
-        }
-        if (this.currentQuery) {
-          const notAvailable = filterOptions.querySelectorAll('input, label');
-          notAvailable.forEach((element) => {
-            element.style.cursor = 'not-allowed';
-          });
         }
       });
       const labels = document.querySelectorAll('.filtering-list label');
