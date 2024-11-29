@@ -19,7 +19,7 @@ export function generateTimeLeftHTML(listing) {
   if (days > 0) {
     endingTitle.textContent = 'Ending in';
     const daysNumber = document.createElement('p');
-    daysNumber.classList.add('text-2xl', 'font-semibold', 'lg:text-4xl');
+    daysNumber.classList.add('text-2xl', 'font-semibold', 'lg:text-3xl');
     daysNumber.textContent = days;
     const unitText = document.createElement('span');
     unitText.textContent = 'days left';
@@ -33,29 +33,34 @@ export function generateTimeLeftHTML(listing) {
     endingTitle.textContent = 'Ending in';
     const hourLeft = document.createElement('p');
     hourLeft.classList.add(
-      'text-xl',
+      'text-2xl',
       'font-semibold',
-      'lg:text-2xl',
+      'lg:text-3xl',
       'inline-block',
     );
     hourLeft.textContent = hours;
     const hourUnit = document.createElement('span');
     hourUnit.textContent = 'h';
-    hourUnit.classList.add('text-xs', 'font-semibold', 'ml-1');
+    hourUnit.classList.add('text-xs', 'font-semibold', 'ml-1', 'lg:text-base');
     hourLeft.appendChild(hourUnit);
 
     const minutesLeft = document.createElement('p');
     minutesLeft.classList.add(
-      'text-xl',
+      'text-2xl',
       'font-semibold',
-      'lg:text-2xl',
+      'lg:text-3xl',
       'inline-block',
       'ml-2',
     );
     minutesLeft.textContent = minutes;
     const minutesUnit = document.createElement('span');
     minutesUnit.textContent = 'm';
-    minutesUnit.classList.add('text-xs', 'font-semibold', 'ml-1');
+    minutesUnit.classList.add(
+      'text-xs',
+      'font-semibold',
+      'ml-1',
+      'lg:text-base',
+    );
     minutesLeft.appendChild(minutesUnit);
 
     ending.append(endingTitle, hourLeft, minutesLeft);

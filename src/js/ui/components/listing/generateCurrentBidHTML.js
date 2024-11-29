@@ -20,7 +20,7 @@ export function generateCurrentBidHTML(listing) {
     if (bidAmount) {
       biddingTitle.textContent = 'Current bid';
       const amount = document.createElement('p');
-      amount.classList.add('text-2xl', 'font-semibold', 'lg:text-4xl');
+      amount.classList.add('text-2xl', 'font-semibold', 'lg:text-3xl');
       amount.textContent = bidAmount;
       const unitText = document.createElement('span');
       unitText.textContent = 'credits';

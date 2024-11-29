@@ -438,6 +438,17 @@ export default class AuctionApp extends AuctionAPI {
             'leading-8',
             'font-display',
           );
+
+          const newestButton = document.getElementById('newest');
+          newestButton.checked = true;
+
+          const showActive = document.getElementById('showActive');
+          showActive.disabled = true;
+          const showAll = document.getElementById('showAll');
+          showAll.disabled = true;
+          showActive.checked = false;
+          showAll.checked = true;
+
           const clearButton = document.createElement('button');
           clearButton.classList.add('ml-3');
           clearButton.innerHTML = `<i class="fa-solid fa-xmark text-gray text-sm"></i>`;
@@ -445,11 +456,30 @@ export default class AuctionApp extends AuctionAPI {
           result.append(resultText);
           const form = document.querySelector('.search-form');
           form.insertAdjacentElement('afterend', result);
+
           clearButton.addEventListener('click', () => {
             searchInput.value = '';
             resultText.remove();
+            this.currentQuery = '';
+
+            showActive.disabled = false;
+            showAll.disabled = false;
+            showActive.checked = true;
+            showAll.checked = false;
+            const filterOptions = document.querySelector('.filtering-list');
+            filterOptions.classList.add('hidden');
             this.events.listing.displayListings();
+
+            this.filtering.removeCheckedAttribute();
+            const newestButton = document.getElementById('newest');
+            newestButton.checked = true;
+            const sortOptions = document.querySelector('.sorting-list');
+            sortOptions.classList.add('hidden');
           });
+          const sortOptions = document.querySelector('.sorting-list');
+          sortOptions.classList.add('hidden');
+          const filterOptions = document.querySelector('.filtering-list');
+          filterOptions.classList.add('hidden');
         } catch (error) {
           alert('Something went wrong while searching: ' + error.message);
         }
@@ -642,7 +672,7 @@ export default class AuctionApp extends AuctionAPI {
     removeCheckedAttribute: () => {
       const checkBoxes = document.getElementsByName('sort');
       checkBoxes.forEach((input) => {
-        input.removeAttribute('checked');
+        input.checked = false;
       });
     },
 
@@ -679,7 +709,7 @@ export default class AuctionApp extends AuctionAPI {
           );
         }
 
-        newestButton.setAttribute('checked', 'checked');
+        newestButton.checked = true;
       });
     },
 
@@ -716,7 +746,7 @@ export default class AuctionApp extends AuctionAPI {
           );
         }
 
-        oldestButton.setAttribute('checked', 'checked');
+        oldestButton.checked = true;
       });
     },
 
@@ -754,7 +784,7 @@ export default class AuctionApp extends AuctionAPI {
           );
         }
 
-        endingSoonButton.setAttribute('checked', 'checked');
+        endingSoonButton.checked = true;
       });
     },
 
@@ -792,7 +822,7 @@ export default class AuctionApp extends AuctionAPI {
           );
         }
 
-        resentUpdateButton.setAttribute('checked', 'checked');
+        resentUpdateButton.checked = true;
       });
     },
 
@@ -806,12 +836,7 @@ export default class AuctionApp extends AuctionAPI {
           filterOptions.classList.add('hidden');
         }
         if (this.currentQuery) {
-          const showActive = document.getElementById('showActive');
-          showActive.disabled = true;
-          const showAll = document.getElementById('showAll');
-          showAll.disabled = true;
           const notAvailable = filterOptions.querySelectorAll('input, label');
-          console.log(notAvailable);
           notAvailable.forEach((element) => {
             element.style.cursor = 'not-allowed';
           });
@@ -851,9 +876,8 @@ export default class AuctionApp extends AuctionAPI {
             this.currentFilter,
           );
         }
-
-        showActive.removeAttribute('checked');
-        showAll.setAttribute('checked', 'checked');
+        showActive.checked = false;
+        showAll.checked = true;
       });
     },
 
@@ -881,8 +905,8 @@ export default class AuctionApp extends AuctionAPI {
           );
         }
 
-        showAll.removeAttribute('checked');
-        showActive.setAttribute('checked', 'checked');
+        showAll.checked = false;
+        showActive.checked = true;
       });
     },
   };
