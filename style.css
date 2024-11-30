@@ -720,6 +720,18 @@ video {
   margin-top: 2rem;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-0 {
+  margin-right: 0px;
+}
+
 .block {
   display: block;
 }
@@ -896,6 +908,10 @@ video {
   gap: 1.5rem;
 }
 
+.gap-3 {
+  gap: 0.75rem;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1056,6 +1072,16 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 
 .pb-10 {
@@ -1717,6 +1743,10 @@ video {
     margin-top: 5rem;
   }
 
+  .lg\:mt-0 {
+    margin-top: 0px;
+  }
+
   .lg\:block {
     display: block;
   }
@@ -1752,6 +1782,10 @@ video {
 
   .lg\:w-full {
     width: 100%;
+  }
+
+  .lg\:w-1\/4 {
+    width: 25%;
   }
 
   .lg\:translate-y-0 {

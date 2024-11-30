@@ -65,25 +65,32 @@
               required
           /></label>
         </div>
-        <label for="img-url" class="font-display font-semibold"
-          >Image URL<input
-            type="url"
-            name="mediaUrl"
-            id="img-url"
-            class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
-            required
-        /></label>
-        <label for="img-alt" class="font-display font-semibold"
-          >Image alt<input
-            type="text"
-            name="mediaAlt"
-            id="img-alt"
-            class="border border-outline p-4 block w-full rounded-md mt-1 mb-4 lg:mb-10"
-            required
-        /></label>
+        <div class="lg:flex lg:justify-between lg:items-center lg:gap-4">
+          <label for="img-url" class="font-display font-semibold lg:w-1/2"
+            >Image URL<input
+              type="url"
+              name="mediaUrl"
+              id="img-url"
+              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
+              required
+          /></label>
+          <label for="img-alt" class="font-display font-semibold lg:w-1/2"
+            >Image alt<input
+              type="text"
+              name="mediaAlt"
+              id="img-alt"
+              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
+              required
+          /></label>
+        </div>
+        <button
+          class="blue-btn relative bg-blue text-white font-display font-semibold text-sm rounded-md px-4 py-2 w-fit ml-auto mr-0 hover:text-blue"
+        >
+          Add Image
+        </button>
         <button
           type="submit"
-          class="blue-btn relative bg-blue text-white font-display font-semibold text-sm rounded-md w-full py-4 lg:text-base hover:text-blue"
+          class="blue-btn relative bg-blue text-white font-display font-semibold text-sm rounded-md w-full py-4 mt-6 lg:text-base lg:mt-10 hover:text-blue"
         >
           Create New Listing
         </button>
