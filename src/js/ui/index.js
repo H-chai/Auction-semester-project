@@ -279,7 +279,6 @@ export default class AuctionApp extends AuctionAPI {
       create: async (event) => {
         event.preventDefault();
         const data = AuctionApp.form.formSubmit(event);
-        console.log(data);
         const {
           title,
           description,
@@ -495,7 +494,6 @@ export default class AuctionApp extends AuctionAPI {
 
       addImage: () => {
         const addImgBtn = document.querySelector('.add-img');
-        console.log(addImgBtn);
         let counter = 1;
 
         addImgBtn.addEventListener('click', () => {

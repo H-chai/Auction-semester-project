@@ -16,9 +16,13 @@
     ></script>
     <script type="module" src="../src/main.js" defer></script>
   </head>
-  <body class="font-body text-black">
-    <header class="header p-4 lg:px-16 lg:pt-10 lg:pb-6"></header>
-    <main class="px-6 pb-28 md:pt-16 lg:pt-28 lg:px-16 lg:pb-32 lg:mx-auto">
+  <body
+    class="font-body text-black min-h-screen grid grid-rows-[auto_1fr_auto]"
+  >
+    <header class="container header p-4 lg:px-16 lg:pt-10 lg:pb-6"></header>
+    <main
+      class="container px-6 pb-28 md:pt-16 lg:pt-28 lg:px-16 lg:pb-32 lg:mx-auto"
+    >
       <section class="listing-item-container lg:flex xl:px-20"></section>
     </main>
     <footer class="fixed bottom-0 left-0 right-0 bg-off-white z-50 lg:hidden">
@@ -43,7 +47,7 @@
       </ul>
     </footer>
     <footer
-      class="hidden lg:flex lg:justify-center lg:gap-6 lg:font-display lg:text-xs lg:mb-6"
+      class="container hidden lg:flex lg:justify-center lg:gap-6 lg:font-display lg:text-xs lg:mb-6"
     >
       <a href="#">Terms of Use</a>
       <a href="#">Privacy Policy</a>

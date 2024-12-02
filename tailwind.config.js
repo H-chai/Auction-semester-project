@@ -20,6 +20,11 @@ export default {
       outline: '#B0BEC5',
       'outline-light': '#E0E0E0',
     },
+    container: {
+      screens: {
+        xl: '100%',
+      },
+    },
 
     extend: {
       fontSize: {
