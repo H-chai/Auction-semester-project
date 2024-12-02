@@ -86,6 +86,7 @@ export default class AuctionApp extends AuctionAPI {
       this.events.logout();
       const form = document.forms['createListing'];
       form.addEventListener('submit', this.events.listing.create);
+      this.events.listing.addImage();
     },
 
     listingUpdate: async () => {
@@ -278,6 +279,7 @@ export default class AuctionApp extends AuctionAPI {
       create: async (event) => {
         event.preventDefault();
         const data = AuctionApp.form.formSubmit(event);
+        console.log(data);
         const {
           title,
           description,
@@ -293,7 +295,7 @@ export default class AuctionApp extends AuctionAPI {
         try {
           await this.listing.create({ title, description, media, endsAt });
           alert('You have created a new listing!');
-          window.location.href = '/';
+          //window.location.href = '/';
         } catch (error) {
           alert(
             `Could not create the listing.\n${error.message}.\nPlease try again.`,
@@ -489,6 +491,65 @@ export default class AuctionApp extends AuctionAPI {
         } catch (error) {
           alert('Something went wrong while searching: ' + error.message);
         }
+      },
+
+      addImage: () => {
+        const addImgBtn = document.querySelector('.add-img');
+        console.log(addImgBtn);
+        let counter = 1;
+
+        addImgBtn.addEventListener('click', () => {
+          counter++;
+          const urlLabel = document.createElement('label');
+          urlLabel.htmlFor = `img-url-${counter}`;
+          urlLabel.classList.add(
+            'url-label',
+            'font-display',
+            'font-semibold',
+            'lg:w-1/2',
+          );
+          urlLabel.textContent = `Image url (${counter})`;
+          const urlInput = document.createElement('input');
+          urlInput.type = 'url';
+          urlInput.name = 'mediaUrl';
+          urlInput.id = `img-url-${counter}`;
+          urlInput.classList.add(
+            'border',
+            'border-outline',
+            'p-4',
+            'block',
+            'w-full',
+            'rounded-md',
+            'mt-1',
+            'mb-4',
+          );
+          urlInput.required = true;
+          urlLabel.appendChild(urlInput);
+
+          const altLabel = document.createElement('label');
+          altLabel.htmlFor = `img-alt-${counter}`;
+          altLabel.classList.add('font-display', 'font-semibold', 'lg:w-1/2');
+          altLabel.textContent = `Image alt (${counter})`;
+          const altInput = document.createElement('input');
+          altInput.type = 'alt';
+          altInput.name = 'mediaAlt';
+          altInput.id = `img-alt-${counter}`;
+          altInput.classList.add(
+            'border',
+            'border-outline',
+            'p-4',
+            'block',
+            'w-full',
+            'rounded-md',
+            'mt-1',
+            'mb-4',
+          );
+          altInput.required = true;
+          altLabel.appendChild(altInput);
+
+          const imageList = document.querySelector('.image-list');
+          imageList.append(urlLabel, altLabel);
+        });
       },
     },
 
