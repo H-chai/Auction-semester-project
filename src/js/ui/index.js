@@ -4,6 +4,7 @@ import { generateListingCard } from './components/listing/listingCard';
 import { generateUnAuthenticatedHeader } from './components/headers/unAuthenticatedHeader';
 import { getLatestImages } from './components/utils/getLatestImages';
 import { generateSingleListingHTML } from './components/listing/generateSingleListingHTML';
+import { generateSkeletonCard } from './components/listing/generateSkeletonCard';
 
 export default class AuctionApp extends AuctionAPI {
   constructor() {
@@ -14,6 +15,7 @@ export default class AuctionApp extends AuctionAPI {
   async router(pathname = window.location.pathname) {
     switch (pathname) {
       case '/':
+        this.events.listing.displaySkeleton(24);
         await this.views.listingFeed();
         break;
       case '/auth/register/':
@@ -32,6 +34,7 @@ export default class AuctionApp extends AuctionAPI {
         await this.views.listingUpdate();
         break;
       case '/profile/':
+        this.events.listing.displaySkeleton(4);
         await this.views.profile();
         break;
       case '/profile/update/':
@@ -111,6 +114,8 @@ export default class AuctionApp extends AuctionAPI {
     },
   };
 
+  //skeletonCount = 24;
+
   events = {
     register: async (event) => {
       const data = AuctionApp.form.formSubmit(event);
@@ -170,6 +175,17 @@ export default class AuctionApp extends AuctionAPI {
     },
 
     listing: {
+      displaySkeleton: (count) => {
+        const listingsContainer = document.querySelector('.listings-container');
+        listingsContainer.innerHTML = '';
+        const skeletonFragment = document.createDocumentFragment();
+        for (let i = 0; i < count; i++) {
+          const skeletonCard = generateSkeletonCard();
+          skeletonFragment.appendChild(skeletonCard);
+        }
+        listingsContainer.appendChild(skeletonFragment);
+      },
+
       displayListings: async (
         page = 1,
         sort = 'created',
@@ -177,6 +193,10 @@ export default class AuctionApp extends AuctionAPI {
         active = true,
       ) => {
         try {
+          const listingsContainer = document.querySelector(
+            '.listings-container',
+          );
+
           const listings = await this.listing.get24Listings(
             24,
             page,
@@ -190,10 +210,8 @@ export default class AuctionApp extends AuctionAPI {
           const newUrl = `${window.location.pathname}?page=${page}`;
           window.history.replaceState({}, '', newUrl);
           this.pagination.homePagination(currentPage, pageCount);
-          const listingsContainer = document.querySelector(
-            '.listings-container',
-          );
           listingsContainer.innerHTML = '';
+
           data.forEach((listing) => {
             const listingCard = generateListingCard(listing);
             listingsContainer.appendChild(listingCard);
@@ -624,7 +642,7 @@ export default class AuctionApp extends AuctionAPI {
           const meta = userListings.meta;
 
           const listingContainer = document.querySelector(
-            '.user-listings-container',
+            '.listings-container',
           );
           listingContainer.innerHTML = '';
           listings.forEach((listing) => {
