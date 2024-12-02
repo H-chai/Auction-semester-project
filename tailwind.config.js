@@ -19,6 +19,7 @@ export default {
       'off-white': '#F5F5F5',
       outline: '#B0BEC5',
       'outline-light': '#E0E0E0',
+      transparent: 'transparent',
     },
     container: {
       screens: {
@@ -34,9 +35,9 @@ export default {
         md: '0.25rem',
       },
       animation: {
-        'slider-01': 'slider-01 32s infinite',
-        'slider-02': 'slider-02 32s infinite',
-        'slider-03': 'slider-03 32s infinite',
+        'slider-01': 'slider-01 24s infinite',
+        'slider-02': 'slider-02 24s infinite',
+        'slider-03': 'slider-03 24s infinite',
       },
       keyframes: {
         'slider-01': {
