@@ -29,7 +29,6 @@ export function generateAuthenticatedHeader() {
   const createLink = document.createElement('a');
   createLink.href = '/listing/create/';
   createLink.classList.add(
-    'creating-btn',
     'px-8',
     'py-3',
     'mb-4',
@@ -40,6 +39,25 @@ export function generateAuthenticatedHeader() {
     'transition',
     'duration-500',
     'hover:text-orange',
+    'hover:font-bold',
+    'hover:bg-transparent',
+    "before:content-['']",
+    'before:absolute',
+    'before:w-full',
+    'before:h-full',
+    'before:top-0',
+    'before:left-0',
+    'before:border-2',
+    'before:border-orange',
+    'before:rounded-md',
+    'before:box-border',
+    'before:opacity-0',
+    'before:scale-[.8]',
+    'before:transition-all',
+    'before:duration-300',
+    'before:ease-linear',
+    'before:hover:scale-100',
+    'before:hover:opacity-100',
   );
   createLink.textContent = 'Create Listing';
   const userIconContainer = document.createElement('div');
