@@ -1,62 +1,30 @@
 @import './imageSlider/imageSlider';
+@import './hamburgerIcon/pseudo';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.menu-btn:checked ~ .menu-box {
-  visibility: visible;
-  right: 0;
-}
-
-.menu-box {
-  box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
-  transition-duration: 0.375s;
-}
-
-.menu-item {
-  transition-duration: 0.25s;
-}
-
-.navicon {
-  transition: 0.395s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
-
-  &::before,
-  &::after {
-    content: '';
-    display: block;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: 100;
-    background: #034c8c;
-    transition: 0.395s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+@layer components {
+  .custom-before {
+    @apply before:content-[''] before:block before:h-full before:w-full before:absolute before:z-50 before:bg-blue before:duration-[395ms] before:ease-custom-ease before:delay-[100.8ms] before:top-2;
+  }
+  .custom-after {
+    @apply after:content-[''] after:block after:h-full after:w-full after:absolute after:z-50 after:bg-blue after:duration-[395ms] after:ease-custom-ease after:delay-[100.8ms] after:bottom-2;
   }
 
-  &::before {
-    top: 8px;
+  .btn-orange {
+    @apply px-8 py-3 mb-4 bg-orange text-black rounded-md relative transition duration-500 hover:text-orange hover:font-bold hover:bg-transparent before:content-[''] before:h-full before:w-full before:absolute before:top-0 before:left-0 before:border-2 before:border-orange before:rounded-md before:box-border before:opacity-0 before:scale-[.8] before:transition-all before:duration-300 before:ease-linear before:hover:scale-100 before:hover:opacity-100;
   }
 
-  &::after {
-    bottom: 8px;
+  .btn-green {
+    @apply px-6 py-2 text-sm lg:px-8 lg:py-3 lg:text-base inline-block bg-green text-black rounded-md cursor-pointer relative transition duration-500 hover:text-green hover:font-bold hover:bg-transparent before:content-[''] before:h-full before:w-full before:absolute before:top-0 before:left-0 before:border-2 before:border-green before:rounded-md before:box-border before:opacity-0 before:scale-[.8] before:transition-all before:duration-300 before:ease-linear before:hover:scale-100 before:hover:opacity-100;
   }
-}
 
-.menu-btn:checked ~ .menu-icon .navicon:before {
-  transform: rotate(-135deg);
-}
+  .btn-blue {
+    @apply relative bg-blue text-white font-display font-semibold text-sm rounded-md w-full hover:text-blue hover:font-bold hover:bg-transparent before:content-[''] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:border-2 before:border-blue before:rounded-md before:box-border before:-z-10 before:opacity-0 before:scale-[.8] before:transition-all before:duration-300 before:ease-linear before:hover:scale-100 before:hover:opacity-100;
+  }
 
-.menu-btn:checked ~ .menu-icon .navicon:after {
-  transform: rotate(135deg);
-}
-
-.menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before {
-  top: 0;
-}
-.menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-  bottom: 0;
-}
-
-.menu-btn:checked ~ .menu-icon .navicon {
-  background: rgba(0, 0, 0, 0);
-  transition: 0.2192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+  .btn-red {
+    @apply relative bg-red text-white font-display font-semibold text-sm rounded-md w-full hover:text-red hover:font-bold hover:bg-transparent before:content-[''] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:border-2 before:border-red before:rounded-md before:box-border before:-z-10 before:opacity-0 before:scale-[.8] before:transition-all before:duration-300 before:ease-linear before:hover:scale-100 before:hover:opacity-100;
+  }
 }

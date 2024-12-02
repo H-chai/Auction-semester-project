@@ -32,23 +32,13 @@ export function generateUnAuthenticatedHeader() {
     'text-blue',
     'rounded-md',
     'mr-6',
+    'font-semibold',
     'hover:underline',
   );
   loginLink.textContent = 'Log in';
   const signupLink = document.createElement('a');
   signupLink.href = '/auth/register/';
-  signupLink.classList.add(
-    'blue-btn',
-    'px-8',
-    'py-3',
-    'bg-blue',
-    'text-white',
-    'rounded-md',
-    'relative',
-    'transition',
-    'duration-500',
-    'hover:text-blue',
-  );
+  signupLink.classList.add('btn-blue', 'px-8', 'py-4', 'lg:text-base');
   signupLink.textContent = 'Sign up';
 
   const mobileNavigation = document.createElement('nav');
@@ -56,7 +46,7 @@ export function generateUnAuthenticatedHeader() {
   const checkBox = document.createElement('input');
   checkBox.type = 'checkbox';
   checkBox.id = 'menu-btn';
-  checkBox.classList.add('menu-btn', 'hidden');
+  checkBox.classList.add('menu-btn', 'hidden', 'peer');
   const checkBoxLabel = document.createElement('label');
   checkBoxLabel.htmlFor = 'menu-btn';
   checkBoxLabel.classList.add(
@@ -64,8 +54,11 @@ export function generateUnAuthenticatedHeader() {
     'inline-block',
     'relative',
     'cursor-pointer',
-    'py-6',
-    'px-3',
+    'w-12',
+    'h-12',
+    'flex',
+    'justify-center',
+    'items-center',
     'bg-white',
     'rounded-full',
   );
@@ -75,12 +68,21 @@ export function generateUnAuthenticatedHeader() {
     'bg-blue',
     'relative',
     'h-[2px]',
-    'w-[28px]',
+    'w-[24px]',
     'block',
+    'duration-[395ms]',
+    'ease-custom-ease',
+    'delay-[100.8ms]',
+    'custom-before',
+    'custom-after',
   );
   const menuBox = document.createElement('ul');
   menuBox.classList.add(
     'menu-box',
+    'peer-checked:visible',
+    'peer-checked:right-0',
+    'shadow-custom',
+    'duration-[375ms]',
     'bg-off-white',
     'fixed',
     'top-0',

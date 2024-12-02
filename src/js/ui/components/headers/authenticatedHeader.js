@@ -28,37 +28,7 @@ export function generateAuthenticatedHeader() {
   updateLink.classList.add('update', 'mb-4');
   const createLink = document.createElement('a');
   createLink.href = '/listing/create/';
-  createLink.classList.add(
-    'px-8',
-    'py-3',
-    'mb-4',
-    'bg-orange',
-    'text-black',
-    'rounded-md',
-    'relative',
-    'transition',
-    'duration-500',
-    'hover:text-orange',
-    'hover:font-bold',
-    'hover:bg-transparent',
-    "before:content-['']",
-    'before:absolute',
-    'before:w-full',
-    'before:h-full',
-    'before:top-0',
-    'before:left-0',
-    'before:border-2',
-    'before:border-orange',
-    'before:rounded-md',
-    'before:box-border',
-    'before:opacity-0',
-    'before:scale-[.8]',
-    'before:transition-all',
-    'before:duration-300',
-    'before:ease-linear',
-    'before:hover:scale-100',
-    'before:hover:opacity-100',
-  );
+  createLink.classList.add('btn-orange');
   createLink.textContent = 'Create Listing';
   const userIconContainer = document.createElement('div');
   userIconContainer.classList.add('relative', 'group');
@@ -97,7 +67,6 @@ export function generateAuthenticatedHeader() {
   listItemProfile.classList.add('mb-4');
   const profileLink = document.createElement('a');
   profileLink.classList.add(
-    'my-page',
     'flex',
     'items-center',
     'text-black',
@@ -145,7 +114,7 @@ export function generateAuthenticatedHeader() {
   const checkBox = document.createElement('input');
   checkBox.type = 'checkbox';
   checkBox.id = 'menu-btn';
-  checkBox.classList.add('menu-btn', 'hidden');
+  checkBox.classList.add('menu-btn', 'hidden', 'peer');
   const checkBoxLabel = document.createElement('label');
   checkBoxLabel.htmlFor = 'menu-btn';
   checkBoxLabel.classList.add(
@@ -153,8 +122,11 @@ export function generateAuthenticatedHeader() {
     'inline-block',
     'relative',
     'cursor-pointer',
-    'py-6',
-    'px-3',
+    'w-12',
+    'h-12',
+    'flex',
+    'justify-center',
+    'items-center',
     'bg-white',
     'rounded-full',
   );
@@ -166,10 +138,19 @@ export function generateAuthenticatedHeader() {
     'h-[2px]',
     'w-[24px]',
     'block',
+    'duration-[395ms]',
+    'ease-custom-ease',
+    'delay-[100.8ms]',
+    'custom-before',
+    'custom-after',
   );
   const menuBox = document.createElement('ul');
   menuBox.classList.add(
     'menu-box',
+    'peer-checked:visible',
+    'peer-checked:right-0',
+    'shadow-custom',
+    'duration-[375ms]',
     'bg-off-white',
     'fixed',
     'top-0',
@@ -191,12 +172,12 @@ export function generateAuthenticatedHeader() {
   const menuBoxProfileLink = document.createElement('a');
   menuBoxProfileLink.href = `/profile/?name=${username}`;
   menuBoxProfileLink.classList.add(
-    'my-page',
+    'menu-item',
+    'duration-[250ms]',
     'flex',
     'justify-center',
     'items-center',
     'text-blue',
-    'menu-item',
     'py-3',
     'px-6',
     'font-semibold',

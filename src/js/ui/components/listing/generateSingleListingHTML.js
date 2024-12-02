@@ -79,15 +79,7 @@ export function generateSingleListingHTML(listing) {
   );
   const button = document.createElement('button');
   button.textContent = 'Place a bid';
-  button.classList.add(
-    'text-white',
-    'bg-blue',
-    'py-4',
-    'font-semibold',
-    'rounded-md',
-    'font-display',
-    'w-2/5',
-  );
+  button.classList.add('btn-blue', 'py-4', 'w-2/5', 'lg:text-base');
   button.type = 'submit';
   const loggedInUser = localStorage.getItem('username');
   if (listing.seller.name === loggedInUser) {
