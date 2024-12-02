@@ -66,6 +66,12 @@ export default {
       aspectRatio: {
         '4/3': '4 / 3',
       },
+      boxShadow: {
+        custom: '1px 0px 6px rgba(0, 0, 0, 0.2)',
+      },
+      transitionTimingFunction: {
+        'custom-ease': 'cubic-bezier(0.04, 0.04, 0.12, 0.96)',
+      },
     },
   },
   plugins: [],
