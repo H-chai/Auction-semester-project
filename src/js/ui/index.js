@@ -102,6 +102,7 @@ export default class AuctionApp extends AuctionAPI {
     profile: async () => {
       this.events.headerToggle();
       this.events.profile.displayProfile();
+      this.events.profile.displayUpdateProfileButton();
       this.filtering.openSorting();
       this.filtering.openFilter();
       this.events.logout();
@@ -113,8 +114,6 @@ export default class AuctionApp extends AuctionAPI {
       this.events.profile.updateProfile();
     },
   };
-
-  //skeletonCount = 24;
 
   events = {
     register: async (event) => {
@@ -238,43 +237,7 @@ export default class AuctionApp extends AuctionAPI {
             update.forEach((div) => {
               const updateBtn = document.createElement('a');
               updateBtn.textContent = 'Update Listing';
-              updateBtn.classList.add(
-                'btn-green',
-                // 'px-6',
-                // 'py-2',
-                // 'text-sm',
-                // 'lg:px-8',
-                // 'lg:py-3',
-                // 'lg:text-base',
-                // 'inline-block',
-                // 'bg-green',
-                // 'text-black',
-                // 'rounded-md',
-                // 'cursor-pointer',
-                // 'relative',
-                // 'transition',
-                // 'duration-500',
-                // 'hover:text-green',
-                // 'hover:font-bold',
-                // 'hover:bg-transparent',
-                // "before:content-['']",
-                // 'before:absolute',
-                // 'before:w-full',
-                // 'before:h-full',
-                // 'before:top-0',
-                // 'before:left-0',
-                // 'before:border-2',
-                // 'before:border-green',
-                // 'before:rounded-md',
-                // 'before:box-border',
-                // 'before:opacity-0',
-                // 'before:scale-[.8]',
-                // 'before:transition-all',
-                // 'before:duration-300',
-                // 'before:ease-linear',
-                // 'before:hover:scale-100',
-                // 'before:hover:opacity-100',
-              );
+              updateBtn.classList.add('btn-green');
               updateBtn.addEventListener('click', () => {
                 window.location.href = `/listing/update/?id=${listingId}`;
               });
@@ -609,26 +572,6 @@ export default class AuctionApp extends AuctionAPI {
           const avatar = document.querySelector('.avatar');
           avatar.src = data.avatar.url;
           avatar.alt = data.avatar.alt;
-          const updateButtonContainer = document.querySelector(
-            '.update-btn-container',
-          );
-          updateButtonContainer.classList.add(
-            'absolute',
-            '-top-1/2',
-            'lg:top-0',
-            'right-0',
-          );
-          const updateButton = document.createElement('a');
-          updateButton.classList.add(
-            'btn-green',
-            'font-display',
-            'font-semibold',
-          );
-          updateButton.textContent = 'Update Profile';
-          updateButton.href = '/profile/update/';
-          if (name === AuctionApp.user) {
-            updateButtonContainer.appendChild(updateButton);
-          }
           const username = document.querySelector('.username');
           username.textContent = data.name;
           const bio = document.querySelector('.bio');
@@ -671,6 +614,31 @@ export default class AuctionApp extends AuctionAPI {
           } else {
             alert(error.message);
           }
+        }
+      },
+
+      displayUpdateProfileButton: () => {
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name');
+        const updateButtonContainer = document.querySelector(
+          '.update-btn-container',
+        );
+        updateButtonContainer.classList.add(
+          'absolute',
+          '-top-1/2',
+          'lg:top-0',
+          'right-0',
+        );
+        const updateButton = document.createElement('a');
+        updateButton.classList.add(
+          'btn-green',
+          'font-display',
+          'font-semibold',
+        );
+        updateButton.textContent = 'Update Profile';
+        updateButton.href = '/profile/update/';
+        if (name === AuctionApp.user) {
+          updateButtonContainer.appendChild(updateButton);
         }
       },
 
