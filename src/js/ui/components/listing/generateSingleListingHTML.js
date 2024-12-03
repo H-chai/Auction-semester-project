@@ -10,7 +10,7 @@ export function generateSingleListingHTML(listing) {
   const imageWrapper = document.createElement('div');
   imageWrapper.classList.add('lg:w-1/2', 'flex', 'flex-col', 'items-center');
   const mainImage = document.createElement('div');
-  mainImage.classList.add('main-image', 'mb-6');
+  mainImage.classList.add('main-image', 'mb-6', 'w-full');
   const listingImage = document.createElement('img');
   const medias = listing.media;
   if (medias?.[0]) {
