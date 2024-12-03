@@ -97,6 +97,7 @@ export default class AuctionApp extends AuctionAPI {
       this.events.logout();
       this.events.listing.update();
       this.events.listing.delete();
+      this.events.listing.addImage();
     },
 
     profile: async () => {
@@ -319,14 +320,92 @@ export default class AuctionApp extends AuctionAPI {
         const listing = await this.listing.getSingleListing(listingId);
         const { data } = listing;
         console.log(data);
+
         const title = document.getElementById('title');
         title.value = data.title;
         const description = document.getElementById('description');
         description.value = data.description;
+
+        const medias = data.media;
+        console.log(medias);
+        console.log(medias.length);
         const imgUrl = document.getElementById('img-url');
-        imgUrl.value = data.media[0].url;
+        imgUrl.value = medias[0].url;
         const imgAlt = document.getElementById('img-alt');
-        imgAlt.value = data.media[0].alt;
+        imgAlt.value = medias[0].alt;
+
+        if (medias.length > 1) {
+          for (let i = 1; i < medias.length; i++) {
+            const imageList = document.createElement('div');
+            imageList.classList.add(
+              'image-list',
+              'lg:flex',
+              'lg:justify-between',
+              'lg:items-center',
+              'lg:gap-4',
+            );
+            const urlLabel = document.createElement('label');
+            urlLabel.htmlFor = `img-url-${i + 1}`;
+            urlLabel.classList.add(
+              'url-label',
+              'font-display',
+              'font-semibold',
+              'lg:w-1/2',
+            );
+            urlLabel.textContent = `Image url`;
+            const urlInput = document.createElement('input');
+            urlInput.type = 'url';
+            urlInput.name = 'mediaUrl';
+            urlInput.id = `img-url-${i + 1}`;
+            urlInput.classList.add(
+              'border',
+              'border-outline',
+              'p-4',
+              'block',
+              'w-full',
+              'rounded-md',
+              'mt-1',
+              'mb-4',
+            );
+            urlInput.value = medias[i].url;
+            urlLabel.appendChild(urlInput);
+
+            const altLabel = document.createElement('label');
+            altLabel.htmlFor = `img-alt-${i + 1}`;
+            altLabel.classList.add('font-display', 'font-semibold', 'lg:w-1/2');
+            altLabel.textContent = `Image alt`;
+            const altInput = document.createElement('input');
+            altInput.type = 'alt';
+            altInput.name = 'mediaAlt';
+            altInput.id = `img-alt-${i + 1}`;
+            altInput.classList.add(
+              'border',
+              'border-outline',
+              'p-4',
+              'block',
+              'w-full',
+              'rounded-md',
+              'mt-1',
+              'mb-4',
+            );
+            altInput.value = medias[i].alt;
+            altLabel.appendChild(altInput);
+
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.innerHTML = `<i class="fa-regular fa-circle-xmark text-xl text-blue"></i>`;
+            removeButton.addEventListener('click', () => {
+              const parentContent = removeButton.closest('.image-list');
+              parentContent.remove();
+            });
+
+            imageList.append(urlLabel, altLabel, removeButton);
+            const addImageButton = document.querySelector('.add-img');
+            const updateForm = document.forms['updateListing'];
+            updateForm.insertBefore(imageList, addImageButton);
+          }
+        }
+
         const isoString = data.endsAt;
         const end = new Date(isoString);
         const date = end.toISOString().split('T')[0];
@@ -345,8 +424,22 @@ export default class AuctionApp extends AuctionAPI {
           form.addEventListener('submit', (event) => {
             event.preventDefault();
             const formData = AuctionApp.form.formSubmit(event);
-            const { title, description, mediaUrl, mediaAlt } = formData;
-            const media = [{ url: mediaUrl, alt: mediaAlt }];
+            const { title, description } = formData;
+
+            const imageList = document.querySelectorAll('.image-list');
+            const urlArray = [];
+            const altArray = [];
+            imageList.forEach((list) => {
+              const url = list.querySelector('input[name="mediaUrl"]').value;
+              const alt = list.querySelector('input[name="mediaAlt"]').value;
+              urlArray.push(url);
+              altArray.push(alt);
+            });
+            const media = urlArray.map((url, index) => ({
+              url: url,
+              alt: altArray[index],
+            }));
+
             this.listing.update(listingId, {
               title,
               description,
@@ -576,8 +669,8 @@ export default class AuctionApp extends AuctionAPI {
           imageList.append(urlLabel, altLabel, removeButton);
 
           const addImageButton = document.querySelector('.add-img');
-          const createForm = document.forms['createListing'];
-          createForm.insertBefore(imageList, addImageButton);
+          const form = document.querySelector('form');
+          form.insertBefore(imageList, addImageButton);
         });
       },
     },
