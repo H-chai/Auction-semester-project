@@ -598,8 +598,8 @@ export default class AuctionApp extends AuctionAPI {
       },
 
       addImage: () => {
-        const addImgBtn = document.querySelector('.add-img');
         let counter = 1;
+        const addImgBtn = document.querySelector('.add-img');
 
         addImgBtn.addEventListener('click', () => {
           counter++;
@@ -612,7 +612,6 @@ export default class AuctionApp extends AuctionAPI {
             'lg:gap-4',
           );
           const urlLabel = document.createElement('label');
-          urlLabel.htmlFor = `img-url-${counter}`;
           urlLabel.classList.add(
             'url-label',
             'font-display',
@@ -623,7 +622,6 @@ export default class AuctionApp extends AuctionAPI {
           const urlInput = document.createElement('input');
           urlInput.type = 'url';
           urlInput.name = 'mediaUrl';
-          urlInput.id = `img-url-${counter}`;
           urlInput.classList.add(
             'border',
             'border-outline',
@@ -638,13 +636,11 @@ export default class AuctionApp extends AuctionAPI {
           urlLabel.appendChild(urlInput);
 
           const altLabel = document.createElement('label');
-          altLabel.htmlFor = `img-alt-${counter}`;
           altLabel.classList.add('font-display', 'font-semibold', 'lg:w-1/2');
           altLabel.textContent = `Image alt`;
           const altInput = document.createElement('input');
           altInput.type = 'alt';
           altInput.name = 'mediaAlt';
-          altInput.id = `img-alt-${counter}`;
           altInput.classList.add(
             'border',
             'border-outline',
@@ -657,6 +653,20 @@ export default class AuctionApp extends AuctionAPI {
           );
           altInput.required = true;
           altLabel.appendChild(altInput);
+
+          const path = window.location.pathname;
+          console.log(path);
+          if (path === '/listing/update/') {
+            urlLabel.htmlFor = `img-url-${counter}-update`;
+            altLabel.htmlFor = `img-alt-${counter}-update`;
+            urlInput.id = `img-url-${counter}-update`;
+            altInput.id = `img-alt-${counter}-update`;
+          } else {
+            urlLabel.htmlFor = `img-url-${counter}`;
+            altLabel.htmlFor = `img-alt-${counter}`;
+            urlInput.id = `img-url-${counter}`;
+            altInput.id = `img-alt-${counter}`;
+          }
 
           const removeButton = document.createElement('button');
           removeButton.type = 'button';
