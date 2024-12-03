@@ -150,7 +150,7 @@ export default class AuctionAPI {
       page = 1,
       sort = 'created',
       sortOrder = 'desc',
-      active = 'true',
+      active = 'false',
       name,
     ) => {
       const url = new URL(`${AuctionAPI.paths.profiles}/${name}/listings`);

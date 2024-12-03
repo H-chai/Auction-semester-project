@@ -691,7 +691,7 @@ export default class AuctionApp extends AuctionAPI {
         page = 1,
         sort = 'created',
         sortOrder = 'desc',
-        active = true,
+        active = false,
       ) => {
         const params = new URLSearchParams(window.location.search);
         const name = params.get('name');
