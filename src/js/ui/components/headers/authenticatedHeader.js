@@ -33,14 +33,14 @@ export function generateAuthenticatedHeader() {
   const userIconContainer = document.createElement('div');
   userIconContainer.classList.add('relative', 'group');
   const userIconImage = document.createElement('img');
-  userIconImage.src = '/images/image copy.png';
-  userIconImage.alt = 'User Avatar';
   userIconImage.classList.add(
+    'user-avatar',
     'w-12',
     'h-12',
     'rounded-full',
     'cursor-pointer',
     'mb-4',
+    'object-cover',
   );
   const dropDownMenu = document.createElement('div');
   dropDownMenu.classList.add(

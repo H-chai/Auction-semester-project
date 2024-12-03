@@ -23,7 +23,13 @@ export function generateAuthenticatedFooter() {
   const profileLink = document.createElement('a');
   profileLink.href = `/profile/?name=${username}`;
   const avatar = document.createElement('img');
-  avatar.classList.add('w-7', 'h-7', 'rounded-full');
+  avatar.classList.add(
+    'user-avatar',
+    'w-8',
+    'h-8',
+    'rounded-full',
+    'object-cover',
+  );
 
   profileLink.appendChild(avatar);
   profile.appendChild(profileLink);
