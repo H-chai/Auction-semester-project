@@ -212,6 +212,8 @@ export default class AuctionAPI {
       const url = new URL(AuctionAPI.paths.search);
       url.searchParams.append('limit', limit);
       url.searchParams.append('page', page);
+      url.searchParams.append('_seller', true);
+      url.searchParams.append('_bids', true);
       url.searchParams.append('sort', sort);
       url.searchParams.append('sortOrder', sortOrder);
       url.searchParams.append('q', query);
