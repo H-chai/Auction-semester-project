@@ -712,7 +712,7 @@ export default class AuctionApp extends AuctionAPI {
         page = 1,
         sort = 'created',
         sortOrder = 'desc',
-        active = false,
+        active = true,
       ) => {
         const params = new URLSearchParams(window.location.search);
         const name = params.get('name');
@@ -736,6 +736,7 @@ export default class AuctionApp extends AuctionAPI {
           credits.textContent = data.credits;
           const itemCount = document.querySelector('.item-count');
           itemCount.textContent = data._count.listings;
+          console.log(data);
 
           const userListings = await this.listing.getUsersListings(
             24,
