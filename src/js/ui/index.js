@@ -160,6 +160,7 @@ export default class AuctionApp extends AuctionAPI {
       if (isLoggedIn) {
         const authenticatedHeader = generateAuthenticatedHeader();
         header.appendChild(authenticatedHeader);
+        this.avatar.userAvatar();
       } else {
         const unAuthenticatedHeader = generateUnAuthenticatedHeader();
         header.appendChild(unAuthenticatedHeader);
@@ -173,6 +174,7 @@ export default class AuctionApp extends AuctionAPI {
       if (isLoggedIn) {
         const authenticatedFooter = generateAuthenticatedFooter();
         footer.appendChild(authenticatedFooter);
+        this.avatar.userAvatar();
       } else {
         return 0;
       }
@@ -849,6 +851,19 @@ export default class AuctionApp extends AuctionAPI {
           `Could not bid on this listing.\n${error.message}.\nPlease try again.`,
         );
       }
+    },
+  };
+
+  avatar = {
+    userAvatar: async () => {
+      const username = localStorage.getItem('username');
+      const profile = await this.profile.getProfile(username);
+      const { data } = profile;
+      const avatarContainer = document.querySelectorAll('.user-avatar');
+      avatarContainer.forEach((avatar) => {
+        avatar.src = data.avatar.url;
+        avatar.alt = data.avatar.alt;
+      });
     },
   };
 
