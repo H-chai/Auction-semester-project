@@ -1,10 +1,6 @@
+import { getUserCredits } from '../utils/getUserCredits';
 import { generateCurrentBidHTML } from './generateCurrentBidHTML';
 import { generateTimeLeftHTML } from './generateTimeLeftHTML';
-import AuctionAPI from '../../../api';
-
-const api = new AuctionAPI();
-const loggedInUser = localStorage.getItem('username');
-const userProfile = await api.profile.getProfile(loggedInUser);
 
 export function generateSingleListingHTML(listing) {
   const listingSection = document.createElement('div');
@@ -115,6 +111,7 @@ export function generateSingleListingHTML(listing) {
   button.textContent = 'Place a bid';
   button.classList.add('btn-blue', 'py-4', 'w-2/5', 'lg:text-base');
   button.type = 'submit';
+  const loggedInUser = localStorage.getItem('username');
   if (listing.seller.name === loggedInUser) {
     input.disabled = true;
     input.style.cursor = 'not-allowed';
@@ -130,7 +127,7 @@ export function generateSingleListingHTML(listing) {
   credits.textContent = 'Your current credits:';
   credits.classList.add('text-sm', 'mb-8');
   const userCredits = document.createElement('span');
-  userCredits.textContent = userProfile.data.credits;
+  userCredits.textContent = getUserCredits();
   userCredits.classList.add('font-bold', 'ml-1', 'text-base');
   credits.appendChild(userCredits);
 
