@@ -226,6 +226,7 @@ export default class AuctionApp extends AuctionAPI {
           const listingId = params.get('id');
           const listing = await this.listing.getSingleListing(listingId);
           const { data } = listing;
+          console.log(data);
           const listingContainer = document.querySelector(
             '.listing-item-container',
           );
@@ -279,22 +280,32 @@ export default class AuctionApp extends AuctionAPI {
       create: async (event) => {
         event.preventDefault();
         const data = AuctionApp.form.formSubmit(event);
-        const {
-          title,
-          description,
-          endingDate,
-          endingTime,
-          mediaUrl,
-          mediaAlt,
-        } = data;
-        const media = [{ url: mediaUrl, alt: mediaAlt }];
+
+        const { title, description, endingDate, endingTime } = data;
+
+        const imageList = document.querySelectorAll('.image-list');
+        const urlArray = [];
+        const altArray = [];
+        imageList.forEach((list) => {
+          const url = list.querySelector('input[name="mediaUrl"]').value;
+          const alt = list.querySelector('input[name="mediaAlt"]').value;
+          urlArray.push(url);
+          altArray.push(alt);
+        });
+
+        const media = urlArray.map((url, index) => ({
+          url: url,
+          alt: altArray[index],
+        }));
+
+        console.log(media);
         const dateCombined = `${endingDate}T${endingTime}:00.000Z`;
         const date = new Date(dateCombined);
         const endsAt = date.toISOString();
         try {
           await this.listing.create({ title, description, media, endsAt });
           alert('You have created a new listing!');
-          //window.location.href = '/';
+          window.location.href = '/';
         } catch (error) {
           alert(
             `Could not create the listing.\n${error.message}.\nPlease try again.`,
@@ -307,6 +318,7 @@ export default class AuctionApp extends AuctionAPI {
         const listingId = params.get('id');
         const listing = await this.listing.getSingleListing(listingId);
         const { data } = listing;
+        console.log(data);
         const title = document.getElementById('title');
         title.value = data.title;
         const description = document.getElementById('description');
