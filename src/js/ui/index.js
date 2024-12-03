@@ -498,6 +498,8 @@ export default class AuctionApp extends AuctionAPI {
 
         addImgBtn.addEventListener('click', () => {
           counter++;
+          const imageList = document.createElement('div');
+          imageList.classList.add('image-list');
           const urlLabel = document.createElement('label');
           urlLabel.htmlFor = `img-url-${counter}`;
           urlLabel.classList.add(
@@ -544,9 +546,11 @@ export default class AuctionApp extends AuctionAPI {
           );
           altInput.required = true;
           altLabel.appendChild(altInput);
-
-          const imageList = document.querySelector('.image-list');
           imageList.append(urlLabel, altLabel);
+
+          const addImageButton = document.querySelector('.add-img');
+          const createForm = document.forms['createListing'];
+          createForm.insertBefore(imageList, addImageButton);
         });
       },
     },
