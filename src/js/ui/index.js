@@ -227,7 +227,6 @@ export default class AuctionApp extends AuctionAPI {
           const listingId = params.get('id');
           const listing = await this.listing.getSingleListing(listingId);
           const { data } = listing;
-          console.log(data);
           const listingContainer = document.querySelector(
             '.listing-item-container',
           );
@@ -818,11 +817,10 @@ export default class AuctionApp extends AuctionAPI {
       const id = params.get('id');
       try {
         await this.bid.bid(id, { amount: Number(formData.amount) });
-        console.log(localStorage.getItem('credits'));
-        const { data } = await this.profile.getProfile(
-          localStorage.getItem('username'),
-        );
-        localStorage.setItem('credits', data.credits);
+        // const { data } = await this.profile.getProfile(
+        //   localStorage.getItem('username'),
+        // );
+        // localStorage.setItem('credits', data.credits);
         alert('Success! Your bid has been placed. Good luck!');
         window.location.href = `/listing/?id=${id}`;
       } catch (error) {
