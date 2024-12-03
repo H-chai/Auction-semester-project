@@ -499,7 +499,13 @@ export default class AuctionApp extends AuctionAPI {
         addImgBtn.addEventListener('click', () => {
           counter++;
           const imageList = document.createElement('div');
-          imageList.classList.add('image-list');
+          imageList.classList.add(
+            'image-list',
+            'lg:flex',
+            'lg:justify-between',
+            'lg:items-center',
+            'lg:gap-4',
+          );
           const urlLabel = document.createElement('label');
           urlLabel.htmlFor = `img-url-${counter}`;
           urlLabel.classList.add(
@@ -508,7 +514,7 @@ export default class AuctionApp extends AuctionAPI {
             'font-semibold',
             'lg:w-1/2',
           );
-          urlLabel.textContent = `Image url (${counter})`;
+          urlLabel.textContent = `Image url`;
           const urlInput = document.createElement('input');
           urlInput.type = 'url';
           urlInput.name = 'mediaUrl';
@@ -529,7 +535,7 @@ export default class AuctionApp extends AuctionAPI {
           const altLabel = document.createElement('label');
           altLabel.htmlFor = `img-alt-${counter}`;
           altLabel.classList.add('font-display', 'font-semibold', 'lg:w-1/2');
-          altLabel.textContent = `Image alt (${counter})`;
+          altLabel.textContent = `Image alt`;
           const altInput = document.createElement('input');
           altInput.type = 'alt';
           altInput.name = 'mediaAlt';
@@ -546,7 +552,16 @@ export default class AuctionApp extends AuctionAPI {
           );
           altInput.required = true;
           altLabel.appendChild(altInput);
-          imageList.append(urlLabel, altLabel);
+
+          const removeButton = document.createElement('button');
+          removeButton.type = 'button';
+          removeButton.innerHTML = `<i class="fa-regular fa-circle-xmark text-xl text-blue"></i>`;
+          removeButton.addEventListener('click', () => {
+            const parentContent = removeButton.closest('.image-list');
+            parentContent.remove();
+          });
+
+          imageList.append(urlLabel, altLabel, removeButton);
 
           const addImageButton = document.querySelector('.add-img');
           const createForm = document.forms['createListing'];
