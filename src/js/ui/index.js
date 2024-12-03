@@ -819,6 +819,10 @@ export default class AuctionApp extends AuctionAPI {
       const id = params.get('id');
       try {
         await this.bid.bid(id, { amount: Number(formData.amount) });
+        const currentCredits = localStorage.getItem('credits');
+        const updatedCurrentCredits =
+          Number(currentCredits) - Number(formData.amount);
+        localStorage.setItem('credits', updatedCurrentCredits);
         alert('Success! Your bid has been placed. Good luck!');
         window.location.href = `/listing/?id=${id}`;
       } catch (error) {

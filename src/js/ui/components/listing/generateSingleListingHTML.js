@@ -1,4 +1,3 @@
-import { getUserCredits } from '../utils/getUserCredits';
 import { generateCurrentBidHTML } from './generateCurrentBidHTML';
 import { generateTimeLeftHTML } from './generateTimeLeftHTML';
 
@@ -127,7 +126,7 @@ export function generateSingleListingHTML(listing) {
   credits.textContent = 'Your current credits:';
   credits.classList.add('text-sm', 'mb-8');
   const userCredits = document.createElement('span');
-  userCredits.textContent = getUserCredits();
+  userCredits.textContent = localStorage.getItem('credits');
   userCredits.classList.add('font-bold', 'ml-1', 'text-base');
   credits.appendChild(userCredits);
 
