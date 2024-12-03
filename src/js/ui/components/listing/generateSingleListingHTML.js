@@ -2,15 +2,22 @@ import { generateCurrentBidHTML } from './generateCurrentBidHTML';
 import { generateTimeLeftHTML } from './generateTimeLeftHTML';
 
 export function generateSingleListingHTML(listing) {
+  console.log(listing);
   const listingSection = document.createElement('div');
   listingSection.classList.add('md:w-4/5', 'md:mx-auto', 'lg:w-full');
   const listingContainer = document.createElement('div');
   listingContainer.classList.add('lg:flex', 'lg:items-start', 'lg:gap-20');
 
+  const imageWrapper = document.createElement('div');
+  imageWrapper.classList.add('lg:w-1/2', 'flex', 'flex-col', 'items-center');
+  const mainImage = document.createElement('div');
+  mainImage.classList.add('main-image', 'mb-6');
   const listingImage = document.createElement('img');
-  if (listing.media?.[0]) {
-    listingImage.src = listing.media[0].url;
-    listingImage.alt = listing.media[0].alt;
+  const medias = listing.media;
+  console.log(medias);
+  if (medias?.[0]) {
+    listingImage.src = medias[0].url;
+    listingImage.alt = medias[0].alt;
   } else {
     listingImage.src = '/images/noImageAvailable.svg';
     listingImage.alt = 'No image available';
@@ -21,10 +28,34 @@ export function generateSingleListingHTML(listing) {
     'object-cover',
     'object-center',
     'w-full',
-    'mb-6',
     'md:aspect-4/3',
-    'lg:w-1/2',
   );
+  mainImage.appendChild(listingImage);
+  const imageList = document.createElement('div');
+  imageList.classList.add('flex', 'items-center', 'flex-wrap', 'gap-2', 'mb-6');
+  medias.forEach((media) => {
+    const imageButton = document.createElement('button');
+    const subImage = document.createElement('img');
+    subImage.classList.add(
+      'w-14',
+      'opacity-70',
+      'aspect-square',
+      'rounded-md',
+      'object-cover',
+      'object-center',
+      'md:aspect-4/3',
+      'lg:w-20',
+    );
+    subImage.src = media.url;
+    subImage.alt = media.alt;
+    imageButton.appendChild(subImage);
+    imageList.appendChild(imageButton);
+    imageButton.addEventListener('click', () => {
+      mainImage.innerHTML = `<img src=${media.url} alt=${media.alt} class="aspect-square rounded-md object-cover object-center w-full md:aspect-4/3">`;
+    });
+  });
+
+  imageWrapper.append(mainImage, imageList);
 
   const listingDetail = document.createElement('div');
   listingDetail.classList.add('lg:w-1/2');
@@ -217,7 +248,7 @@ export function generateSingleListingHTML(listing) {
   backIcon.classList.add('fa-solid', 'fa-arrow-left', 'mr-1');
   homeLink.prepend(backIcon);
 
-  listingContainer.append(listingImage, listingDetail);
+  listingContainer.append(imageWrapper, listingDetail);
   listingSection.append(listingContainer, homeLink);
 
   return listingSection;
