@@ -5,6 +5,7 @@ import { generateUnAuthenticatedHeader } from './components/headers/unAuthentica
 import { getLatestImages } from './components/utils/getLatestImages';
 import { generateSingleListingHTML } from './components/listing/generateSingleListingHTML';
 import { generateSkeletonCard } from './components/listing/generateSkeletonCard';
+import { generateAuthenticatedFooter } from './components/footers/authenticatedFooter';
 
 export default class AuctionApp extends AuctionAPI {
   constructor() {
@@ -59,6 +60,7 @@ export default class AuctionApp extends AuctionAPI {
   views = {
     listingFeed: async () => {
       this.events.headerToggle();
+      this.events.footerToggle();
       this.events.listing.imageSlider();
       this.events.listing.displayListings();
       this.filtering.openSorting();
@@ -80,12 +82,14 @@ export default class AuctionApp extends AuctionAPI {
 
     listing: async () => {
       this.events.headerToggle();
+      this.events.footerToggle();
       this.events.listing.displaySingleListing();
       this.events.logout();
     },
 
     listingCreate: async () => {
       this.events.headerToggle();
+      this.events.footerToggle();
       this.events.logout();
       const form = document.forms['createListing'];
       form.addEventListener('submit', this.events.listing.create);
@@ -94,6 +98,7 @@ export default class AuctionApp extends AuctionAPI {
 
     listingUpdate: async () => {
       this.events.headerToggle();
+      this.events.footerToggle();
       this.events.logout();
       this.events.listing.update();
       this.events.listing.delete();
@@ -102,6 +107,7 @@ export default class AuctionApp extends AuctionAPI {
 
     profile: async () => {
       this.events.headerToggle();
+      this.events.footerToggle();
       this.events.profile.displayProfile();
       this.events.profile.displayUpdateProfileButton();
       this.filtering.openSorting();
@@ -111,6 +117,7 @@ export default class AuctionApp extends AuctionAPI {
 
     profileUpdate: async () => {
       this.events.headerToggle();
+      this.events.footerToggle();
       this.events.logout();
       this.events.profile.updateProfile();
     },
@@ -156,6 +163,18 @@ export default class AuctionApp extends AuctionAPI {
       } else {
         const unAuthenticatedHeader = generateUnAuthenticatedHeader();
         header.appendChild(unAuthenticatedHeader);
+      }
+    },
+
+    footerToggle: () => {
+      const isLoggedIn = localStorage.getItem('token');
+      const footer = document.querySelector('.authenticated-footer');
+
+      if (isLoggedIn) {
+        const authenticatedFooter = generateAuthenticatedFooter();
+        footer.appendChild(authenticatedFooter);
+      } else {
+        return 0;
       }
     },
 
