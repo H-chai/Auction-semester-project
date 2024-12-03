@@ -318,16 +318,12 @@ export default class AuctionApp extends AuctionAPI {
         const listingId = params.get('id');
         const listing = await this.listing.getSingleListing(listingId);
         const { data } = listing;
-        console.log(data);
-
         const title = document.getElementById('title');
         title.value = data.title;
         const description = document.getElementById('description');
         description.value = data.description;
 
         const medias = data.media;
-        console.log(medias);
-        console.log(medias.length);
         const imgUrl = document.getElementById('img-url');
         imgUrl.value = medias[0].url;
         const imgAlt = document.getElementById('img-alt');
@@ -654,7 +650,6 @@ export default class AuctionApp extends AuctionAPI {
           altLabel.appendChild(altInput);
 
           const path = window.location.pathname;
-          console.log(path);
           if (path === '/listing/update/') {
             urlLabel.htmlFor = `img-url-${counter}-update`;
             altLabel.htmlFor = `img-alt-${counter}-update`;
@@ -676,10 +671,17 @@ export default class AuctionApp extends AuctionAPI {
           });
 
           imageList.append(urlLabel, altLabel, removeButton);
+          const imageNumber = document.querySelectorAll('.image-list');
 
-          const addImageButton = document.querySelector('.add-img');
-          const form = document.querySelector('form');
-          form.insertBefore(imageList, addImageButton);
+          if (imageNumber.length < 8) {
+            const addImageButton = document.querySelector('.add-img');
+            const form = document.querySelector('form');
+            form.insertBefore(imageList, addImageButton);
+          } else {
+            alert(
+              'You have reached the limit!\nYou can upload a maximum of 8 images.',
+            );
+          }
         });
       },
     },
@@ -817,10 +819,6 @@ export default class AuctionApp extends AuctionAPI {
       const id = params.get('id');
       try {
         await this.bid.bid(id, { amount: Number(formData.amount) });
-        // const { data } = await this.profile.getProfile(
-        //   localStorage.getItem('username'),
-        // );
-        // localStorage.setItem('credits', data.credits);
         alert('Success! Your bid has been placed. Good luck!');
         window.location.href = `/listing/?id=${id}`;
       } catch (error) {

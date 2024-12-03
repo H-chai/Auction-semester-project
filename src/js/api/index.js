@@ -24,7 +24,7 @@ export default class AuctionAPI {
 
       const errorData = await response[output]();
       const errorDetail = errorData.errors[0].message || 'Unknown error';
-      throw new Error(`${errorMessage}: ${errorDetail}`);
+      throw new Error(`${errorDetail}`);
     },
   };
 
