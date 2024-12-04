@@ -188,6 +188,7 @@ export function generateSingleListingHTML(listing) {
       const bidder = document.createElement('div');
       bidder.classList.add('flex', 'items-center', 'gap-2');
       const bidderAvatar = document.createElement('img');
+      bidderAvatar.alt = bid.bidder.avatar.alt || "Bidder's avatar";
       bidderAvatar.src = bid.bidder.avatar.url;
       bidderAvatar.classList.add('w-7', 'h-7', 'rounded-full');
       const bidderName = document.createElement('a');
