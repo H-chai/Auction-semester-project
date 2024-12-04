@@ -12,7 +12,11 @@ export async function getLatestImages() {
   const { data } = listings;
   const mediaArray = data.map((listing) => listing.media[0]);
   const filterMediaArray = mediaArray.filter((media) => media !== undefined);
-  const urlArray = filterMediaArray.map((media) => media.url);
+  const urlArray = filterMediaArray.map((media) => ({
+    url: media.url,
+    alt: media.alt,
+  }));
+
   const latestImageArray = urlArray.slice(0, 3);
 
   return latestImageArray;

@@ -294,10 +294,11 @@ export default class AuctionApp extends AuctionAPI {
           '.image-slider-container',
         );
         imageSliderContainer.innerHTML = '';
-        const latestURLs = await getLatestImages();
+        const latestMedia = await getLatestImages();
         for (let i = 0; i < 3; i++) {
           const img = document.createElement('img');
-          img.src = latestURLs[i];
+          img.src = latestMedia[i].url;
+          img.alt = latestMedia[i].alt || `Image ${i + 1}`;
           img.classList.add(
             `img-${i}`,
             'absolute',
