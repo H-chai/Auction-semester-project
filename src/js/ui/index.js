@@ -274,6 +274,15 @@ export default class AuctionApp extends AuctionAPI {
           }
           const form = document.forms['bid'];
           form.addEventListener('submit', this.events.bid);
+          const metaDescription = document.querySelector(
+            'meta[name="description"]',
+          );
+          const userName = data.description;
+          if (userName) {
+            metaDescription.setAttribute('content', userName);
+          } else {
+            metaDescription.setAttribute('content', data.title);
+          }
         } catch (error) {
           alert(error.message);
         }
@@ -744,7 +753,6 @@ export default class AuctionApp extends AuctionAPI {
           credits.textContent = data.credits;
           const itemCount = document.querySelector('.item-count');
           itemCount.textContent = data._count.listings;
-          console.log(data);
 
           const userListings = await this.listing.getUsersListings(
             24,
@@ -770,6 +778,14 @@ export default class AuctionApp extends AuctionAPI {
           const newUrl = `${window.location.pathname}?name=${name}&page=${page}`;
           window.history.replaceState({}, '', newUrl);
           this.pagination.homePagination(currentPage, pageCount);
+          const metaDescription = document.querySelector(
+            'meta[name="description"]',
+          );
+          const userName = data.name;
+          metaDescription.setAttribute(
+            'content',
+            `Profile page of ${userName}`,
+          );
         } catch (error) {
           if (!AuctionApp.user) {
             alert(
