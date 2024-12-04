@@ -9,6 +9,7 @@ export function generateAuthenticatedHeader() {
 
   const logoContainer = document.createElement('a');
   logoContainer.href = '/';
+  logoContainer.setAttribute('aria-label', 'View top page');
   logoContainer.classList.add('block', 'w-1/3', 'md:w-1/6', 'lg:mb-4');
   const logoImage = document.createElement('img');
   logoImage.src = '/images/Logo.svg';
@@ -28,11 +29,13 @@ export function generateAuthenticatedHeader() {
   updateLink.classList.add('update', 'mb-4');
   const createLink = document.createElement('a');
   createLink.href = '/listing/create/';
+  createLink.setAttribute('aria-label', 'To create listing page');
   createLink.classList.add('btn-orange');
   createLink.textContent = 'Create Listing';
   const userIconContainer = document.createElement('div');
   userIconContainer.classList.add('relative', 'group');
   const userIconImage = document.createElement('img');
+  userIconImage.setAttribute('aria-label', "User's avatar");
   userIconImage.classList.add(
     'user-avatar',
     'w-12',
@@ -66,6 +69,7 @@ export function generateAuthenticatedHeader() {
   const listItemProfile = document.createElement('li');
   listItemProfile.classList.add('mb-4');
   const profileLink = document.createElement('a');
+  profileLink.setAttribute('aria-label', 'View profile page');
   profileLink.classList.add(
     'flex',
     'items-center',
@@ -82,6 +86,7 @@ export function generateAuthenticatedHeader() {
   profileLinkText.textContent = 'Profile';
   const listItemLogout = document.createElement('li');
   const logoutButton = document.createElement('button');
+  logoutButton.setAttribute('aria-label', 'Log out');
   logoutButton.classList.add(
     'logout-button',
     'flex',
@@ -170,6 +175,7 @@ export function generateAuthenticatedHeader() {
   const itemContainer = document.createElement('div');
   const menuBoxProfile = document.createElement('li');
   const menuBoxProfileLink = document.createElement('a');
+  menuBoxProfileLink.setAttribute('aria-label', 'View profile page');
   menuBoxProfileLink.href = `/profile/?name=${username}`;
   menuBoxProfileLink.classList.add(
     'menu-item',
@@ -192,6 +198,7 @@ export function generateAuthenticatedHeader() {
   menuBoxProfileLinkText.textContent = 'Profile';
   const menuBoxLogout = document.createElement('li');
   const menuBoxLogoutButton = document.createElement('button');
+  menuBoxLogoutButton.setAttribute('aria-label', 'Log out');
   menuBoxLogoutButton.classList.add(
     'logout-button',
     'flex',

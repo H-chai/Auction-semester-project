@@ -266,6 +266,7 @@ export default class AuctionApp extends AuctionAPI {
               const updateBtn = document.createElement('a');
               updateBtn.textContent = 'Update Listing';
               updateBtn.classList.add('btn-green');
+              updateBtn.setAttribute('aria-label', 'Update listing');
               updateBtn.addEventListener('click', () => {
                 window.location.href = `/listing/update/?id=${listingId}`;
               });
@@ -425,6 +426,7 @@ export default class AuctionApp extends AuctionAPI {
 
             const removeButton = document.createElement('button');
             removeButton.type = 'button';
+            removeButton.setAttribute('aria-label', 'Remove image');
             removeButton.innerHTML = `<i class="fa-regular fa-circle-xmark text-xl text-blue"></i>`;
             removeButton.addEventListener('click', () => {
               const parentContent = removeButton.closest('.image-list');
@@ -596,6 +598,7 @@ export default class AuctionApp extends AuctionAPI {
           });
 
           const clearButton = document.createElement('button');
+          clearButton.setAttribute('aria-label', 'Clear search');
           clearButton.classList.add('ml-3');
           clearButton.innerHTML = `<i class="fa-solid fa-xmark text-gray text-sm"></i>`;
           resultText.append(resultNumber, clearButton);
@@ -702,6 +705,7 @@ export default class AuctionApp extends AuctionAPI {
 
           const removeButton = document.createElement('button');
           removeButton.type = 'button';
+          removeButton.setAttribute('aria-label', 'Remove image');
           removeButton.innerHTML = `<i class="fa-regular fa-circle-xmark text-xl text-blue"></i>`;
           removeButton.addEventListener('click', () => {
             const parentContent = removeButton.closest('.image-list');
@@ -817,6 +821,7 @@ export default class AuctionApp extends AuctionAPI {
           'font-semibold',
         );
         updateButton.textContent = 'Update Profile';
+        updateButton.setAttribute('aria-label', 'To update profile page');
         updateButton.href = '/profile/update/';
         if (name === AuctionApp.user) {
           updateButtonContainer.appendChild(updateButton);
@@ -1175,6 +1180,7 @@ export default class AuctionApp extends AuctionAPI {
 
       const createButton = (pageNumber, pageData) => {
         const button = document.createElement('button');
+        button.setAttribute('aria-label', `To page ${pageNumber}`);
         button.textContent = pageNumber;
         button.dataset.page = pageData;
         button.classList.add(
@@ -1287,6 +1293,7 @@ export default class AuctionApp extends AuctionAPI {
         'border',
         'border-blue',
       );
+      previousButton.setAttribute('aria-label', 'Previous page');
       if (currentPage === 1) {
         previousButton.disabled = true;
         previousButton.style.cursor = 'not-allowed';
@@ -1346,6 +1353,7 @@ export default class AuctionApp extends AuctionAPI {
         'border',
         'border-blue',
       );
+      nextButton.setAttribute('aria-label', 'Next page');
       if (currentPage === pageCount || pageCount === 0) {
         nextButton.disabled = true;
         nextButton.style.cursor = 'not-allowed';

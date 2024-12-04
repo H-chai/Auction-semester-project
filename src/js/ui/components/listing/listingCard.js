@@ -3,6 +3,7 @@ import { generateTimeLeftHTML } from './generateTimeLeftHTML';
 
 export function generateListingCard(listing) {
   const cardContainer = document.createElement('a');
+  cardContainer.setAttribute('aria-label', 'View this listing page');
   cardContainer.classList.add(
     'border',
     'border-outline-light',

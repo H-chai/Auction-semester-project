@@ -33,6 +33,7 @@ export function generateSingleListingHTML(listing) {
   imageList.classList.add('flex', 'items-center', 'flex-wrap', 'gap-2', 'mb-6');
   medias.forEach((media) => {
     const imageButton = document.createElement('button');
+    imageButton.setAttribute('aria-label', 'View the listing image');
     const subImage = document.createElement('img');
     subImage.classList.add(
       'w-14',
@@ -108,6 +109,7 @@ export function generateSingleListingHTML(listing) {
   );
   const button = document.createElement('button');
   button.textContent = 'Place a bid';
+  button.setAttribute('aria-label', 'Place a bid');
   button.classList.add('btn-blue', 'py-4', 'w-2/5', 'lg:text-base');
   button.type = 'submit';
   const loggedInUser = localStorage.getItem('username');
@@ -147,9 +149,11 @@ export function generateSingleListingHTML(listing) {
   const ownerInfo = document.createElement('div');
   ownerInfo.classList.add('flex', 'items-center', 'gap-2', 'justify-start');
   const ownerAvatar = document.createElement('img');
+  ownerAvatar.alt = listing.seller.avatar.alt;
   ownerAvatar.src = listing.seller.avatar.url;
   ownerAvatar.classList.add('w-7', 'h-7', 'rounded-full');
   const ownerName = document.createElement('a');
+  ownerName.setAttribute('aria-label', "View owner's profile page");
   ownerName.textContent = listing.seller.name;
   ownerName.href = `/profile/?name=${listing.seller.name}`;
   ownerName.classList.add(
@@ -187,6 +191,7 @@ export function generateSingleListingHTML(listing) {
       bidderAvatar.src = bid.bidder.avatar.url;
       bidderAvatar.classList.add('w-7', 'h-7', 'rounded-full');
       const bidderName = document.createElement('a');
+      bidderName.setAttribute('aria-label', "View bidder's profile page");
       bidderName.textContent = bid.bidder.name;
       bidderName.href = `/profile/?name=${bid.bidder.name}`;
       bidderName.classList.add(
@@ -230,6 +235,7 @@ export function generateSingleListingHTML(listing) {
   );
 
   const homeLink = document.createElement('a');
+  homeLink.setAttribute('aria-label', 'Top page');
   homeLink.href = '/';
   homeLink.textContent = 'See all listings';
   homeLink.classList.add(
