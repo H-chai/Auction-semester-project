@@ -1968,6 +1968,10 @@ video {
     display: flex;
   }
 
+  .lg\:grid {
+    display: grid;
+  }
+
   .lg\:hidden {
     display: none;
   }
@@ -2022,6 +2026,10 @@ video {
 
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-\[auto_1fr\] {
+    grid-template-columns: auto 1fr;
   }
 
   .lg\:items-start {
