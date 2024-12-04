@@ -17,7 +17,7 @@ export function generateSingleListingHTML(listing) {
     listingImage.src = medias[0].url;
     listingImage.alt = medias[0].alt;
   } else {
-    listingImage.src = '/images/noImageAvailable.svg';
+    listingImage.src = '../../../../../images/noImageAvailable.svg';
     listingImage.alt = 'No image available';
   }
   listingImage.classList.add(
