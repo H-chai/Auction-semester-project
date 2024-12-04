@@ -289,12 +289,13 @@ export default class AuctionApp extends AuctionAPI {
         }
       },
 
-      imageSlider: () => {
+      imageSlider: async () => {
         const imageSliderContainer = document.querySelector(
           '.image-slider-container',
         );
         imageSliderContainer.innerHTML = '';
-        const latestURLs = getLatestImages();
+        const latestURLs = await getLatestImages();
+        console.log(latestURLs);
         for (let i = 0; i < 3; i++) {
           const img = document.createElement('img');
           img.src = latestURLs[i];
