@@ -355,9 +355,10 @@ export default class AuctionApp extends AuctionAPI {
             const imageList = document.createElement('div');
             imageList.classList.add(
               'image-list',
-              'lg:flex',
-              'lg:justify-between',
-              'lg:items-center',
+              'flex',
+              'justify-between',
+              'items-center',
+              'gap-2',
               'lg:gap-4',
             );
             const urlLabel = document.createElement('label');
@@ -622,9 +623,10 @@ export default class AuctionApp extends AuctionAPI {
           const imageList = document.createElement('div');
           imageList.classList.add(
             'image-list',
-            'lg:flex',
-            'lg:justify-between',
-            'lg:items-center',
+            'flex',
+            'justify-between',
+            'items-center',
+            'gap-2',
             'lg:gap-4',
           );
           const urlLabel = document.createElement('label');
