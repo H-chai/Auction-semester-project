@@ -40,6 +40,15 @@
   <body
     class="font-body text-black min-h-screen grid grid-rows-[auto_1fr_auto]"
   >
+    <div
+      class="loader fixed top-0 left-0 right-0 bottom-0 z-50 w-full flex flex-col items-center justify-center h-screen bg-off-white"
+    >
+      <p class="mb-4">Loading...</p>
+      <div
+        class="animate-spin h-20 w-20 border-4 border-blue rounded-full"
+        style="border-top-color: transparent"
+      ></div>
+    </div>
     <header
       class="container header p-4 lg:px-16 lg:pt-10 lg:pb-6 lg:w-full"
     ></header>
@@ -187,7 +196,7 @@
       </section>
     </main>
     <footer
-      class="authenticated-footer fixed bottom-0 left-0 right-0 bg-off-white z-50 lg:hidden"
+      class="authenticated-footer fixed bottom-0 left-0 right-0 bg-off-white z-40 lg:hidden"
     ></footer>
     <footer
       class="container hidden lg:flex lg:justify-center lg:gap-6 lg:font-display lg:text-xs lg:mb-6"

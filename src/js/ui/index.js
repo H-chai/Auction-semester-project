@@ -62,12 +62,13 @@ export default class AuctionApp extends AuctionAPI {
       this.events.headerToggle();
       this.events.footerToggle();
       this.events.listing.imageSlider();
-      this.events.listing.displayListings();
+      await this.events.listing.displayListings();
       this.filtering.openSorting();
       this.filtering.openFilter();
       this.events.logout();
       const form = document.forms['search'];
       form.addEventListener('submit', this.events.listing.search);
+      this.loader.hideLoading();
     },
 
     register: async () => {
@@ -83,8 +84,9 @@ export default class AuctionApp extends AuctionAPI {
     listing: async () => {
       this.events.headerToggle();
       this.events.footerToggle();
-      this.events.listing.displaySingleListing();
+      await this.events.listing.displaySingleListing();
       this.events.logout();
+      this.loader.hideLoading();
     },
 
     listingCreate: async () => {
@@ -94,6 +96,7 @@ export default class AuctionApp extends AuctionAPI {
       const form = document.forms['createListing'];
       form.addEventListener('submit', this.events.listing.create);
       this.events.listing.addImage();
+      this.loader.hideLoading();
     },
 
     listingUpdate: async () => {
@@ -103,6 +106,7 @@ export default class AuctionApp extends AuctionAPI {
       this.events.listing.update();
       this.events.listing.delete();
       this.events.listing.addImage();
+      this.loader.hideLoading();
     },
 
     profile: async () => {
@@ -113,6 +117,7 @@ export default class AuctionApp extends AuctionAPI {
       this.filtering.openSorting();
       this.filtering.openFilter();
       this.events.logout();
+      this.loader.hideLoading();
     },
 
     profileUpdate: async () => {
@@ -120,6 +125,7 @@ export default class AuctionApp extends AuctionAPI {
       this.events.footerToggle();
       this.events.logout();
       this.events.profile.updateProfile();
+      this.loader.hideLoading();
     },
   };
 
@@ -1372,6 +1378,14 @@ export default class AuctionApp extends AuctionAPI {
       pagination.appendChild(nextButton);
 
       return pagination;
+    },
+  };
+
+  loader = {
+    hideLoading: () => {
+      const loader = document.querySelector('.loader');
+      loader.classList.add('hidden');
+      loader.classList.remove('flex');
     },
   };
 }
