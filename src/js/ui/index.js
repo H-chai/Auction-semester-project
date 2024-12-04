@@ -295,7 +295,6 @@ export default class AuctionApp extends AuctionAPI {
         );
         imageSliderContainer.innerHTML = '';
         const latestURLs = await getLatestImages();
-        console.log(latestURLs);
         for (let i = 0; i < 3; i++) {
           const img = document.createElement('img');
           img.src = latestURLs[i];
@@ -336,7 +335,6 @@ export default class AuctionApp extends AuctionAPI {
           alt: altArray[index],
         }));
 
-        console.log(media);
         const dateCombined = `${endingDate}T${endingTime}:00.000Z`;
         const date = new Date(dateCombined);
         const endsAt = date.toISOString();

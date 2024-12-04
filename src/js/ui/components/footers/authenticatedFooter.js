@@ -36,7 +36,6 @@ export function generateAuthenticatedFooter() {
   profile.appendChild(profileLink);
 
   footerContainer.append(home, create, profile);
-  console.log(footerContainer);
 
   return footerContainer;
 }
