@@ -227,7 +227,7 @@ function X() {
     e.setAttribute('aria-label', 'View top page'),
     e.classList.add('block', 'w-1/3', 'md:w-1/6', 'lg:mb-4');
   const t = document.createElement('img');
-  (t.src = '../../../../../images/Logo.svg'),
+  (t.src = '../../../../../images/Logo.png'),
     (t.alt = 'CrediBid logo'),
     e.appendChild(t);
   const n = document.createElement('nav');
@@ -658,7 +658,7 @@ function _() {
     e.setAttribute('aria-label', 'View top page'),
     e.classList.add('block', 'w-1/3', 'md:w-1/6', 'lg:mb-4');
   const t = document.createElement('img');
-  (t.src = '../../../../../images/Logo.svg'),
+  (t.src = '../../../../../images/Logo.png'),
     (t.alt = 'CrediBid logo'),
     e.appendChild(t);
   const n = document.createElement('nav');
