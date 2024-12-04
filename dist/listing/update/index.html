@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Update your auction listing with new details, images, or pricing. Keep your item fresh and increase your chances of making a sale!"
+    />
+    <title>CrediBid Update Listing</title>
+
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=gambetta@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-touch-icon-Dq9xObLx.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32-CTQ4isjo.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon-16x16-SOm5lZPu.png"
+    />
+    <link rel="manifest" href="/assets/site-CLpPmzqV.webmanifest" />
+    <script
+      src="https://kit.fontawesome.com/98d292e689.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" crossorigin src="/assets/main-DU5lqOWn.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-eWMvm469.css" />
+  </head>
+  <body
+    class="font-body text-black min-h-screen grid grid-rows-[auto_1fr_auto]"
+  >
+    <div
+      class="loader fixed top-0 left-0 right-0 bottom-0 z-50 w-full flex flex-col items-center justify-center h-screen bg-off-white"
+    >
+      <p class="mb-4">Loading...</p>
+      <div
+        class="animate-spin h-20 w-20 border-4 border-blue rounded-full"
+        style="border-top-color: transparent"
+      ></div>
+    </div>
+    <header
+      class="container flex justify-between items-center p-4 lg:px-16 lg:pt-10 lg:pb-6"
+    ></header>
+    <main class="container pt-6 px-6 pb-20 lg:pt-24 lg:pb-32">
+      <h1 class="font-display text-3xl font-semibold text-center mb-8">
+        Update Listing
+      </h1>
+      <form
+        name="updateListing"
+        class="w-full flex flex-col lg:w-3/5 lg:mx-auto"
+      >
+        <label for="title" class="font-display font-semibold"
+          >Title<input
+            type="text"
+            name="title"
+            id="title"
+            class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
+            required
+        /></label>
+        <label for="description" class="font-display font-semibold"
+          >Description<input
+            type="text"
+            name="description"
+            id="description"
+            class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
+            required
+        /></label>
+        <div class="lg:flex lg:justify-between lg:items-center lg:gap-4">
+          <label
+            for="endingDate"
+            class="font-display font-semibold lg:w-1/2 text-gray"
+            >Ending date (Ending date cannot be changed.)<input
+              type="date"
+              name="endingDate"
+              id="endingDate"
+              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4 cursor-not-allowed"
+              disabled
+          /></label>
+          <label
+            for="endingTime"
+            class="font-display font-semibold lg:w-1/2 text-gray"
+            >Ending time (Ending time cannot be changed.)<input
+              type="time"
+              name="endingTime"
+              id="endingTime"
+              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4 cursor-not-allowed"
+              disabled
+          /></label>
+        </div>
+        <div
+          class="image-list flex justify-between items-center gap-2 lg:gap-4"
+        >
+          <label for="img-url" class="font-display font-semibold lg:w-1/2"
+            >Image url<input
+              type="url"
+              name="mediaUrl"
+              id="img-url"
+              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
+              required
+          /></label>
+          <label for="img-alt" class="font-display font-semibold lg:w-1/2"
+            >Image alt<input
+              type="text"
+              name="mediaAlt"
+              id="img-alt"
+              class="border border-outline p-4 block w-full rounded-md mt-1 mb-4"
+              required
+          /></label>
+        </div>
+        <button
+          type="button"
+          class="add-img btn-blue px-4 py-2 w-fit ml-auto mr-0"
+          aria-label="Add image"
+        >
+          Add Image
+        </button>
+
+        <div class="mt-6 lg:flex lg:gap-4 lg:items-center lg:mt-10">
+          <button
+            type="submit"
+            class="py-4 lg:w-3/4 btn-blue lg:text-base"
+            aria-label="Update listing"
+          >
+            Update Listing
+          </button>
+          <button
+            type="button"
+            class="delete-btn py-3 mt-4 lg:w-1/4 lg:mt-0 btn-red"
+            aria-label="Delete listing"
+          >
+            Delete Listing
+          </button>
+        </div>
+      </form>
+    </main>
+    <footer
+      class="authenticated-footer fixed bottom-0 left-0 right-0 bg-off-white z-40 lg:hidden"
+    ></footer>
+    <footer
+      class="container hidden lg:flex lg:justify-center lg:gap-6 lg:font-display lg:text-xs lg:mb-6"
+    >
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+    </footer>
+  </body>
+</html>
