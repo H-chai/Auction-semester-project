@@ -6,10 +6,10 @@
 
 @layer components {
   .custom-before {
-    @apply before:content-[''] before:block before:h-full before:w-full before:absolute before:z-40 before:bg-blue before:duration-[395ms] before:ease-custom-ease before:delay-[100.8ms] before:top-2;
+    @apply before:content-[''] before:block before:h-full before:w-full before:absolute before:z-50 before:bg-blue before:duration-[395ms] before:ease-custom-ease before:delay-[100.8ms] before:top-2;
   }
   .custom-after {
-    @apply after:content-[''] after:block after:h-full after:w-full after:absolute after:z-40 after:bg-blue after:duration-[395ms] after:ease-custom-ease after:delay-[100.8ms] after:bottom-2;
+    @apply after:content-[''] after:block after:h-full after:w-full after:absolute after:z-50 after:bg-blue after:duration-[395ms] after:ease-custom-ease after:delay-[100.8ms] after:bottom-2;
   }
 
   .btn-orange {
