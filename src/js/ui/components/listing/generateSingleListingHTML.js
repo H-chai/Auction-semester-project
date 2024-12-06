@@ -50,7 +50,7 @@ export function generateSingleListingHTML(listing) {
     imageButton.appendChild(subImage);
     imageList.appendChild(imageButton);
     imageButton.addEventListener('click', () => {
-      mainImage.innerHTML = `<img src=${media.url} alt=${media.alt} class="aspect-square rounded-md object-cover object-center w-full md:aspect-4/3">`;
+      mainImage.innerHTML = `<img src="${media.url}" class="aspect-square rounded-md object-cover object-center w-full md:aspect-4/3" alt="${media.alt}" >`;
     });
   });
 
