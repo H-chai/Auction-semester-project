@@ -853,7 +853,7 @@ function se(d) {
         O.appendChild(q),
         i.appendChild(O),
         O.addEventListener('click', () => {
-          s.innerHTML = `<img src=${S.url} alt=${S.alt} class="aspect-square rounded-md object-cover object-center w-full md:aspect-4/3">`;
+          s.innerHTML = `<img src="${S.url}" class="aspect-square rounded-md object-cover object-center w-full md:aspect-4/3" alt="${S.alt}" >`;
         });
     }),
     n.append(s, i);
