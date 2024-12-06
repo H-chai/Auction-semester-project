@@ -42,15 +42,15 @@ function I(d) {
     e
   );
 }
-class g {
+class f {
   static apiAuthBase = K;
   static apiAuctionBase = W;
   static paths = {
-    register: `${g.apiAuthBase}/register`,
-    login: `${g.apiAuthBase}/login`,
-    listings: `${g.apiAuctionBase}/listings`,
-    profiles: `${g.apiAuctionBase}/profiles`,
-    search: `${g.apiAuctionBase}/listings/search`,
+    register: `${f.apiAuthBase}/register`,
+    login: `${f.apiAuthBase}/login`,
+    listings: `${f.apiAuctionBase}/listings`,
+    profiles: `${f.apiAuctionBase}/profiles`,
+    search: `${f.apiAuctionBase}/listings/search`,
   };
   static responseHandler = {
     handleResponse: async (e, t, n = 'json') => {
@@ -71,43 +71,43 @@ class g {
   auth = {
     register: async ({ name: e, email: t, password: n }) => {
       const s = JSON.stringify({ name: e, email: t, password: n }),
-        a = await fetch(g.paths.register, {
+        a = await fetch(f.paths.register, {
           headers: I(!0),
           method: 'POST',
           body: s,
         });
-      return await g.responseHandler.handleResponse(a);
+      return await f.responseHandler.handleResponse(a);
     },
     login: async ({ email: e, password: t }) => {
       const n = JSON.stringify({ email: e, password: t }),
-        s = await fetch(g.paths.login, {
+        s = await fetch(f.paths.login, {
           headers: I(!0),
           method: 'POST',
           body: n,
         }),
-        { data: a } = await g.responseHandler.handleResponse(s),
+        { data: a } = await f.responseHandler.handleResponse(s),
         { accessToken: r, name: i } = a;
-      (g.token = r), (g.username = i);
+      (f.token = r), (f.username = i);
       const l = (await this.profile.getProfile(i)).data.credits;
-      return (g.credits = l), a;
+      return (f.credits = l), a;
     },
   };
   profile = {
     getProfile: async (e) => {
-      const t = await fetch(`${g.paths.profiles}/${e}`, {
+      const t = await fetch(`${f.paths.profiles}/${e}`, {
         headers: I(),
         method: 'GET',
       });
-      return await g.responseHandler.handleResponse(t);
+      return await f.responseHandler.handleResponse(t);
     },
     updateProfile: async (e, { bio: t, banner: n, avatar: s }) => {
       const a = JSON.stringify({ bio: t, banner: n, avatar: s }),
-        r = await fetch(`${g.paths.profiles}/${e}`, {
+        r = await fetch(`${f.paths.profiles}/${e}`, {
           headers: I(!0),
           method: 'PUT',
           body: a,
         });
-      await g.responseHandler.handleResponse(r),
+      await f.responseHandler.handleResponse(r),
         (window.location.href = `/profile/?name=${e}`);
     },
   };
@@ -119,7 +119,7 @@ class g {
       s = 'desc',
       a = 'true',
     ) => {
-      const r = new URL(g.paths.listings);
+      const r = new URL(f.paths.listings);
       r.searchParams.append('limit', e),
         r.searchParams.append('page', t),
         r.searchParams.append('_seller', !0),
@@ -128,17 +128,13 @@ class g {
         r.searchParams.append('sort', n),
         r.searchParams.append('sortOrder', s);
       const i = await fetch(r.toString(), { headers: I(), method: 'GET' });
-      return await g.responseHandler.handleResponse(i);
-    },
-    getAllListings: async () => {
-      const e = await fetch(g.paths.listings, { headers: I(), method: 'GET' });
-      return await g.responseHandler.handleResponse(e);
+      return await f.responseHandler.handleResponse(i);
     },
     getSingleListing: async (e) => {
-      const t = new URL(`${g.paths.listings}/${e}`);
+      const t = new URL(`${f.paths.listings}/${e}`);
       t.searchParams.append('_seller', !0), t.searchParams.append('_bids', !0);
       const n = await fetch(t.toString(), { headers: I(), method: 'GET' });
-      return await g.responseHandler.handleResponse(n);
+      return await f.responseHandler.handleResponse(n);
     },
     getUsersListings: async (
       e = 24,
@@ -148,7 +144,7 @@ class g {
       a = 'true',
       r,
     ) => {
-      const i = new URL(`${g.paths.profiles}/${r}/listings`);
+      const i = new URL(`${f.paths.profiles}/${r}/listings`);
       i.searchParams.append('limit', e),
         i.searchParams.append('page', t),
         i.searchParams.append('_seller', !0),
@@ -157,7 +153,7 @@ class g {
         i.searchParams.append('sort', n),
         i.searchParams.append('sortOrder', s);
       const o = await fetch(i.toString(), { headers: I(), method: 'GET' });
-      return await g.responseHandler.handleResponse(o);
+      return await f.responseHandler.handleResponse(o);
     },
     create: async ({ title: e, description: t, media: n, endsAt: s }) => {
       const a = JSON.stringify({
@@ -166,35 +162,35 @@ class g {
           media: n,
           endsAt: s,
         }),
-        r = await fetch(g.paths.listings, {
+        r = await fetch(f.paths.listings, {
           headers: I(!0),
           method: 'POST',
           body: a,
         }),
-        { data: i } = await g.responseHandler.handleResponse(r);
+        { data: i } = await f.responseHandler.handleResponse(r);
       return i;
     },
     update: async (e, { title: t, description: n, media: s }) => {
       const a = JSON.stringify({ title: t, description: n, media: s }),
-        r = await fetch(`${g.paths.listings}/${e}`, {
+        r = await fetch(`${f.paths.listings}/${e}`, {
           headers: I(!0),
           method: 'PUT',
           body: a,
         });
-      await g.responseHandler.handleResponse(r),
+      await f.responseHandler.handleResponse(r),
         (window.location.href = `/listing/?id=${e}`);
     },
     delete: async (e) => {
-      const t = await fetch(`${g.paths.listings}/${e}`, {
+      const t = await fetch(`${f.paths.listings}/${e}`, {
         headers: I(!0),
         method: 'DELETE',
       });
-      await g.responseHandler.handleResponse(t);
+      await f.responseHandler.handleResponse(t);
       const n = sessionStorage.getItem('username');
       window.location.href = `/profile/?name=${n}`;
     },
     search: async (e, t = 24, n = 1, s = 'created', a = 'desc') => {
-      const r = new URL(g.paths.search);
+      const r = new URL(f.paths.search);
       r.searchParams.append('limit', t),
         r.searchParams.append('page', n),
         r.searchParams.append('_seller', !0),
@@ -203,18 +199,18 @@ class g {
         r.searchParams.append('sortOrder', a),
         r.searchParams.append('q', e);
       const i = await fetch(r.toString(), { headers: I(!0), method: 'GET' });
-      return await g.responseHandler.handleResponse(i);
+      return await f.responseHandler.handleResponse(i);
     },
   };
   bid = {
     bid: async (e, { amount: t }) => {
       const n = JSON.stringify({ amount: t }),
-        s = await fetch(`${g.paths.listings}/${e}/bids`, {
+        s = await fetch(`${f.paths.listings}/${e}/bids`, {
           headers: I(!0),
           method: 'POST',
           body: n,
         }),
-        { data: a } = await g.responseHandler.handleResponse(s);
+        { data: a } = await f.responseHandler.handleResponse(s);
       return a;
     },
   };
@@ -282,9 +278,9 @@ function X() {
   const l = document.createElement('ul'),
     h = document.createElement('li');
   h.classList.add('mb-4');
-  const f = document.createElement('a');
-  f.setAttribute('aria-label', 'View profile page'),
-    f.classList.add(
+  const g = document.createElement('a');
+  g.setAttribute('aria-label', 'View profile page'),
+    g.classList.add(
       'flex',
       'items-center',
       'text-black',
@@ -292,7 +288,7 @@ function X() {
       'hover:text-blue',
     );
   const m = sessionStorage.getItem('username');
-  f.href = `/profile/?name=${m}`;
+  g.href = `/profile/?name=${m}`;
   const w = document.createElement('i');
   w.classList.add('fa-regular', 'fa-user', 'text-sm', 'mr-2');
   const p = document.createElement('span');
@@ -312,9 +308,9 @@ function X() {
   const b = document.createElement('span');
   b.classList.add('whitespace-nowrap'),
     (b.textContent = 'Log out'),
-    f.append(w, p),
+    g.append(w, p),
     c.append(y, b),
-    h.appendChild(f),
+    h.appendChild(g),
     u.appendChild(c),
     l.append(h, u),
     o.appendChild(l),
@@ -746,7 +742,7 @@ function _() {
     'flex-col',
     'justify-between',
   );
-  const f = document.createElement('div'),
+  const g = document.createElement('div'),
     m = document.createElement('li');
   m.classList.add('text-center');
   const w = document.createElement('a');
@@ -791,15 +787,15 @@ function _() {
     o.appendChild(l),
     m.appendChild(w),
     p.appendChild(u),
-    f.append(m, p),
+    g.append(m, p),
     c.append(y, b),
-    h.append(f, c),
+    h.append(g, c),
     r.append(i, o, h),
     d.append(e, n, r),
     d
   );
 }
-const ee = new g();
+const ee = new f();
 async function te() {
   return await ee.listing.get24Listings();
 }
@@ -881,8 +877,8 @@ function se(d) {
       'mb-2',
       'break-words',
     );
-  const f = document.createElement('p');
-  (f.textContent = d.description), f.classList.add('text-base', 'mb-6');
+  const g = document.createElement('p');
+  (g.textContent = d.description), g.classList.add('text-base', 'mb-6');
   const m = document.createElement('ul');
   m.classList.add('flex', 'justify-between', 'items-center', 'mb-6');
   const w = G(d),
@@ -1008,7 +1004,7 @@ function se(d) {
       S.classList.add('mt-2', 'font-medium', 'text-sm'),
       U.append(F, S);
   }
-  o.append(l, h, f, m, u, L, v, U);
+  o.append(l, h, g, m, u, L, v, U);
   const P = document.createElement('a');
   P.setAttribute('aria-label', 'Top page'),
     (P.href = '/'),
@@ -1113,7 +1109,7 @@ function re() {
     d
   );
 }
-class T extends g {
+class T extends f {
   constructor() {
     super(), this.router();
   }
@@ -1299,8 +1295,8 @@ Please try again.`);
             r = await this.listing.get24Listings(24, e, t, n, s),
             { data: i, meta: o } = r,
             { currentPage: l, pageCount: h } = o,
-            f = `${window.location.pathname}?page=${e}`;
-          window.history.replaceState({}, '', f),
+            g = `${window.location.pathname}?page=${e}`;
+          window.history.replaceState({}, '', g),
             this.pagination.homePagination(l, h),
             (a.innerHTML = ''),
             i.forEach((m) => {
@@ -1321,7 +1317,7 @@ Please try again.`);
           const r = se(s);
           a.appendChild(r),
             s.seller.name === T.user &&
-              document.querySelectorAll('.update').forEach((f) => {
+              document.querySelectorAll('.update').forEach((g) => {
                 const m = document.createElement('a');
                 (m.textContent = 'Update Listing'),
                   m.classList.add('btn-green'),
@@ -1329,7 +1325,7 @@ Please try again.`);
                   m.addEventListener('click', () => {
                     window.location.href = `/listing/update/?id=${t}`;
                   }),
-                  f.appendChild(m);
+                  g.appendChild(m);
               }),
             document.forms.bid.addEventListener('submit', this.events.bid);
           const o = document.querySelector('meta[name="description"]'),
@@ -1375,8 +1371,8 @@ Please try again.`);
           o.push(u), l.push(c);
         });
         const h = o.map((p, u) => ({ url: p, alt: l[u] })),
-          f = `${a}T${r}:00.000Z`,
-          w = new Date(f).toISOString();
+          g = `${a}T${r}:00.000Z`,
+          w = new Date(g).toISOString();
         try {
           await this.listing.create({
             title: n,
@@ -1473,9 +1469,9 @@ Please try again.`);
             document.forms.updateListing.insertBefore(y, k);
           }
         const h = s.endsAt,
-          f = new Date(h),
-          m = f.toISOString().split('T')[0],
-          w = f.toLocaleTimeString('en-US', {
+          g = new Date(h),
+          m = g.toISOString().split('T')[0],
+          w = g.toLocaleTimeString('en-US', {
             hour12: !1,
             hour: '2-digit',
             minute: '2-digit',
@@ -1527,11 +1523,11 @@ Please try again.`);
             h = `${window.location.pathname}?page=${t}&query=${e}`;
           window.history.replaceState({}, '', h),
             this.pagination.homePagination(o, l);
-          const f = document.querySelector('.listings-container');
-          (f.innerHTML = ''),
+          const g = document.querySelector('.listings-container');
+          (g.innerHTML = ''),
             r.forEach((m) => {
               const w = D(m);
-              f.appendChild(w);
+              g.appendChild(w);
             });
         } catch (a) {
           alert(a.message);
@@ -1552,9 +1548,9 @@ Please try again.`);
           l.classList.add('hidden');
           const h = document.querySelector('.filtering-list');
           h.classList.add('hidden');
-          const f = n.charAt(0).toUpperCase() + n.substring(1).toLowerCase(),
+          const g = n.charAt(0).toUpperCase() + n.substring(1).toLowerCase(),
             m = document.createElement('p');
-          (m.textContent = f),
+          (m.textContent = g),
             m.classList.add(
               'font-semibold',
               'text-center',
@@ -1694,8 +1690,8 @@ Please try again.`);
             n.append(s, r, l),
             document.querySelectorAll('.image-list').length < 8)
           ) {
-            const f = document.querySelector('.add-img');
-            document.querySelector('form').insertBefore(n, f);
+            const g = document.querySelector('.add-img');
+            document.querySelector('form').insertBefore(n, g);
           } else
             alert(`You have reached the limit!
 You can upload a maximum of 8 images.`);
@@ -1715,8 +1711,8 @@ You can upload a maximum of 8 images.`);
             (l.style.backgroundPosition = 'center');
           const h = document.querySelector('.avatar');
           (h.src = o.avatar.url), (h.alt = o.avatar.alt);
-          const f = document.querySelector('.username');
-          f.textContent = o.name;
+          const g = document.querySelector('.username');
+          g.textContent = o.name;
           const m = document.querySelector('.bio');
           m.textContent = o.bio;
           const w = document.querySelector('.credits');
@@ -1776,12 +1772,12 @@ Please log in or create an account to continue.`),
             const l = T.form.formSubmit(o),
               {
                 bio: h,
-                bannerUrl: f,
+                bannerUrl: g,
                 bannerAlt: m,
                 avatarUrl: w,
                 avatarAlt: p,
               } = l,
-              u = { url: f, alt: m },
+              u = { url: g, alt: m },
               c = { url: w, alt: p };
             this.profile.updateProfile(T.user, {
               bio: h,
@@ -2196,8 +2192,8 @@ Please try again.`);
         });
       const h = document.createElement('i');
       h.classList.add('fa-solid', 'fa-angle-left'), l.appendChild(h);
-      const f = document.querySelector('[data-page="1"]');
-      n.insertBefore(l, f);
+      const g = document.querySelector('[data-page="1"]');
+      n.insertBefore(l, g);
       const m = document.createElement('button');
       m.classList.add(
         'w-8',
