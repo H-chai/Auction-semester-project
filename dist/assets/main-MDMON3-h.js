@@ -402,7 +402,7 @@ function X() {
   U.classList.add('fa-regular', 'fa-user', 'mr-2');
   const F = document.createElement('span');
   F.textContent = 'Profile';
-  const R = document.createElement('li'),
+  const j = document.createElement('li'),
     A = document.createElement('button');
   A.setAttribute('aria-label', 'Log out'),
     A.classList.add(
@@ -421,8 +421,8 @@ function X() {
     );
   const P = document.createElement('i');
   P.classList.add('fa-solid', 'fa-right-from-bracket', 'mr-2');
-  const j = document.createElement('span');
-  j.textContent = 'Log out';
+  const H = document.createElement('span');
+  H.textContent = 'Log out';
   const S = document.createElement('div');
   S.classList.add('text-xs', 'text-black', 'flex', 'justify-center', 'gap-6');
   const O = document.createElement('li');
@@ -432,9 +432,9 @@ function X() {
     (q.textContent = 'Privacy Policy'),
     B.append(U, F),
     C.appendChild(B),
-    A.append(P, j),
-    R.appendChild(A),
-    $.append(C, R),
+    A.append(P, H),
+    j.appendChild(A),
+    $.append(C, j),
     S.append(O, q),
     k.append($, S),
     x.appendChild(v),
@@ -809,7 +809,7 @@ async function ne() {
   return e
     .map((r) => r.media[0])
     .filter((r) => r !== void 0)
-    .map((r) => r.url)
+    .map((r) => ({ url: r.url, alt: r.alt }))
     .slice(0, 3);
 }
 function se(d) {
@@ -961,7 +961,7 @@ function se(d) {
     F = document.createElement('p');
   (F.textContent = 'Bid history'),
     F.classList.add('text-sm', 'font-medium', 'text-gray');
-  const R = document.createElement('ul'),
+  const j = document.createElement('ul'),
     A = d.bids;
   if (A.length > 0)
     A.forEach((S) => {
@@ -976,31 +976,32 @@ function se(d) {
       );
       const q = document.createElement('div');
       q.classList.add('flex', 'items-center', 'gap-2');
-      const M = document.createElement('img');
-      (M.src = S.bidder.avatar.url),
-        M.classList.add('w-7', 'h-7', 'rounded-full');
-      const H = document.createElement('a');
-      H.setAttribute('aria-label', "View bidder's profile page"),
-        (H.textContent = S.bidder.name),
-        (H.href = `/profile/?name=${S.bidder.name}`),
-        H.classList.add(
+      const N = document.createElement('img');
+      (N.alt = S.bidder.avatar.alt || "Bidder's avatar"),
+        (N.src = S.bidder.avatar.url),
+        N.classList.add('w-7', 'h-7', 'rounded-full');
+      const R = document.createElement('a');
+      R.setAttribute('aria-label', "View bidder's profile page"),
+        (R.textContent = S.bidder.name),
+        (R.href = `/profile/?name=${S.bidder.name}`),
+        R.classList.add(
           'font-semibold',
           'text-sm',
           'underline',
           'lg:text-base',
           'lg:font-medium',
         ),
-        q.append(M, H);
-      const N = document.createElement('p');
-      (N.textContent = S.amount),
-        N.classList.add('lg:text-lg', 'lg:font-medium');
+        q.append(N, R);
+      const M = document.createElement('p');
+      (M.textContent = S.amount),
+        M.classList.add('lg:text-lg', 'lg:font-medium');
       const Q = document.createElement('i');
       Q.classList.add('fa-solid', 'fa-coins', 'ml-1.5'),
-        N.appendChild(Q),
-        O.append(q, N),
-        R.appendChild(O);
+        M.appendChild(Q),
+        O.append(q, M),
+        j.appendChild(O);
     }),
-      U.append(F, R);
+      U.append(F, j);
   else {
     const S = document.createElement('p');
     (S.textContent = 'No bid placed yet'),
@@ -1021,10 +1022,10 @@ function se(d) {
       'mt-8',
       'lg:mt-14',
     );
-  const j = document.createElement('i');
+  const H = document.createElement('i');
   return (
-    j.classList.add('fa-solid', 'fa-arrow-left', 'mr-1'),
-    P.prepend(j),
+    H.classList.add('fa-solid', 'fa-arrow-left', 'mr-1'),
+    P.prepend(H),
     t.append(n, o),
     e.append(t, P),
     e
@@ -1344,7 +1345,8 @@ Please try again.`);
         const t = await ne();
         for (let n = 0; n < 3; n++) {
           const s = document.createElement('img');
-          (s.src = t[n]),
+          (s.src = t[n].url),
+            (s.alt = t[n].alt || `Image ${n + 1}`),
             s.classList.add(
               `img-${n}`,
               'absolute',
