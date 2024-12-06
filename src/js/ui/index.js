@@ -54,7 +54,7 @@ export default class AuctionApp extends AuctionAPI {
   };
 
   static get user() {
-    return localStorage.getItem('username');
+    return sessionStorage.getItem('username');
   }
 
   views = {
@@ -160,7 +160,7 @@ export default class AuctionApp extends AuctionAPI {
     },
 
     headerToggle: () => {
-      const isLoggedIn = localStorage.getItem('token');
+      const isLoggedIn = sessionStorage.getItem('token');
       const header = document.querySelector('header');
 
       if (isLoggedIn) {
@@ -174,7 +174,7 @@ export default class AuctionApp extends AuctionAPI {
     },
 
     footerToggle: () => {
-      const isLoggedIn = localStorage.getItem('token');
+      const isLoggedIn = sessionStorage.getItem('token');
       const footer = document.querySelector('.authenticated-footer');
 
       if (isLoggedIn) {
@@ -191,9 +191,9 @@ export default class AuctionApp extends AuctionAPI {
       logoutButton.forEach((button) => {
         button.addEventListener('click', (event) => {
           event.preventDefault();
-          localStorage.removeItem('token');
-          localStorage.removeItem('username');
-          localStorage.removeItem('credits');
+          sessionStorage.removeItem('token');
+          sessionStorage.removeItem('username');
+          sessionStorage.removeItem('credits');
 
           alert('You have successfully logged out.');
           window.location.href = '/';
@@ -870,10 +870,10 @@ export default class AuctionApp extends AuctionAPI {
       const id = params.get('id');
       try {
         await this.bid.bid(id, { amount: Number(formData.amount) });
-        const currentCredits = localStorage.getItem('credits');
+        const currentCredits = sessionStorage.getItem('credits');
         const updatedCurrentCredits =
           Number(currentCredits) - Number(formData.amount);
-        localStorage.setItem('credits', updatedCurrentCredits);
+        sessionStorage.setItem('credits', updatedCurrentCredits);
         alert('Success! Your bid has been placed. Good luck!');
         window.location.href = `/listing/?id=${id}`;
       } catch (error) {
@@ -886,7 +886,7 @@ export default class AuctionApp extends AuctionAPI {
 
   avatar = {
     userAvatar: async () => {
-      const username = localStorage.getItem('username');
+      const username = sessionStorage.getItem('username');
       const profile = await this.profile.getProfile(username);
       const { data } = profile;
       const avatarContainer = document.querySelectorAll('.user-avatar');

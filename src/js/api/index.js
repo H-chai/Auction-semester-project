@@ -29,15 +29,15 @@ export default class AuctionAPI {
   };
 
   static set token(accessToken) {
-    localStorage.setItem('token', accessToken);
+    sessionStorage.setItem('token', accessToken);
   }
 
   static set username(user) {
-    localStorage.setItem('username', user);
+    sessionStorage.setItem('username', user);
   }
 
   static set credits(credits) {
-    localStorage.setItem('credits', credits);
+    sessionStorage.setItem('credits', credits);
   }
 
   auth = {
@@ -198,7 +198,7 @@ export default class AuctionAPI {
         method: 'DELETE',
       });
       await AuctionAPI.responseHandler.handleResponse(response);
-      const username = localStorage.getItem('username');
+      const username = sessionStorage.getItem('username');
       window.location.href = `/profile/?name=${username}`;
     },
 

@@ -17,7 +17,7 @@ export function generateAuthenticatedFooter() {
   create.classList.add('flex', 'justify-center');
   create.innerHTML = `<a href="/listing/create/" aria-label="Create a new listing"><i class="fa-regular fa-square-plus text-2xl"></i></a>`;
 
-  const username = localStorage.getItem('username');
+  const username = sessionStorage.getItem('username');
   const profile = document.createElement('li');
   profile.classList.add('flex', 'justify-center');
   const profileLink = document.createElement('a');

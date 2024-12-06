@@ -7,8 +7,8 @@ export function headers(body) {
     headers.append('X-Noroff-API-Key', API_KEY);
   }
 
-  if (localStorage.token) {
-    headers.append('Authorization', `Bearer ${localStorage.token}`);
+  if (sessionStorage.token) {
+    headers.append('Authorization', `Bearer ${sessionStorage.token}`);
   }
 
   if (body) {

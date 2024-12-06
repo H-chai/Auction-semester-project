@@ -36,8 +36,8 @@ function I(d) {
   const e = new Headers();
   return (
     e.append('X-Noroff-API-Key', z),
-    localStorage.token &&
-      e.append('Authorization', `Bearer ${localStorage.token}`),
+    sessionStorage.token &&
+      e.append('Authorization', `Bearer ${sessionStorage.token}`),
     d && e.append('Content-type', 'application/json'),
     e
   );
@@ -60,13 +60,13 @@ class g {
     },
   };
   static set token(e) {
-    localStorage.setItem('token', e);
+    sessionStorage.setItem('token', e);
   }
   static set username(e) {
-    localStorage.setItem('username', e);
+    sessionStorage.setItem('username', e);
   }
   static set credits(e) {
-    localStorage.setItem('credits', e);
+    sessionStorage.setItem('credits', e);
   }
   auth = {
     register: async ({ name: e, email: t, password: n }) => {
@@ -190,7 +190,7 @@ class g {
         method: 'DELETE',
       });
       await g.responseHandler.handleResponse(t);
-      const n = localStorage.getItem('username');
+      const n = sessionStorage.getItem('username');
       window.location.href = `/profile/?name=${n}`;
     },
     search: async (e, t = 24, n = 1, s = 'created', a = 'desc') => {
@@ -291,7 +291,7 @@ function X() {
       'cursor-pointer',
       'hover:text-blue',
     );
-  const m = localStorage.getItem('username');
+  const m = sessionStorage.getItem('username');
   f.href = `/profile/?name=${m}`;
   const w = document.createElement('i');
   w.classList.add('fa-regular', 'fa-user', 'text-sm', 'mr-2');
@@ -911,7 +911,7 @@ function se(d) {
     b.setAttribute('aria-label', 'Place a bid'),
     b.classList.add('btn-blue', 'py-4', 'w-2/5', 'lg:text-base'),
     (b.type = 'submit');
-  const E = localStorage.getItem('username');
+  const E = sessionStorage.getItem('username');
   d.seller.name === E &&
     ((y.disabled = !0),
     (y.style.cursor = 'not-allowed'),
@@ -923,7 +923,7 @@ function se(d) {
   const L = document.createElement('p');
   (L.textContent = 'Your current credits:'), L.classList.add('text-sm', 'mb-8');
   const x = document.createElement('span');
-  (x.textContent = localStorage.getItem('credits')),
+  (x.textContent = sessionStorage.getItem('credits')),
     x.classList.add('font-bold', 'ml-1', 'text-base'),
     L.appendChild(x),
     E ||
@@ -1092,7 +1092,7 @@ function re() {
   t.classList.add('flex', 'justify-center'),
     (t.innerHTML =
       '<a href="/listing/create/" aria-label="Create a new listing"><i class="fa-regular fa-square-plus text-2xl"></i></a>');
-  const n = localStorage.getItem('username'),
+  const n = sessionStorage.getItem('username'),
     s = document.createElement('li');
   s.classList.add('flex', 'justify-center');
   const a = document.createElement('a');
@@ -1154,7 +1154,7 @@ class T extends g {
     },
   };
   static get user() {
-    return localStorage.getItem('username');
+    return sessionStorage.getItem('username');
   }
   views = {
     listingFeed: async () => {
@@ -1252,7 +1252,7 @@ Please try again.`);
       }
     },
     headerToggle: () => {
-      const e = localStorage.getItem('token'),
+      const e = sessionStorage.getItem('token'),
         t = document.querySelector('header');
       if (e) {
         const n = X();
@@ -1263,7 +1263,7 @@ Please try again.`);
       }
     },
     footerToggle: () => {
-      const e = localStorage.getItem('token'),
+      const e = sessionStorage.getItem('token'),
         t = document.querySelector('.authenticated-footer');
       if (e) {
         const n = re();
@@ -1274,9 +1274,9 @@ Please try again.`);
       document.querySelectorAll('.logout-button').forEach((t) => {
         t.addEventListener('click', (n) => {
           n.preventDefault(),
-            localStorage.removeItem('token'),
-            localStorage.removeItem('username'),
-            localStorage.removeItem('credits'),
+            sessionStorage.removeItem('token'),
+            sessionStorage.removeItem('username'),
+            sessionStorage.removeItem('credits'),
             alert('You have successfully logged out.'),
             (window.location.href = '/');
         });
@@ -1801,9 +1801,9 @@ Please try again.`);
         s = new URLSearchParams(window.location.search).get('id');
       try {
         await this.bid.bid(s, { amount: Number(t.amount) });
-        const a = localStorage.getItem('credits'),
+        const a = sessionStorage.getItem('credits'),
           r = Number(a) - Number(t.amount);
-        localStorage.setItem('credits', r),
+        sessionStorage.setItem('credits', r),
           alert('Success! Your bid has been placed. Good luck!'),
           (window.location.href = `/listing/?id=${s}`);
       } catch (a) {
@@ -1815,7 +1815,7 @@ Please try again.`);
   };
   avatar = {
     userAvatar: async () => {
-      const e = localStorage.getItem('username'),
+      const e = sessionStorage.getItem('username'),
         t = await this.profile.getProfile(e),
         { data: n } = t;
       document.querySelectorAll('.user-avatar').forEach((a) => {

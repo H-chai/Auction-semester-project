@@ -112,7 +112,7 @@ export function generateSingleListingHTML(listing) {
   button.setAttribute('aria-label', 'Place a bid');
   button.classList.add('btn-blue', 'py-4', 'w-2/5', 'lg:text-base');
   button.type = 'submit';
-  const loggedInUser = localStorage.getItem('username');
+  const loggedInUser = sessionStorage.getItem('username');
   if (listing.seller.name === loggedInUser) {
     input.disabled = true;
     input.style.cursor = 'not-allowed';
@@ -128,7 +128,7 @@ export function generateSingleListingHTML(listing) {
   credits.textContent = 'Your current credits:';
   credits.classList.add('text-sm', 'mb-8');
   const userCredits = document.createElement('span');
-  userCredits.textContent = localStorage.getItem('credits');
+  userCredits.textContent = sessionStorage.getItem('credits');
   userCredits.classList.add('font-bold', 'ml-1', 'text-base');
   credits.appendChild(userCredits);
 
