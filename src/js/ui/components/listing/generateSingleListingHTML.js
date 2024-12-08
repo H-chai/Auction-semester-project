@@ -232,8 +232,12 @@ export function generateSingleListingHTML(listing) {
     form,
     credits,
     owner,
-    history,
+    //history,
   );
+
+  if (loggedInUser) {
+    listingDetail.appendChild(history);
+  }
 
   const homeLink = document.createElement('a');
   homeLink.setAttribute('aria-label', 'Top page');
