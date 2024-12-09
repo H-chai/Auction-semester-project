@@ -240,8 +240,9 @@ export function generateSingleListingHTML(listing) {
 
   const homeLink = document.createElement('a');
   homeLink.setAttribute('aria-label', 'Top page');
-  homeLink.href = '/';
-  homeLink.textContent = 'See all listings';
+  const previousPage = sessionStorage.getItem('page');
+  homeLink.href = `/?page=${previousPage}`;
+  homeLink.textContent = 'Back to listings';
   homeLink.classList.add(
     'inline-block',
     'underline',
