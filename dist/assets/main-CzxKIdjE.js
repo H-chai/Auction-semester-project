@@ -28,14 +28,14 @@
     fetch(s.href, a);
   }
 })();
-const z = '42d1daed-d7a5-4f39-b3da-5f11248409c0',
-  V = 'https://v2.api.noroff.dev',
-  K = `${V}/auth`,
-  W = `${V}/auction`;
-function I(d) {
+const K = '42d1daed-d7a5-4f39-b3da-5f11248409c0',
+  Y = 'https://v2.api.noroff.dev',
+  W = `${Y}/auth`,
+  X = `${Y}/auction`;
+function T(d) {
   const e = new Headers();
   return (
-    e.append('X-Noroff-API-Key', z),
+    e.append('X-Noroff-API-Key', K),
     sessionStorage.token &&
       e.append('Authorization', `Bearer ${sessionStorage.token}`),
     d && e.append('Content-type', 'application/json'),
@@ -43,8 +43,8 @@ function I(d) {
   );
 }
 class f {
-  static apiAuthBase = K;
-  static apiAuctionBase = W;
+  static apiAuthBase = W;
+  static apiAuctionBase = X;
   static paths = {
     register: `${f.apiAuthBase}/register`,
     login: `${f.apiAuthBase}/login`,
@@ -72,7 +72,7 @@ class f {
     register: async ({ name: e, email: t, password: n }) => {
       const s = JSON.stringify({ name: e, email: t, password: n }),
         a = await fetch(f.paths.register, {
-          headers: I(!0),
+          headers: T(!0),
           method: 'POST',
           body: s,
         });
@@ -81,7 +81,7 @@ class f {
     login: async ({ email: e, password: t }) => {
       const n = JSON.stringify({ email: e, password: t }),
         s = await fetch(f.paths.login, {
-          headers: I(!0),
+          headers: T(!0),
           method: 'POST',
           body: n,
         }),
@@ -95,7 +95,7 @@ class f {
   profile = {
     getProfile: async (e) => {
       const t = await fetch(`${f.paths.profiles}/${e}`, {
-        headers: I(),
+        headers: T(),
         method: 'GET',
       });
       return await f.responseHandler.handleResponse(t);
@@ -103,7 +103,7 @@ class f {
     updateProfile: async (e, { bio: t, banner: n, avatar: s }) => {
       const a = JSON.stringify({ bio: t, banner: n, avatar: s }),
         r = await fetch(`${f.paths.profiles}/${e}`, {
-          headers: I(!0),
+          headers: T(!0),
           method: 'PUT',
           body: a,
         });
@@ -127,13 +127,13 @@ class f {
         r.searchParams.append('_active', a),
         r.searchParams.append('sort', n),
         r.searchParams.append('sortOrder', s);
-      const i = await fetch(r.toString(), { headers: I(), method: 'GET' });
+      const i = await fetch(r.toString(), { headers: T(), method: 'GET' });
       return await f.responseHandler.handleResponse(i);
     },
     getSingleListing: async (e) => {
       const t = new URL(`${f.paths.listings}/${e}`);
       t.searchParams.append('_seller', !0), t.searchParams.append('_bids', !0);
-      const n = await fetch(t.toString(), { headers: I(), method: 'GET' });
+      const n = await fetch(t.toString(), { headers: T(), method: 'GET' });
       return await f.responseHandler.handleResponse(n);
     },
     getUsersListings: async (
@@ -152,7 +152,7 @@ class f {
         i.searchParams.append('_active', a),
         i.searchParams.append('sort', n),
         i.searchParams.append('sortOrder', s);
-      const o = await fetch(i.toString(), { headers: I(), method: 'GET' });
+      const o = await fetch(i.toString(), { headers: T(), method: 'GET' });
       return await f.responseHandler.handleResponse(o);
     },
     create: async ({ title: e, description: t, media: n, endsAt: s }) => {
@@ -163,7 +163,7 @@ class f {
           endsAt: s,
         }),
         r = await fetch(f.paths.listings, {
-          headers: I(!0),
+          headers: T(!0),
           method: 'POST',
           body: a,
         }),
@@ -173,7 +173,7 @@ class f {
     update: async (e, { title: t, description: n, media: s }) => {
       const a = JSON.stringify({ title: t, description: n, media: s }),
         r = await fetch(`${f.paths.listings}/${e}`, {
-          headers: I(!0),
+          headers: T(!0),
           method: 'PUT',
           body: a,
         });
@@ -182,7 +182,7 @@ class f {
     },
     delete: async (e) => {
       const t = await fetch(`${f.paths.listings}/${e}`, {
-        headers: I(!0),
+        headers: T(!0),
         method: 'DELETE',
       });
       await f.responseHandler.handleResponse(t);
@@ -198,7 +198,7 @@ class f {
         r.searchParams.append('sort', s),
         r.searchParams.append('sortOrder', a),
         r.searchParams.append('q', e);
-      const i = await fetch(r.toString(), { headers: I(!0), method: 'GET' });
+      const i = await fetch(r.toString(), { headers: T(!0), method: 'GET' });
       return await f.responseHandler.handleResponse(i);
     },
   };
@@ -206,7 +206,7 @@ class f {
     bid: async (e, { amount: t }) => {
       const n = JSON.stringify({ amount: t }),
         s = await fetch(`${f.paths.listings}/${e}/bids`, {
-          headers: I(!0),
+          headers: T(!0),
           method: 'POST',
           body: n,
         }),
@@ -215,7 +215,7 @@ class f {
     },
   };
 }
-function X() {
+function Z() {
   const d = document.createElement('div');
   d.classList.add('flex', 'justify-between', 'items-center', 'w-full');
   const e = document.createElement('a');
@@ -394,8 +394,8 @@ function X() {
       'mx-auto',
       'mb-3',
     );
-  const U = document.createElement('i');
-  U.classList.add('fa-regular', 'fa-user', 'mr-2');
+  const q = document.createElement('i');
+  q.classList.add('fa-regular', 'fa-user', 'mr-2');
   const F = document.createElement('span');
   F.textContent = 'Profile';
   const j = document.createElement('li'),
@@ -417,44 +417,44 @@ function X() {
     );
   const P = document.createElement('i');
   P.classList.add('fa-solid', 'fa-right-from-bracket', 'mr-2');
-  const H = document.createElement('span');
-  H.textContent = 'Log out';
-  const S = document.createElement('div');
-  S.classList.add('text-xs', 'text-black', 'flex', 'justify-center', 'gap-6');
+  const N = document.createElement('span');
+  N.textContent = 'Log out';
+  const R = document.createElement('div');
+  R.classList.add('text-xs', 'text-black', 'flex', 'justify-center', 'gap-6');
+  const S = document.createElement('li');
+  S.textContent = 'Terms of Use';
   const O = document.createElement('li');
-  O.textContent = 'Terms of Use';
-  const q = document.createElement('li');
   return (
-    (q.textContent = 'Privacy Policy'),
-    B.append(U, F),
+    (O.textContent = 'Privacy Policy'),
+    B.append(q, F),
     C.appendChild(B),
-    A.append(P, H),
+    A.append(P, N),
     j.appendChild(A),
     $.append(C, j),
-    S.append(O, q),
-    k.append($, S),
+    R.append(S, O),
+    k.append($, R),
     x.appendChild(v),
     E.append(L, x, k),
     d.append(e, n, E),
     d
   );
 }
-function Y(d) {
+function G(d) {
   const e = d.endsAt,
     t = new Date(e).getTime(),
     n = new Date().getTime();
   return t - n;
 }
-function Z(d) {
+function _(d) {
   const e = d.bids || [];
   if (e.length > 0) {
     const t = e.map((s) => s.amount);
     return Math.max(...t);
   } else return 0;
 }
-function G(d) {
-  const e = Z(d),
-    t = Y(d),
+function J(d) {
+  const e = _(d),
+    t = G(d),
     n = Math.floor(t / (1e3 * 60 * 60 * 24)),
     s = document.createElement('li'),
     a = document.createElement('p');
@@ -521,8 +521,8 @@ function G(d) {
     );
   }
 }
-function J(d) {
-  const e = Y(d),
+function z(d) {
+  const e = G(d),
     t = Math.floor(e / (1e3 * 60 * 60 * 24)),
     n = Math.floor(e / (1e3 * 60 * 60)),
     s = Math.floor((e % (1e3 * 60 * 60)) / (1e3 * 60)),
@@ -589,7 +589,7 @@ function J(d) {
     );
   }
 }
-function D(d) {
+function Q(d) {
   const e = document.createElement('a');
   e.setAttribute('aria-label', 'View this listing page'),
     e.classList.add(
@@ -642,11 +642,19 @@ function D(d) {
     );
   const a = document.createElement('ul');
   a.classList.add('flex', 'justify-between', 'items-center', 'lg:px-2');
-  const r = G(d),
-    i = J(d);
-  return a.append(r, i), e.append(t, s, a), e;
+  const r = J(d),
+    i = z(d);
+  return (
+    a.append(r, i),
+    e.append(t, s, a),
+    e.addEventListener('click', () => {
+      const l = new URLSearchParams(window.location.search).get('page');
+      sessionStorage.setItem('page', l);
+    }),
+    e
+  );
 }
-function _() {
+function ee() {
   const d = document.createElement('div');
   d.classList.add('flex', 'justify-between', 'items-center', 'w-full');
   const e = document.createElement('a');
@@ -795,12 +803,12 @@ function _() {
     d
   );
 }
-const ee = new f();
-async function te() {
-  return await ee.listing.get24Listings();
-}
+const te = new f();
 async function ne() {
-  const d = await te(),
+  return await te.listing.get24Listings();
+}
+async function se() {
+  const d = await ne(),
     { data: e } = d;
   return e
     .map((r) => r.media[0])
@@ -808,7 +816,7 @@ async function ne() {
     .map((r) => ({ url: r.url, alt: r.alt }))
     .slice(0, 3);
 }
-function se(d) {
+function ae(d) {
   const e = document.createElement('div');
   e.classList.add('md:w-4/5', 'md:mx-auto', 'lg:w-full');
   const t = document.createElement('div');
@@ -837,8 +845,8 @@ function se(d) {
     r.forEach((S) => {
       const O = document.createElement('button');
       O.setAttribute('aria-label', 'View the listing image');
-      const q = document.createElement('img');
-      q.classList.add(
+      const U = document.createElement('img');
+      U.classList.add(
         'w-14',
         'opacity-70',
         'aspect-square',
@@ -848,9 +856,9 @@ function se(d) {
         'md:aspect-4/3',
         'lg:w-20',
       ),
-        (q.src = S.url),
-        (q.alt = S.alt),
-        O.appendChild(q),
+        (U.src = S.url),
+        (U.alt = S.alt),
+        O.appendChild(U),
         i.appendChild(O),
         O.addEventListener('click', () => {
           s.innerHTML = `<img src="${S.url}" class="aspect-square rounded-md object-cover object-center w-full md:aspect-4/3" alt="${S.alt}" >`;
@@ -881,8 +889,8 @@ function se(d) {
   (g.textContent = d.description), g.classList.add('text-base', 'mb-6');
   const m = document.createElement('ul');
   m.classList.add('flex', 'justify-between', 'items-center', 'mb-6');
-  const w = G(d),
-    p = J(d);
+  const w = J(d),
+    p = z(d);
   m.append(w, p);
   const u = document.createElement('form');
   (u.name = 'bid'), u.classList.add('flex', 'gap-2', 'mb-3');
@@ -953,7 +961,7 @@ function se(d) {
     ),
     $.append(C, B),
     v.append(k, $);
-  const U = document.createElement('div'),
+  const q = document.createElement('div'),
     F = document.createElement('p');
   (F.textContent = 'Bid history'),
     F.classList.add('text-sm', 'font-medium', 'text-gray');
@@ -970,45 +978,46 @@ function se(d) {
         'border-b',
         'border-outline-light',
       );
-      const q = document.createElement('div');
-      q.classList.add('flex', 'items-center', 'gap-2');
-      const N = document.createElement('img');
-      (N.alt = S.bidder.avatar.alt || "Bidder's avatar"),
-        (N.src = S.bidder.avatar.url),
-        N.classList.add('w-7', 'h-7', 'rounded-full');
-      const R = document.createElement('a');
-      R.setAttribute('aria-label', "View bidder's profile page"),
-        (R.textContent = S.bidder.name),
-        (R.href = `/profile/?name=${S.bidder.name}`),
-        R.classList.add(
+      const U = document.createElement('div');
+      U.classList.add('flex', 'items-center', 'gap-2');
+      const M = document.createElement('img');
+      (M.alt = S.bidder.avatar.alt || "Bidder's avatar"),
+        (M.src = S.bidder.avatar.url),
+        M.classList.add('w-7', 'h-7', 'rounded-full');
+      const H = document.createElement('a');
+      H.setAttribute('aria-label', "View bidder's profile page"),
+        (H.textContent = S.bidder.name),
+        (H.href = `/profile/?name=${S.bidder.name}`),
+        H.classList.add(
           'font-semibold',
           'text-sm',
           'underline',
           'lg:text-base',
           'lg:font-medium',
         ),
-        q.append(N, R);
-      const M = document.createElement('p');
-      (M.textContent = S.amount),
-        M.classList.add('lg:text-lg', 'lg:font-medium');
-      const Q = document.createElement('i');
-      Q.classList.add('fa-solid', 'fa-coins', 'ml-1.5'),
-        M.appendChild(Q),
-        O.append(q, M),
+        U.append(M, H);
+      const D = document.createElement('p');
+      (D.textContent = S.amount),
+        D.classList.add('lg:text-lg', 'lg:font-medium');
+      const V = document.createElement('i');
+      V.classList.add('fa-solid', 'fa-coins', 'ml-1.5'),
+        D.appendChild(V),
+        O.append(U, D),
         j.appendChild(O);
     }),
-      U.append(F, j);
+      q.append(F, j);
   else {
     const S = document.createElement('p');
     (S.textContent = 'No bid placed yet'),
       S.classList.add('mt-2', 'font-medium', 'text-sm'),
-      U.append(F, S);
+      q.append(F, S);
   }
-  o.append(l, h, g, m, u, L, v), E && o.appendChild(U);
+  o.append(l, h, g, m, u, L, v), E && o.appendChild(q);
   const P = document.createElement('a');
-  P.setAttribute('aria-label', 'Top page'),
-    (P.href = '/'),
-    (P.textContent = 'See all listings'),
+  P.setAttribute('aria-label', 'Top page');
+  const N = sessionStorage.getItem('page');
+  (P.href = `/?page=${N}`),
+    (P.textContent = 'Back to listings'),
     P.classList.add(
       'inline-block',
       'underline',
@@ -1018,16 +1027,16 @@ function se(d) {
       'mt-8',
       'lg:mt-14',
     );
-  const H = document.createElement('i');
+  const R = document.createElement('i');
   return (
-    H.classList.add('fa-solid', 'fa-arrow-left', 'mr-1'),
-    P.prepend(H),
+    R.classList.add('fa-solid', 'fa-arrow-left', 'mr-1'),
+    P.prepend(R),
     t.append(n, o),
     e.append(t, P),
     e
   );
 }
-function ae() {
+function re() {
   const d = document.createElement('div');
   d.classList.add(
     'border',
@@ -1070,7 +1079,7 @@ function ae() {
     d
   );
 }
-function re() {
+function ie() {
   const d = document.createElement('ul');
   d.classList.add(
     'flex',
@@ -1109,14 +1118,16 @@ function re() {
     d
   );
 }
-class T extends f {
+class I extends f {
   constructor() {
     super(), this.router();
   }
   async router(e = window.location.pathname) {
+    const n = new URLSearchParams(window.location.search).get('page') || 1;
     switch (e) {
       case '/':
-        this.events.listing.displaySkeleton(24), await this.views.listingFeed();
+        this.events.listing.displaySkeleton(24),
+          await this.views.listingFeed(n);
         break;
       case '/auth/register/':
         await this.views.register();
@@ -1153,11 +1164,11 @@ class T extends f {
     return sessionStorage.getItem('username');
   }
   views = {
-    listingFeed: async () => {
+    listingFeed: async (e) => {
       this.events.headerToggle(),
         this.events.footerToggle(),
         this.events.listing.imageSlider(),
-        await this.events.listing.displayListings(),
+        await this.events.listing.displayListings(e),
         this.filtering.openSorting(),
         this.filtering.openFilter(),
         this.events.logout(),
@@ -1220,7 +1231,7 @@ class T extends f {
   };
   events = {
     register: async (e) => {
-      const t = T.form.formSubmit(e),
+      const t = I.form.formSubmit(e),
         { name: n, email: s } = t;
       try {
         await this.auth.register(t),
@@ -1236,7 +1247,7 @@ Please try again.`);
       }
     },
     login: async (e) => {
-      const t = T.form.formSubmit(e);
+      const t = I.form.formSubmit(e);
       try {
         await this.auth.login(t),
           alert('You have successfully logged in!'),
@@ -1251,10 +1262,10 @@ Please try again.`);
       const e = sessionStorage.getItem('token'),
         t = document.querySelector('header');
       if (e) {
-        const n = X();
+        const n = Z();
         t.appendChild(n), this.avatar.userAvatar();
       } else {
-        const n = _();
+        const n = ee();
         t.appendChild(n);
       }
     },
@@ -1262,7 +1273,7 @@ Please try again.`);
       const e = sessionStorage.getItem('token'),
         t = document.querySelector('.authenticated-footer');
       if (e) {
-        const n = re();
+        const n = ie();
         t.appendChild(n), this.avatar.userAvatar();
       } else return 0;
     },
@@ -1273,6 +1284,7 @@ Please try again.`);
             sessionStorage.removeItem('token'),
             sessionStorage.removeItem('username'),
             sessionStorage.removeItem('credits'),
+            sessionStorage.removeItem('page'),
             alert('You have successfully logged out.'),
             (window.location.href = '/');
         });
@@ -1284,7 +1296,7 @@ Please try again.`);
         t.innerHTML = '';
         const n = document.createDocumentFragment();
         for (let s = 0; s < e; s++) {
-          const a = ae();
+          const a = re();
           n.appendChild(a);
         }
         t.appendChild(n);
@@ -1300,7 +1312,7 @@ Please try again.`);
             this.pagination.homePagination(l, h),
             (a.innerHTML = ''),
             i.forEach((m) => {
-              const w = D(m);
+              const w = Q(m);
               a.appendChild(w);
             });
         } catch (a) {
@@ -1314,9 +1326,9 @@ Please try again.`);
             { data: s } = n,
             a = document.querySelector('.listing-item-container');
           a.innerHTML = '';
-          const r = se(s);
+          const r = ae(s);
           a.appendChild(r),
-            s.seller.name === T.user &&
+            s.seller.name === I.user &&
               document.querySelectorAll('.update').forEach((g) => {
                 const m = document.createElement('a');
                 (m.textContent = 'Update Listing'),
@@ -1338,7 +1350,7 @@ Please try again.`);
       imageSlider: async () => {
         const e = document.querySelector('.image-slider-container');
         e.innerHTML = '';
-        const t = await ne();
+        const t = await se();
         for (let n = 0; n < 3; n++) {
           const s = document.createElement('img');
           (s.src = t[n].url),
@@ -1360,7 +1372,7 @@ Please try again.`);
       },
       create: async (e) => {
         e.preventDefault();
-        const t = T.form.formSubmit(e),
+        const t = I.form.formSubmit(e),
           { title: n, description: s, endingDate: a, endingTime: r } = t,
           i = document.querySelectorAll('.image-list'),
           o = [],
@@ -1483,15 +1495,15 @@ Please try again.`);
         try {
           document.forms.updateListing.addEventListener('submit', (y) => {
             y.preventDefault();
-            const b = T.form.formSubmit(y),
+            const b = I.form.formSubmit(y),
               { title: E, description: L } = b,
               x = document.querySelectorAll('.image-list'),
               v = [],
               k = [];
             x.forEach((C) => {
               const B = C.querySelector('input[name="mediaUrl"]').value,
-                U = C.querySelector('input[name="mediaAlt"]').value;
-              v.push(B), k.push(U);
+                q = C.querySelector('input[name="mediaAlt"]').value;
+              v.push(B), k.push(q);
             });
             const $ = v.map((C, B) => ({ url: C, alt: k[B] }));
             this.listing.update(t, { title: E, description: L, media: $ });
@@ -1526,7 +1538,7 @@ Please try again.`);
           const g = document.querySelector('.listings-container');
           (g.innerHTML = ''),
             r.forEach((m) => {
-              const w = D(m);
+              const w = Q(m);
               g.appendChild(w);
             });
         } catch (a) {
@@ -1535,7 +1547,7 @@ Please try again.`);
       },
       search: async (e) => {
         e.preventDefault();
-        const n = T.form.formSubmit(e).search,
+        const n = I.form.formSubmit(e).search,
           s = document.querySelector('.result');
         s.textContent = '';
         const a = await this.listing.search(n),
@@ -1725,7 +1737,7 @@ You can upload a maximum of 8 images.`);
             b = document.querySelector('.listings-container');
           (b.innerHTML = ''),
             c.forEach(($) => {
-              const C = D($);
+              const C = Q($);
               b.appendChild(C);
             });
           const { currentPage: E, pageCount: L } = y,
@@ -1736,7 +1748,7 @@ You can upload a maximum of 8 images.`);
             k = o.name;
           v.setAttribute('content', `Profile page of ${k}`);
         } catch (i) {
-          T.user
+          I.user
             ? alert(i.message)
             : (alert(`You need to log in to access this profile.
 Please log in or create an account to continue.`),
@@ -1752,10 +1764,10 @@ Please log in or create an account to continue.`),
           (s.textContent = 'Update Profile'),
           s.setAttribute('aria-label', 'To update profile page'),
           (s.href = '/profile/update/'),
-          t === T.user && n.appendChild(s);
+          t === I.user && n.appendChild(s);
       },
       updateProfile: async () => {
-        const { data: e } = await this.profile.getProfile(T.user),
+        const { data: e } = await this.profile.getProfile(I.user),
           t = document.getElementById('bio');
         t.value = e.bio;
         const n = document.getElementById('banner-url');
@@ -1769,7 +1781,7 @@ Please log in or create an account to continue.`),
         try {
           document.forms.updateProfile.addEventListener('submit', (o) => {
             o.preventDefault();
-            const l = T.form.formSubmit(o),
+            const l = I.form.formSubmit(o),
               {
                 bio: h,
                 bannerUrl: g,
@@ -1779,7 +1791,7 @@ Please log in or create an account to continue.`),
               } = l,
               u = { url: g, alt: m },
               c = { url: w, alt: p };
-            this.profile.updateProfile(T.user, {
+            this.profile.updateProfile(I.user, {
               bio: h,
               banner: u,
               avatar: c,
@@ -1793,7 +1805,7 @@ Please try again.`);
       },
     },
     bid: async (e) => {
-      const t = T.form.formSubmit(e),
+      const t = I.form.formSubmit(e),
         s = new URLSearchParams(window.location.search).get('id');
       try {
         await this.bid.bid(s, { amount: Number(t.amount) });
@@ -2253,4 +2265,4 @@ Please try again.`);
     },
   };
 }
-new T();
+new I();
