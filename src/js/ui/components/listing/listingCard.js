@@ -77,5 +77,11 @@ export function generateListingCard(listing) {
 
   cardContainer.append(figure, listingTitle, listingInfo);
 
+  cardContainer.addEventListener('click', () => {
+    const params = new URLSearchParams(window.location.search);
+    const currentPage = params.get('page');
+    sessionStorage.setItem('page', currentPage);
+  });
+
   return cardContainer;
 }
