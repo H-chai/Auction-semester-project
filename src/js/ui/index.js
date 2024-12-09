@@ -248,7 +248,9 @@ export default class AuctionApp extends AuctionAPI {
             listingsContainer.appendChild(listingCard);
           });
         } catch (error) {
-          alert(error.message);
+          alert(
+            `Could not display listings.\n${error.message}.\nPlease come back again later.`,
+          );
         }
       },
 
@@ -289,7 +291,9 @@ export default class AuctionApp extends AuctionAPI {
             metaDescription.setAttribute('content', data.title);
           }
         } catch (error) {
-          alert(error.message);
+          alert(
+            `Could not display the listing.\n${error.message}.\nPlease try again later.`,
+          );
         }
       },
 
@@ -539,7 +543,9 @@ export default class AuctionApp extends AuctionAPI {
             listingsContainer.appendChild(listingCard);
           });
         } catch (error) {
-          alert(error.message);
+          alert(
+            `Could not search listings.\n${error.message}.\nPlease try again later.`,
+          );
         }
       },
 
@@ -632,7 +638,9 @@ export default class AuctionApp extends AuctionAPI {
             sortOptions.classList.add('hidden');
           });
         } catch (error) {
-          alert('Something went wrong while searching: ' + error.message);
+          alert(
+            `Something went wrong while searching.\n${error.message}.\nPlease try again later.`,
+          );
         }
       },
 
@@ -801,7 +809,9 @@ export default class AuctionApp extends AuctionAPI {
             );
             window.location.href = '/';
           } else {
-            alert(error.message);
+            alert(
+              `Could not display profile page.\n${error.message}.\nPlease try again later.`,
+            );
           }
         }
       },
