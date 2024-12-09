@@ -417,7 +417,7 @@ video {
 .custom-before:before {
   position: absolute;
   top: 0.5rem;
-  z-index: 40;
+  z-index: 50;
   display: block;
   height: 100%;
   width: 100%;
@@ -432,7 +432,7 @@ video {
 .custom-after:after {
   position: absolute;
   bottom: 0.5rem;
-  z-index: 40;
+  z-index: 50;
   display: block;
   height: 100%;
   width: 100%;

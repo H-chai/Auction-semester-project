@@ -1004,7 +1004,7 @@ function se(d) {
       S.classList.add('mt-2', 'font-medium', 'text-sm'),
       U.append(F, S);
   }
-  o.append(l, h, g, m, u, L, v, U);
+  o.append(l, h, g, m, u, L, v), E && o.appendChild(U);
   const P = document.createElement('a');
   P.setAttribute('aria-label', 'Top page'),
     (P.href = '/'),
