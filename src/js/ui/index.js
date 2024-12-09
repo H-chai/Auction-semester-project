@@ -14,10 +14,13 @@ export default class AuctionApp extends AuctionAPI {
   }
 
   async router(pathname = window.location.pathname) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get('page') || 1;
+
     switch (pathname) {
       case '/':
         this.events.listing.displaySkeleton(24);
-        await this.views.listingFeed();
+        await this.views.listingFeed(page);
         break;
       case '/auth/register/':
         await this.views.register();
@@ -58,11 +61,11 @@ export default class AuctionApp extends AuctionAPI {
   }
 
   views = {
-    listingFeed: async () => {
+    listingFeed: async (page) => {
       this.events.headerToggle();
       this.events.footerToggle();
       this.events.listing.imageSlider();
-      await this.events.listing.displayListings();
+      await this.events.listing.displayListings(page);
       this.filtering.openSorting();
       this.filtering.openFilter();
       this.events.logout();
@@ -194,6 +197,7 @@ export default class AuctionApp extends AuctionAPI {
           sessionStorage.removeItem('token');
           sessionStorage.removeItem('username');
           sessionStorage.removeItem('credits');
+          sessionStorage.removeItem('page');
 
           alert('You have successfully logged out.');
           window.location.href = '/';
