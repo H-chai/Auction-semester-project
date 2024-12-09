@@ -232,7 +232,6 @@ export function generateSingleListingHTML(listing) {
     form,
     credits,
     owner,
-    //history,
   );
 
   if (loggedInUser) {
