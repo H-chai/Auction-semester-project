@@ -25,8 +25,24 @@ npm install
 
 1. To start the project, run:
 
-   ```bash
-   npm start
-   ```
+```bash
+npm start
+```
 
 2. Open your browser and go to `http://localhost:3000`.
+
+## Manual Testing Instructions
+
+1. **Start the application**:
+
+   - Run the command `npm start` to launch the application locally.
+   - The application should be accessible at [http://localhost:3000](http://localhost:3000) (or another port specified in your configuration).
+
+2. **Test the following functionalities**:
+
+- **User Registration**:
+  - Navigate to `/auth/register/` (Sign up button on right top) and ensure you can register a new user.
+  - Check that you receive a success message after registration.
+- **User Login**:
+  - Navigate to `/auth/login/` and ensure you can log in using the credentials you registered with.
+  - Verify that the login page redirects you to the homepage (`/`) after successful login.
