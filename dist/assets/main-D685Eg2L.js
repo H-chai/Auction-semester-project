@@ -415,23 +415,23 @@ function Z() {
       'w-fit',
       'mx-auto',
     );
-  const P = document.createElement('i');
-  P.classList.add('fa-solid', 'fa-right-from-bracket', 'mr-2');
+  const O = document.createElement('i');
+  O.classList.add('fa-solid', 'fa-right-from-bracket', 'mr-2');
   const N = document.createElement('span');
   N.textContent = 'Log out';
   const R = document.createElement('div');
   R.classList.add('text-xs', 'text-black', 'flex', 'justify-center', 'gap-6');
   const S = document.createElement('li');
   S.textContent = 'Terms of Use';
-  const O = document.createElement('li');
+  const P = document.createElement('li');
   return (
-    (O.textContent = 'Privacy Policy'),
+    (P.textContent = 'Privacy Policy'),
     B.append(q, F),
     C.appendChild(B),
-    A.append(P, N),
+    A.append(O, N),
     j.appendChild(A),
     $.append(C, j),
-    R.append(S, O),
+    R.append(S, P),
     k.append($, R),
     x.appendChild(v),
     E.append(L, x, k),
@@ -843,8 +843,8 @@ function ae(d) {
   const i = document.createElement('div');
   i.classList.add('flex', 'items-center', 'flex-wrap', 'gap-2', 'mb-6'),
     r.forEach((S) => {
-      const O = document.createElement('button');
-      O.setAttribute('aria-label', 'View the listing image');
+      const P = document.createElement('button');
+      P.setAttribute('aria-label', 'View the listing image');
       const U = document.createElement('img');
       U.classList.add(
         'w-14',
@@ -858,9 +858,9 @@ function ae(d) {
       ),
         (U.src = S.url),
         (U.alt = S.alt),
-        O.appendChild(U),
-        i.appendChild(O),
-        O.addEventListener('click', () => {
+        P.appendChild(U),
+        i.appendChild(P),
+        P.addEventListener('click', () => {
           s.innerHTML = `<img src="${S.url}" class="aspect-square rounded-md object-cover object-center w-full md:aspect-4/3" alt="${S.alt}" >`;
         });
     }),
@@ -969,8 +969,8 @@ function ae(d) {
     A = d.bids;
   if (A.length > 0)
     A.forEach((S) => {
-      const O = document.createElement('li');
-      O.classList.add(
+      const P = document.createElement('li');
+      P.classList.add(
         'flex',
         'items-center',
         'justify-between',
@@ -1002,8 +1002,8 @@ function ae(d) {
       const V = document.createElement('i');
       V.classList.add('fa-solid', 'fa-coins', 'ml-1.5'),
         D.appendChild(V),
-        O.append(U, D),
-        j.appendChild(O);
+        P.append(U, D),
+        j.appendChild(P);
     }),
       q.append(F, j);
   else {
@@ -1013,12 +1013,12 @@ function ae(d) {
       q.append(F, S);
   }
   o.append(l, h, g, m, u, L, v), E && o.appendChild(q);
-  const P = document.createElement('a');
-  P.setAttribute('aria-label', 'Top page');
+  const O = document.createElement('a');
+  O.setAttribute('aria-label', 'Top page');
   const N = sessionStorage.getItem('page');
-  (P.href = `/?page=${N}`),
-    (P.textContent = 'Back to listings'),
-    P.classList.add(
+  (O.href = `/?page=${N}`),
+    (O.textContent = 'Back to listings'),
+    O.classList.add(
       'inline-block',
       'underline',
       'font-display',
@@ -1030,9 +1030,9 @@ function ae(d) {
   const R = document.createElement('i');
   return (
     R.classList.add('fa-solid', 'fa-arrow-left', 'mr-1'),
-    P.prepend(R),
+    O.prepend(R),
     t.append(n, o),
-    e.append(t, P),
+    e.append(t, O),
     e
   );
 }
@@ -1316,7 +1316,9 @@ Please try again.`);
               a.appendChild(w);
             });
         } catch (a) {
-          alert(a.message);
+          alert(`Could not display listings.
+${a.message}.
+Please come back again later.`);
         }
       },
       displaySingleListing: async () => {
@@ -1344,7 +1346,9 @@ Please try again.`);
             l = s.description;
           l ? o.setAttribute('content', l) : o.setAttribute('content', s.title);
         } catch (e) {
-          alert(e.message);
+          alert(`Could not display the listing.
+${e.message}.
+Please try again later.`);
         }
       },
       imageSlider: async () => {
@@ -1542,7 +1546,9 @@ Please try again.`);
               g.appendChild(w);
             });
         } catch (a) {
-          alert(a.message);
+          alert(`Could not search listings.
+${a.message}.
+Please try again later.`);
         }
       },
       search: async (e) => {
@@ -1624,7 +1630,9 @@ Please try again.`);
               (x.checked = !0), l.classList.add('hidden');
             });
         } catch (l) {
-          alert('Something went wrong while searching: ' + l.message);
+          alert(`Something went wrong while searching.
+${l.message}.
+Please try again later.`);
         }
       },
       addImage: () => {
@@ -1749,7 +1757,9 @@ You can upload a maximum of 8 images.`);
           v.setAttribute('content', `Profile page of ${k}`);
         } catch (i) {
           I.user
-            ? alert(i.message)
+            ? alert(`Could not display profile page.
+${i.message}.
+Please try again later.`)
             : (alert(`You need to log in to access this profile.
 Please log in or create an account to continue.`),
               (window.location.href = '/'));
