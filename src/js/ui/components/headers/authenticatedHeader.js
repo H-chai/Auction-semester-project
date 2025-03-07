@@ -10,7 +10,7 @@ export function generateAuthenticatedHeader() {
   const logoContainer = document.createElement('a');
   logoContainer.href = '/';
   logoContainer.setAttribute('aria-label', 'View top page');
-  logoContainer.classList.add('block', 'w-1/3', 'md:w-1/6', 'lg:mb-4');
+  logoContainer.classList.add('block', 'w-1/3', 'md:w-1/6');
   const logoImage = document.createElement('img');
   logoImage.src = '../../../../../images/Logo.svg';
   logoImage.alt = 'CrediBid logo';
@@ -42,15 +42,23 @@ export function generateAuthenticatedHeader() {
     'h-12',
     'rounded-full',
     'cursor-pointer',
-    'mb-4',
     'object-cover',
+  );
+  const dropDownMenuContainer = document.createElement('div');
+  dropDownMenuContainer.classList.add(
+    'absolute',
+    'top-full',
+    'right-0',
+    'z-10',
+    'pt-4',
+    'opacity-0',
+    'pointer-events-none',
+    'group-hover:opacity-100',
+    'group-hover:pointer-events-auto',
   );
   const dropDownMenu = document.createElement('div');
   dropDownMenu.classList.add(
-    'absolute',
-    'z-10',
-    'top-full',
-    'right-0',
+    'translate-y-4',
     'bg-white',
     'px-16',
     'py-10',
@@ -64,6 +72,7 @@ export function generateAuthenticatedHeader() {
     'border-outline-light',
     'group-hover:opacity-100',
     'group-hover:pointer-events-auto',
+    'group-hover:translate-y-0',
   );
   const menuList = document.createElement('ul');
   const listItemProfile = document.createElement('li');
@@ -111,7 +120,8 @@ export function generateAuthenticatedHeader() {
   listItemLogout.appendChild(logoutButton);
   menuList.append(listItemProfile, listItemLogout);
   dropDownMenu.appendChild(menuList);
-  userIconContainer.append(userIconImage, dropDownMenu);
+  dropDownMenuContainer.appendChild(dropDownMenu);
+  userIconContainer.append(userIconImage, dropDownMenuContainer);
   pcNavigation.append(updateLink, createLink, userIconContainer);
 
   const mobileNavigation = document.createElement('nav');

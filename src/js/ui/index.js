@@ -315,9 +315,11 @@ export default class AuctionApp extends AuctionAPI {
             'right-0',
             'left-0',
             'm-auto',
-            'h-full',
+            'max-h-[80%]',
+            'max-w-[90%]',
             'opacity-0',
             'md:object-contain',
+            'md:w-full',
           );
           imageSliderContainer.appendChild(img);
         }

@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && npx tailwindcss -i ./src/css/style.css -o ./style.css",
-    "tailwind-build": "npx tailwindcss -i ./src/css/style.css -o ./style.css --watch",
+    "tailwind": "npx tailwindcss -i ./src/css/style.css -o ./style.css --watch",
     "preview": "vite preview",
     "prepare": "husky install"
   },
