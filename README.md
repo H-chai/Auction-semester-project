@@ -52,6 +52,24 @@ CredBid is an auction platform where users can list items for bidding and place 
    ```
 5. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
+## Demo Account Information
+
+To try out the demo, you can register an account using the following guidelines:
+
+### Registration Requirements:
+
+- **Username**: The username must not contain punctuation symbols apart from an underscore (\_).
+- **Email**: The email must be a valid `stud.noroff.no` email address.
+- **Password**: The password must be at least 8 characters long.
+
+### Example Registration:
+
+- **Username**: demo_user_1
+- **Email**: demo_user_1@stud.noroff.no
+- **Password**: Password123
+
+You can use this information to log in and try out the features of the site.
+
 ## API
 
 This project interacts with the [Noroff Auction API](https://docs.noroff.dev/docs/v2) to handle user authentication, listing creation, bidding, and profile management.
