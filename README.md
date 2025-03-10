@@ -54,7 +54,7 @@ CredBid is an auction platform where users can list items for bidding and place 
 
 ## API
 
-This project interacts with the [Noroff Auction API](https://v2.api.noroff.dev/auction) to handle user authentication, listing creation, bidding, and profile management.
+This project interacts with the [Noroff Auction API](https://docs.noroff.dev/docs/v2) to handle user authentication, listing creation, bidding, and profile management.
 
 ### Authentication
 
