@@ -1,75 +1,217 @@
-# Project Name
-
-Auction House
+# eCom Store
 
 ## Overview
 
-An auction website where users can add items to be bid on and bid on items other users have put up for auction. (This is semester project 2 at Noroff)
+CredBid is an auction platform where users can list items for bidding and place bids on items listed by others. Each new user receives 1000 credits to use for bidding, and credits can be earned by successfully auctioning items. Non-registered users can browse listings but cannot place bids.
 
-## Setup
+## Live Demo
+
+[Deployed Application](https://credibid-auction.netlify.app/)
+
+## Technologies Used
+
+- JavaScript
+- Vite
+- HTML
+- CSS (Tailwind CSS)
+- Fetch API
+
+## Features
+
+- **User Authentication**: Users can register, log in, and log out.
+- **Profile Management**: Users can update their avatar and view their total credits.
+- **Auction Listings**: Users can create, browse, and search through auction listings.
+- **Bidding System**: Registered users can place bids on listings and view bid history.
+- **Responsive Design**: Ensures usability across different devices.
+
+## Highlights / Unique Implementations
+
+- **Credit System Implementation**: Users can earn credits by selling items and use credits for bidding on auction items. This feature ensures a dynamic interaction between buying, selling, and bidding.
+- **Bidding System**: Developed a bidding system where registered users can place bids on auction items. The bid history is displayed, and the system ensures that only the highest bid is recorded, providing a seamless auction experience.
+- **User Profile & Avatar Management**: Users can update their profiles and avatars, allowing them to personalize their accounts. This feature enhances user engagement and interaction with the platform, offering a more customized experience.
+- **Responsive Design**: Utilized Tailwind CSS to implement a mobile-first, responsive design. The layout is optimized for different screen sizes, ensuring a smooth and intuitive user experience on mobile, tablet, and desktop devices.
+- **Search Functionality**: Added a search feature that allows users to easily find listings by querying specific keywords. The search results are fast and accurate, providing users with the best browsing experience.
+
+## Installation & Setup
 
 1. Clone the repository:
+   ```sh
+   git clone https://github.com/H-chai/Auction-semester-project.git
+   ```
+2. Navigate to the project folder:
+   ```sh
+   cd Auction-semester-project
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the development server:
+   ```sh
+   npm run dev
+   ```
+5. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-```bash
-git clone https://github.com/H-chai/Auction-semester-project.git
+## API
+
+This project interacts with the [Noroff Auction API](https://v2.api.noroff.dev//auction) to handle user authentication, listing creation, bidding, and profile management.
+
+### Authentication
+
+- **Register a new user**
+
+  ```sh
+  POST https://api.noroff.dev/auth/register
+
+  ```
+
+- **Login**
+  ```sh
+  POST https://api.noroff.dev/auth/login
+  ```
+
+### User Profile
+
+- **Get user profile**
+
+  ```sh
+  GET https://api.noroff.dev/auction/profiles/{name}
+
+  ```
+
+- **Update user profile**
+
+  ```sh
+  PUT https://api.noroff.dev/auction/profiles/{name}
+
+  ```
+
+- **View user’s listings**
+  ```sh
+  GET https://api.noroff.dev/auction/profiles/{name}/listings
+  ```
+
+### Listings
+
+- **Get all listings**
+
+  ```sh
+  GET https://api.noroff.dev/auction/listings
+
+  ```
+
+- **Get a single listing**
+
+  ```sh
+  GET https://api.noroff.dev/auction/listings/{id}
+
+  ```
+
+- **Search for listings**
+
+  ```sh
+  GET https://api.noroff.dev/auction/listings/search?q={query}
+
+  ```
+
+- **Create a new listing**
+
+  ```sh
+  POST https://api.noroff.dev/auction/listings
+
+  ```
+
+- **Delete a listing**
+  ```sh
+  DELETE https://api.noroff.dev/auction/listings/{id}
+  ```
+
+### Bidding
+
+- **Place a bid on a listing**
+
+  ```sh
+  POST https://api.noroff.dev/auction/listings/{id}/bids
+
+  ```
+
+- **Get all bids placed by a user**
+  ```sh
+  GET https://api.noroff.dev/auction/profiles/{name}/bids
+  ```
+
+## Project Structure
+
+```
+/auth
+  ├── login
+  │   ├── index.html # Login page
+  ├── register
+  │   ├── index.html # Registration page
+/listing
+  ├── create
+  │   ├── index.html # Create listing page
+  ├── update
+  │   ├── index.html # Update listing page
+  ├── index.html # Listing page (view a listing)
+/profile
+  ├── update
+  │   ├── index.html # Profile update page
+  ├── index.html # Profile page
+/public
+  ├── images # Static image
+/src
+  ├── css
+  ├── js
+  │   ├── api
+  │   │   ├── constants.js # API base URLs and constants
+  │   │   ├── headers.js # API request headers
+  │   │   ├── index.js # API request functions
+  │   ├── ui
+  │   │   ├── components
+  │   │   │   ├── footers # Footer components
+  │   │   │   ├── headers # Header components
+  │   │   │   ├── listing # Listing-related UI components
+  │   │   │   ├── utils # Utility functions
+  │   │   ├── index.js # Main UI logic/functions
+  ├── main.js # Main script file
+index.html # Entry point (homepage)
+style.css # Global styles
 ```
 
-2. Install dependencies:
+## Future Improvements
 
-```bash
-cd project-name
-npm install
-```
+- **Improved Search Functionality**: Add advanced filtering options to the search function, such as category, price range, and auction deadline. This will allow users to narrow down their searches and find items more efficiently.
+- **User Notifications**: Implement a notification system that alerts users about new bids on items they've placed bids on or remind them about upcoming auction deadlines. This will keep users engaged and informed in real-time.
 
-## Running the Project Locally
+## Screenshots
 
-1. To start the project, run:
+### Homepage
 
-```bash
-npm run dev
-```
+#### Desktop
 
-2. Open your browser and go to the port shown in the terminal.
+![Homepage](screenshots/homepage.png)
 
-## Manual Testing Instructions
+#### Mobile
 
-1. **Start the application**:
+<img src="screenshots/homepage-mobile.png" width="390px">
 
-   - Run the command `npm run dev` to launch the application locally.
-   - The application should be accessible at the port shown in the terminal.
+### Listing Page
 
-2. **Test the following functionalities**:
+#### Desktop
 
-- **User Registration**:
-  - Navigate to `/auth/register/` (`Sign up` button is located in the top right corner on desktop or can be accessed via the hamburger menu on mobile) and ensure you can register a new user.
-  - Check that you receive a success message after registration and redirect to log in page (`/auth/login/`).
-- **User Login**:
-  - Navigate to `/auth/login/` (`Log in` button is located in the top right corner on desktop or can be accessed via the hamburger menu on mobile) and ensure you can log in using the credentials you registered with.
-  - Verify that the login page redirects you to the homepage (`/?page=1`) after successful login.
-- **Create Listing**:
-  - Ensure that after logging in, you can navigate to `/listing/create/` (`Create Listing` button is located in the top right corner on desktop or can be accessed via icon `(+)` in footer on mobile.) and create a new listing.
-  - Verify that the listing is displayed on the homepage (`/?page=1`).
-- **Update Listing**:
-  - Ensure that after logging in and create a listing.
-  - Go to your listing page and you can navigate to `/listing/update/` (`Update Listing` button is located in the page if it is your own listing.)
-  - Verify that the listing is updated on the listing page.
-- **Delete Listing**:
-  - Go to the `/listing/update/` page of the listing you wish to delete (`Update Listing` button is located in the page if it is your own listing).
-  - Ensure that there is a `Delete Listing` button on the page. Click it to initiate the deletion process.
-  - A confirmation message should appear asking if you're sure you want to delete the listing. Confirm the deletion.
-  - After confirming the deletion, verify that the listing is no longer visible on the listing feed page (`/`) or on your profile page `/profile/`.
-- **User Profile**:
-  - Navigate to `/profile/` (Your avatar is located in the top right corner on desktop or the bottom right on mobile) and check that you can view your profile information.
-  - Ensure that you can see your total credits on your profile page.
-- **Update User Profile**:
-  - Ensure you are on your profile page.
-  - Ensure that there is a `Update Profile` button on the page. Click it to initiate updating process.
-  - After clicking Update Profile button, verify that your profile is updated on your profile page `/profile/`.
-- **Bid on Listings**:
-  - Ensure you are on other user's listing page.
-  - Ensure that you can bid on listing. A success message should appear after submitting your bidding (by clicking `Place a bid` button).
-  - Verify that your current credits is updated.
-- **Search Through Listings**:
-  - Ensure you are on the homepage.
-  - Ensure that you can search through listing by writing a keyword in search field.
-  - Ensure that you get search result which matches with you search.
+![Product Page](screenshots/listing-page.png)
+
+#### Mobile
+
+<img src="screenshots/listing-page-mobile.png" width="390px">
+
+### Profile Page
+
+#### Desktop
+
+![Shopping Cart](screenshots/profile-page.png)
+
+#### Mobile
+
+<img src="screenshots/profile-page-mobile.png" width="390px">
