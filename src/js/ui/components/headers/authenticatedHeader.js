@@ -26,7 +26,7 @@ export function generateAuthenticatedHeader() {
     'font-semibold',
   );
   const updateLink = document.createElement('div');
-  updateLink.classList.add('update', 'mb-4');
+  updateLink.classList.add('update');
   const createLink = document.createElement('a');
   createLink.href = '/listing/create/';
   createLink.setAttribute('aria-label', 'To create listing page');
