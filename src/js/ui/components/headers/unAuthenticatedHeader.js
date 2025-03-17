@@ -10,7 +10,7 @@ export function generateUnAuthenticatedHeader() {
   const logoContainer = document.createElement('a');
   logoContainer.href = '/';
   logoContainer.setAttribute('aria-label', 'View top page');
-  logoContainer.classList.add('block', 'w-1/3', 'md:w-1/6');
+  logoContainer.classList.add('block', 'w-1/3', 'md:w-[10%]');
   const logoImage = document.createElement('img');
   logoImage.src = '../../../../../images/Logo.svg';
   logoImage.alt = 'CrediBid logo';
