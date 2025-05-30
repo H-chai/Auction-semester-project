@@ -1,4 +1,4 @@
-# eCom Store
+# CrediBid
 
 ## Overview
 
